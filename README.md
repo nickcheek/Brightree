@@ -18,8 +18,7 @@ composer require nickcheek/brightree
 ## Usage
 
 ``` php
-$skeleton = new BeyondCode\Skeleton();
-echo $skeleton->echoPhrase('Hello, BeyondCode!');
+coming soon
 ```
 
 ### Testing
@@ -48,7 +47,3 @@ If you discover any security related issues, please email nick@nicholascheek.com
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
