@@ -34,14 +34,28 @@ Nickcheek\Brightree\BrighreeServiceProvider::class,
 
 ## Usage
 
+Reference Class in your controller
 ``` php
-coming soon
+use \Nickcheek\Brightree;
 ```
 
-### Testing
+Create a new instance and the API Call you're looking for, for instance, if you wanted to get a note by it's key
+``` php
+$bt = new Brightree\Brightree();
+$note = $bt::GetNoteByKey('141508');
+
+var_dump($note);
+```
+### Available Patient Methods
 
 ``` bash
-composer test
+This will grow quite large over time
+```
+
+### Available Document Management Methods
+
+``` bash
+This will grow quite large over time
 ```
 
 ### Changelog
