@@ -48,14 +48,15 @@ var_dump($note);
 ```
 ### Available Patient Methods
 
-``` bash
-This will grow quite large over time
+``` php
+GetNotesByPatient($PatientID);
+GetNoteByKey($NoteKey);
 ```
 
 ### Available Document Management Methods
 
-``` bash
-This will grow quite large over time
+``` php
+DocumentTypesFetchAll();
 ```
 
 ### Changelog
