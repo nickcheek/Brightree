@@ -49,8 +49,10 @@ var_dump($note);
 ### Available Patient Methods
 
 ``` php
-GetNotesByPatient($PatientID);
-GetNoteByKey($NoteKey);
+$bt::GetNotesByPatient($brightreeID);
+$bt::GetNoteByKey($NoteKey);
+$bt::PatientFetchByBrightreeID($brightreeID)
+$bt::PatientPayorFetchAll($patientKey);
 ```
 
 ### Available Document Management Methods

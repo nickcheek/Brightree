@@ -49,6 +49,14 @@ class Brightree
         return $response;
     }
     
+    public static function PatientPayorFetchAll($key ='12345')
+    {
+        $client     = new SoapClient(config('brightree.patient').'?singleWsdl', self::$patient_options);
+		$response = $client->PatientPayorFetchAll(array("PatientKey" => $key));
+        return $response;
+    } 
+    
+    
     //Document Calls
     public static function DocumentTypesFetchAll()
     {
