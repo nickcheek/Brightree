@@ -1,8 +1,8 @@
 <?php
 
-/*
- * You can place your custom package configuration in here.
- */
-return [
 
+return [
+	'document'=>'https://webservices.brightree.net/v0100-1610/DocumentationService/DocumentManagementService.svc',
+	'patient' => 'https://webservices.brightree.net/v0100-1802/OrderEntryService/patientservice.svc',
+	 
 ];

@@ -1,54 +1,17 @@
 {
     "name": "nickcheek/brightree",
     "description": "Brightree API Wrapper",
-    "keywords": [
-        "nickcheek",
-        "brightree"
-    ],
-    "homepage": "https://github.com/nickcheek/brightree",
-    "license": "MIT License (MIT)",
-    "type": "library",
     "authors": [
         {
-            "name": "Nicholas Cheek",
-            "email": "nick@nicholascheek.com",
-            "role": "Developer"
+            "name": "Nick",
+            "email": "nick@nicholascheek.com"
         }
     ],
-    "require": {
-        "php": "^7.1"
-        "illuminate/support": "5.7.*"
-    },
-    "require-dev": {
-        "orchestra/testbench": "3.7.*",
-        "phpunit/phpunit": "^7.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Nickcheek\\Brightree\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Nickcheek\\Brightree\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Nickcheek\\Brightree\\BrightreeServiceProvider"
-            ],
-            "aliases": {
-                "Brightree": "Nickcheek\\Brightree\\BrightreeFacade"
-            }
-        }
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload" : {
+	    "psr-4":{
+		    "Nickcheek\\Brightree\\": "src/"
+	    }
     }
 }
