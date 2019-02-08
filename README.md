@@ -49,16 +49,50 @@ var_dump($note);
 ### Available Patient Methods
 
 ``` php
-$bt::GetNotesByPatient($brightreeID);
-$bt::GetNoteByKey($NoteKey);
-$bt::PatientFetchByBrightreeID($brightreeID)
-$bt::PatientPayorFetchAll($patientKey);
+PatientCreate($patient);
+PatientSearch($patient);
+PatientUpdate($patient);
+PatientFetchByExternalID($id);
+PatientFetchByPatientID($id);
+PatientFetchByBrightreeID($id);
+PatientFetchByPatientID($id);
+PatientPhoneNumberSearch($patient);
+
+//notes
+PatientNoteCreate($note);
+PatientNoteFetchByKey($id);
+PatientNoteFetchByPatient($id);
+PatientNoteSearch($search);
+PatientNoteUpdate($update);
+GetNotesByPatient($id);
+GetNoteByKey($NoteKey);
+
+//payor
+PatientPayorAdd($payor);
+PatientPayorFetch($payor);
+PatientPayorFetchAll($patientKey);
+PatientPayorRemove($brightreeid);
+PatientPayorUpdate($payor);
+
+//other
+PatientAddMarketingReferral($brightreeid,$referralid);
+PatientRemoveMarketingReferral($id);
+FacilityMasterInfoFetchAll();
+FacilityResidentCreate($resident);
+
 ```
 
 ### Available Document Management Methods
 
 ``` php
 DocumentTypesFetchAll();
+DocumentBatchCreate($batch);
+DocumentBatchSearch($search);
+DocumentSearch($search);
+FetchDocumentContent($key);
+GenerateDocumentID($query);
+StoreDocument($document);
+
 ```
 
 ### Changelog

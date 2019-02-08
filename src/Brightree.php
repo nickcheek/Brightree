@@ -15,9 +15,7 @@ class Brightree
 	{
 		self::$patient_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.patient'),'location' => config('brightree.patient'),'trace' => 1);
 		self::$document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.document'),'location' => config('brightree.document'),'trace' => 1);
-
 	}
-	
 	
 	public static function apiCall($call,$query,$wsdl,$options)
     {
@@ -115,7 +113,7 @@ class Brightree
     
 	public static function FacilityMasterInfoFetchAll()
     {
-    	return self::apiCall('FacilityMasterInfoFetchAll',,config('brightree.patient'),self::$patient_options);
+    	return self::apiCall('FacilityMasterInfoFetchAll','',config('brightree.patient'),self::$patient_options);
     }
 	
 	public static function FacilityResidentCreate($query)
