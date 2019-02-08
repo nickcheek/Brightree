@@ -21,7 +21,7 @@ class Brightree
 	
 	public static function apiCall($call,$query,$wsdl,$options)
     {
-        $client     = new SoapClient(self::$wsdl.'?singleWsdl', self::$connection);
+        $client     = new SoapClient( $wsdl .'?singleWsdl', $options);
         $response 	= $client->$call($query);
         return $response;
     }
