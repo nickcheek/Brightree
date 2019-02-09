@@ -6,178 +6,178 @@ use SoapClient;
 
 class Brightree
 {
-	private static $wsdl;
-	private static $connection;
-	protected static $patient_options;
-	protected static $document_options;
+	private $wsdl;
+	private $connection;
+	protected $patient_options;
+	protected $document_options;
 	
 	public function __construct()
 	{
-		self::$patient_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.patient'),'location' => config('brightree.patient'),'trace' => 1);
-		self::$document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.document'),'location' => config('brightree.document'),'trace' => 1);
+		$this->patient_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.patient'),'location' => config('brightree.patient'),'trace' => 1);
+		$this->document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.document'),'location' => config('brightree.document'),'trace' => 1);
 	}
 	
-	public static function apiCall($call,$query,$wsdl,$options)
+	public function apiCall($call,$query,$wsdl,$options)
     {
         $client     = new SoapClient( $wsdl .'?singleWsdl', $options);
-        $response 	= $client->$call($query);
+        $response 	= $client->call($query);
         return $response;
     }
     
 	//Patient Calls
 	
-	public static function PatientCreate($query)
+	public function PatientCreate($query)
     {
-    	return self::apiCall('PatientCreate',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientCreate',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientSearch($query)
+    public function PatientSearch($query)
     {
-    	return self::apiCall('PatientSearch',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientSearch',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientUpdate($query)
+    public function PatientUpdate($query)
     {
-    	return self::apiCall('PatientUpdate',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientUpdate',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientFetchByExternalID($id=null)
+    public function PatientFetchByExternalID($id=null)
     {
-    	return self::apiCall('PatientFetchByExternalID',array('ExternalID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientFetchByExternalID',array('ExternalID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientFetchByPatientID($id=null)
+    public function PatientFetchByPatientID($id=null)
     {
-    	return self::apiCall('PatientFetchByPatientID',array('PatientID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientFetchByPatientID',array('PatientID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientNoteCreate($query)
+    public function PatientNoteCreate($query)
     {
-    	return self::apiCall('PatientNoteCreate',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteCreate',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientNoteFetchByKey($id=null)
+    public function PatientNoteFetchByKey($id=null)
     {
-    	return self::apiCall('PatientNoteFetchByKey',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientNoteFetchByPatient($id=null)
+    public function PatientNoteFetchByPatient($id=null)
     {
-    	return self::apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientNoteSearch($query)
+    public function PatientNoteSearch($query)
     {
-    	return self::apiCall('PatientNoteSearch',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteSearch',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientNoteUpdate($query)
+    public function PatientNoteUpdate($query)
     {
-    	return self::apiCall('PatientNoteUpdate',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteUpdate',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientPayorAdd($query)
+    public function PatientPayorAdd($query)
     {
-    	return self::apiCall('PatientPayorAdd',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientPayorAdd',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientPayorFetch($query)
+    public function PatientPayorFetch($query)
     {
-    	return self::apiCall('PatientPayorFetch',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientPayorFetch',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientPayorFetchAll($key ='12345')
+    public function PatientPayorFetchAll($key ='12345')
     {
-    	return self::apiCall('PatientPayorFetchAll',array("PatientKey" => $key),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientPayorFetchAll',array("PatientKey" => $key),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientPayorRemove($id=null)
+    public function PatientPayorRemove($id=null)
     {
-    	return self::apiCall('PatientPayorRemove',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientPayorRemove',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientPayorUpdate($query)
+    public function PatientPayorUpdate($query)
     {
-    	return self::apiCall('PatientPayorUpdate',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientPayorUpdate',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientPhoneNumberSearch($query)
+    public function PatientPhoneNumberSearch($query)
     {
-    	return self::apiCall('PatientPhoneNumberSearch',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientPhoneNumberSearch',$query,config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientRemoveMarketingReferral($id=null)
+    public function PatientRemoveMarketingReferral($id=null)
     {
-    	return self::apiCall('PatientRemoveMarketingReferral',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientRemoveMarketingReferral',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-	public static function FacilityMasterInfoFetchAll()
+	public function FacilityMasterInfoFetchAll()
     {
-    	return self::apiCall('FacilityMasterInfoFetchAll','',config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('FacilityMasterInfoFetchAll','',config('brightree.patient'),$this->patient_options);
     }
 	
-	public static function FacilityResidentCreate($query)
+	public function FacilityResidentCreate($query)
     {
-    	return self::apiCall('FacilityResidentCreate',$query,config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('FacilityResidentCreate',$query,config('brightree.patient'),$this->patient_options);
     }
 	
-	public static function PatientAddMarketingReferral($btid=null,$refid=null)
+	public function PatientAddMarketingReferral($btid=null,$refid=null)
     {
-    	return self::apiCall('FacilityResidentCreate',array('BrightreeID'=>$btid,'BrightreeReferralID'=>$refid),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('FacilityResidentCreate',array('BrightreeID'=>$btid,'BrightreeReferralID'=>$refid),config('brightree.patient'),$this->patient_options);
     }
 	
-   public static function GetNoteByKey($id='141508')
+   public function GetNoteByKey($id='141508')
     {
-    	return self::apiCall('PatientNoteFetchByKey',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function GetNotesByPatient($id='12345') 
+    public function GetNotesByPatient($id='12345') 
     {
-    	return self::apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
-    public static function PatientFetchByBrightreeID($id='12345')
+    public function PatientFetchByBrightreeID($id='12345')
     {
-    	return self::apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id),config('brightree.patient'),self::$patient_options);
+    	return $this->apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id),config('brightree.patient'),$this->patient_options);
     }
     
      
     
     
     //Document Management Calls
-    public static function DocumentTypesFetchAll()
+    public function DocumentTypesFetchAll()
     {
-    	return self::apiCall('DocumentTypesFetchAll',[],config('brightree.document'),self::$document_options);
+    	return $this->apiCall('DocumentTypesFetchAll',[],config('brightree.document'),$this->document_options);
     }
     
-    public static function DocumentBatchCreate($query)
+    public function DocumentBatchCreate($query)
     {
-    	return self::apiCall('DocumentBatchCreate',$query,config('brightree.document'),self::$document_options);
+    	return $this->apiCall('DocumentBatchCreate',$query,config('brightree.document'),$this->document_options);
     }
     
-    public static function DocumentBatchSearch($query)
+    public function DocumentBatchSearch($query)
     {
-    	return self::apiCall('DocumentBatchSearch',$query,config('brightree.document'),self::$document_options);
+    	return $this->apiCall('DocumentBatchSearch',$query,config('brightree.document'),$this->document_options);
     }
     
-    public static function DocumentSearch($query)
+    public function DocumentSearch($query)
     {
-    	return self::apiCall('DocumentSearch',$query,config('brightree.document'),self::$document_options);
+    	return $this->apiCall('DocumentSearch',$query,config('brightree.document'),$this->document_options);
     }
     
-    public static function FetchDocumentContent($key='12345')
+    public function FetchDocumentContent($key='12345')
     {
-    	return self::apiCall('FetchDocumentContent',array('documentKey' => $key),config('brightree.document'),self::$document_options);
+    	return $this->apiCall('FetchDocumentContent',array('documentKey' => $key),config('brightree.document'),$this->document_options);
     }
     
-    public static function GenerateDocumentID($query)
+    public function GenerateDocumentID($query)
     {
-    	return self::apiCall('GenerateDocumentID',$query,config('brightree.document'),self::$document_options);
+    	return $this->apiCall('GenerateDocumentID',$query,config('brightree.document'),$this->document_options);
     }
     
-    public static function StoreDocument($query)
+    public function StoreDocument($query)
     {
-    	return self::apiCall('StoreDocument',$query,config('brightree.document'),self::$document_options);
+    	return $this->apiCall('StoreDocument',$query,config('brightree.document'),$this->document_options);
     }
     
 }
