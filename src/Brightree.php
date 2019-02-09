@@ -147,7 +147,7 @@ class Brightree
     //Document Management Calls
     public static function DocumentTypesFetchAll()
     {
-    	return self::apiCall('DocumentTypesFetchAll',,config('brightree.document'),self::$document_options);
+    	return self::apiCall('DocumentTypesFetchAll',[],config('brightree.document'),self::$document_options);
     }
     
     public static function DocumentBatchCreate($query)
