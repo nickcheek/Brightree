@@ -16,20 +16,8 @@ class Brightree
 	
 	public function __construct()
 	{
-		$this->patient_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.patient'),'location' => config('brightree.patient'),'trace' => 1);
-		$this->document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.document'),'location' => config('brightree.document'),'trace' => 1);
-		$this->documentation_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.documentation'),'location' => config('brightree.documentation'),'trace' => 1);
 		
 	}
-	
-	public function apiCall($call,$query,$wsdl,$options)
-    {
-        $client     = new SoapClient( $wsdl .'?singleWsdl', $options);
-        $response 	= $client->call($query);
-        return $response;
-    }
-    
-	
 	
 	public function Patient()
     {
