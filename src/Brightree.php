@@ -7,6 +7,7 @@ use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Document;
 use Nickcheek\Brightree\Service\DocumentManagement;
 use Nickcheek\Brightree\Service\CustomField;
+use Nickcheek\Brightree\Service\Insurance;
 
 
 class Brightree
@@ -30,6 +31,11 @@ class Brightree
     public function CustomField()
     {
     	return new CustomField();
+    }
+    
+    public function Insurance()
+    {
+    	return new Insurance();
     }
     
         
