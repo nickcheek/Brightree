@@ -49,6 +49,7 @@ var_dump($note);
 ### Available Patient Methods
 
 ``` php
+//patient
 PatientCreate($patient);
 PatientSearch($patient);
 PatientUpdate($patient);
