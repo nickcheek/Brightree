@@ -1,8 +1,6 @@
 # Brightree API Wrapper
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
-[![Build Status](https://img.shields.io/travis/nickcheek/brightree/master.svg?style=flat-square)](https://travis-ci.org/nickcheek/brightree)
-[![Quality Score](https://img.shields.io/scrutinizer/g/nickcheek/brightree.svg?style=flat-square)](https://scrutinizer-ci.com/g/nickcheek/brightree)
 [![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 
 Brightree API Wrapper.  
@@ -39,12 +37,11 @@ Reference Class in your controller
 use \Nickcheek\Brightree;
 ```
 
-Create a new instance and the API Call you're looking for, for instance, if you wanted to get a note by it's key
+Create a new instance of the service and the API Call you're looking for, for instance, if you wanted to get a note by it's key
 ``` php
 $bt = new Brightree\Brightree();
-$note = $bt::GetNoteByKey('141508');
-
-var_dump($note);
+$note = $bt->Patient()->GetNoteByKey('141508');
+return $note;
 ```
 ### Available Patient Methods
 
@@ -95,6 +92,62 @@ GenerateDocumentID($query);
 StoreDocument($document);
 
 ```
+
+### Available Documentation Methods
+
+``` php
+CMNCreateFromPatient($query);
+CMNDetailCreate($query);
+CMNDetailDelete($query);
+CMNDetailUpdate($query);
+CMNFetchByBrightreeID($query);
+CMNFetchByExternalID($query);
+CMNFetchByPatientBrightreeID($query);
+CMNFetchBySalesOrderBrightreeID($query);
+CMNLog($query);
+CMNPreview($query);
+CMNPrint($query);
+CMNQuestionAnswerConfiguration($query);
+CMNReasonFetchAll($query);
+CMNRenew($query);
+CMNRevise($query);
+CMNSearch($query);
+CMNTaskCreate($query);
+CMNTaskUpdate($query);
+CMNUpdate($query);
+PARAddPurchaseLimit($query);
+PARCreateFromPatient($query);
+PARDelete($query);
+PARFetchByBrightreeID($query);
+PARFetchByExternalID($query);
+PARFetchByPatientBrightreeID($query);
+PARFetchBySalesOrderBrightreeID($query);
+PARFetchBySalesOrderTemplateBrightreeID($query);
+PARLog($query);
+PARRenew($query);
+PARSearch($query);
+PARUpdate($query);
+PARUpdatePurchaseLimit($query);
+SalesOrderItemLinkCMN($query);
+SalesOrderItemLinkNewCMN($query);
+SalesOrderItemLinkToNewPAR($query);
+SalesOrderItemLinkToPAR($query);
+SalesOrderItemsLinkCMN($query);
+SalesOrderItemsLinkNewCMN($query);
+SalesOrderItemsLinkToNewPAR($query);
+SalesOrderItemsLinkToPAR($query);
+SalesOrderItemsUnlinkCMN($query);
+SalesOrderItemsUnlinkPAR($query);
+SalesOrderItemUnlinkCMN($query);
+SalesOrderItemUnlinkPAR($query);
+SalesOrderTemplateItemLinkToPAR($query);
+SalesOrderTemplateItemsLinkToPAR($query);
+SalesOrderTemplateItemsUnlinkPAR($query);
+SalesOrderTemplateItemUnlinkPAR($query);
+SetParticipantComplianceDate($query);
+
+```
+
 
 ### Changelog
 
