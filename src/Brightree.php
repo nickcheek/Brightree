@@ -4,6 +4,8 @@ namespace Nickcheek\Brightree;
 
 use SoapClient;
 use Nickcheek\Brightree\Service\Patient;
+use Nickcheek\Brightree\Service\Document;
+use Nickcheek\Brightree\Service\DocumentManagement;
 
 
 class Brightree

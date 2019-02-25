@@ -4,7 +4,7 @@ namespace Nickcheek\Brightree\Service;
 
 use SoapClient;
 
-class Documentation
+class DocumentManagement
 {
 	
 	protected $documentation_options;
