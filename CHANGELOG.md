@@ -11,4 +11,6 @@ All notable changes to `brightree` will be documented in this file
 
 - added config file
 - added Documentation Service
+- added Insurance Service
+- added Custom Field Service
 - divided services up

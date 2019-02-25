@@ -102,6 +102,17 @@ CustomFieldValueSaveMultiple($query);
 
 ```
 
+### Available Insurance Methods
+
+``` php
+InsuranceFetchByBrightreeID($query);
+InsuranceFetchByExternalID($query);
+InsuranceSearch($query);
+InsuranceUpdate($query);
+
+```
+
+
 ### Available Documentation Methods
 
 ``` php
