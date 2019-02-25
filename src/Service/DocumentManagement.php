@@ -6,23 +6,24 @@ use SoapClient;
 
 class DocumentManagement
 {
-	
+	protected $documentation;
 	protected $documentation_options;
 
 	
 	public function __construct()
 	{
-		$this->documentation_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.documentation'),'location' => config('brightree.documentation'),'trace' => 1);
+		DEFINE("BASE", dirname( __FILE__ ) ."/" );
+		$config = include(BASE . '../config/config.php');
+		$this->documentation = $config->documentation;
+		$this->documentation_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->documentation,'location' => $this->documentation,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( config('brightree.documentation') .'?singleWsdl', $this->documentation_options);
-        $response 	= $client->call($query);
+        $client     = new SoapClient( $this->documentation .'?singleWsdl', $this->documentation_options);
+        $response 	= $client->$call($query);
         return $response;
     }
-    
-	//Documentation Service
     
     public function CMNCreateFromPatient($query)
     {

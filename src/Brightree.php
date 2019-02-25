@@ -10,11 +10,6 @@ use Nickcheek\Brightree\Service\DocumentManagement;
 
 class Brightree
 {
-	private $wsdl;
-	private $connection;
-	protected $patient_options;
-	protected $document_options;
-	protected $documentation_options;
 	
 	public function __construct()
 	{

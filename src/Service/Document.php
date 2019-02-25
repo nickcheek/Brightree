@@ -6,19 +6,22 @@ use SoapClient;
 
 class Document
 {
-	
+	protected $document;
 	protected $document_options;
 
 	
 	public function __construct()
 	{
-		$this->document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.document'),'location' => config('brightree.document'),'trace' => 1);
+		DEFINE("BASE", dirname( __FILE__ ) ."/" );
+		$config = include(BASE . '../config/config.php');
+		$this->document = $config->document;
+		$this->document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->document,'location' => $this->document,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( config('brightree.document') .'?singleWsdl', $this->document_options);
-        $response 	= $client->call($query);
+        $client     = new SoapClient( $this->document .'?singleWsdl', $this->document_options);
+        $response 	= $client->$call($query);
         return $response;
     }
     

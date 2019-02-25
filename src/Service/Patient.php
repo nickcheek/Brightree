@@ -12,13 +12,16 @@ class Patient
 	
 	public function __construct()
 	{
-		$this->patient_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => config('brightree.patient'),'location' => config('brightree.patient'),'trace' => 1);
+		DEFINE("BASE", dirname( __FILE__ ) ."/" );
+		$config = include(BASE . '../config/config.php');
+		$this->patient = $config->patient;
+		$this->patient_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->patient,'location' => $this->patient,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
         $client     = new SoapClient( config('brightree.patient') .'?singleWsdl', $this->patient_options);
-        $response 	= $client->call($query);
+        $response 	= $client->$call($query);
         return $response;
     }
     
