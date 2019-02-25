@@ -93,6 +93,15 @@ StoreDocument($document);
 
 ```
 
+### Available Custom Field Methods
+
+``` php
+CustomFieldFetchAllByCategory($query);
+CustomFieldValueFetchAllByBrightreeID($query);
+CustomFieldValueSaveMultiple($query);
+
+```
+
 ### Available Documentation Methods
 
 ``` php

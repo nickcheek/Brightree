@@ -269,3 +269,4 @@ class DocumentManagement
     {
     	return $this->apiCall('SetParticipantComplianceDate',$query);
     }
+}

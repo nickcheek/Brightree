@@ -59,3 +59,4 @@ class Document
     {
     	return $this->apiCall('StoreDocument',$query);
     }
+}

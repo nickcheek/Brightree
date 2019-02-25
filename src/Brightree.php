@@ -6,16 +6,12 @@ use SoapClient;
 use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Document;
 use Nickcheek\Brightree\Service\DocumentManagement;
+use Nickcheek\Brightree\Service\CustomField;
 
 
 class Brightree
 {
-	
-	public function __construct()
-	{
-		
-	}
-	
+
 	public function Patient()
     {
     	return new Patient();
@@ -29,6 +25,11 @@ class Brightree
 	public function Documentation()
     {
     	return new Documentation();
+    }
+    
+    public function CustomField()
+    {
+    	return new CustomField();
     }
     
         

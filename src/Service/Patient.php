@@ -6,7 +6,7 @@ use SoapClient;
 
 class Patient
 {
-	
+	protected $patient;
 	protected $patient_options;
 
 	
@@ -24,8 +24,6 @@ class Patient
         $response 	= $client->$call($query);
         return $response;
     }
-    
-	//Patient Calls
 	
 	public function PatientCreate($query)
     {
