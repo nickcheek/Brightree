@@ -202,7 +202,9 @@ $params = array(
 					'ID' => '102'
 				)
 			),
-			'sortParams' => ''
+            'sortParams' => '',
+            'pageSize' => '100',
+            'page' => 1
 		);
 $puex = $bt->Pickup()->PickupExchangeSearch($params);
 return $puex;
