@@ -45,8 +45,14 @@ return $note;
 ```
 ### Available Patient Methods
 
+#### Usage
 ``` php
-//patient
+$bt = new Brightree\Brightree();
+$note = $bt->Patient()->GetNoteByKey('141508');
+return $note;
+```
+
+``` php
 PatientCreate($patient);
 PatientSearch($patient);
 PatientUpdate($patient);
@@ -55,8 +61,6 @@ PatientFetchByPatientID($id);
 PatientFetchByBrightreeID($id);
 PatientFetchByPatientID($id);
 PatientPhoneNumberSearch($patient);
-
-//notes
 PatientNoteCreate($note);
 PatientNoteFetchByKey($id);
 PatientNoteFetchByPatient($id);
@@ -64,15 +68,11 @@ PatientNoteSearch($search);
 PatientNoteUpdate($update);
 GetNotesByPatient($id);
 GetNoteByKey($NoteKey);
-
-//payor
 PatientPayorAdd($payor);
 PatientPayorFetch($payor);
 PatientPayorFetchAll($patientKey);
 PatientPayorRemove($brightreeid);
 PatientPayorUpdate($payor);
-
-//other
 PatientAddMarketingReferral($brightreeid,$referralid);
 PatientRemoveMarketingReferral($id);
 FacilityMasterInfoFetchAll();
@@ -81,6 +81,13 @@ FacilityResidentCreate($resident);
 ```
 
 ### Available Document Management Methods
+
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$document = $bt->Document()->DocumentTypesFetchAll();
+return $document;
+```
 
 ``` php
 DocumentTypesFetchAll();
@@ -95,6 +102,13 @@ StoreDocument($document);
 
 ### Available Custom Field Methods
 
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$cf = $bt->CustomField()->CustomFieldFetchAllByCategory(['category'=>'yourcategory']);
+return $cf;
+```
+
 ``` php
 CustomFieldFetchAllByCategory($query);
 CustomFieldValueFetchAllByBrightreeID($query);
@@ -102,6 +116,13 @@ CustomFieldValueSaveMultiple($query);
 
 ```
 ### Available Doctor Methods
+
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$doctor = $bt->Doctor()->DoctorFetchByBrightreeID(['BrightreeID'=>123]);
+return $doctor;
+```
 
 ``` php
 AddDoctorReferralContact($query);
@@ -121,6 +142,13 @@ RemoveDoctorReferralContact($query);
 
 ### Available Insurance Methods
 
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$insurance = $bt->Insurance()->InsuranceFetchByBrightreeID(['BrightreeID'=>123]);
+return $insurance;
+```
+
 ``` php
 InsuranceFetchByBrightreeID($query);
 InsuranceFetchByExternalID($query);
@@ -130,6 +158,13 @@ InsuranceUpdate($query);
 ```
 
 ### Available Inventory Methods
+
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$inventory = $bt->Inventory()->ClaimNoteTypeFetchAll();
+return $inventory;
+```
 
 ``` php
 ClaimNoteTypeFetchAll();
@@ -158,6 +193,18 @@ StockingUOMFetchAll();
 ```
 ### Available Pickup/Exchange Methods
 
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$params = ['searchParams'=>
+    ['Branch'=>
+        ['ID'=>102]
+    ]
+];
+$puex = $bt->Pickup()->PickupExchangeSearch($params);
+return $puex;
+```
+
 ``` php
 
 PickupExchangeAddAllRentalItems($query);
@@ -182,6 +229,13 @@ PickupExchangeUpdatePODStatus($query);
 
 ```
 ### Available Reference Methods
+
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$reference = $bt->Reference()->AccountGroupFetchAll();
+return $reference;
+```
 
 ``` php
 
@@ -246,9 +300,14 @@ WIPStatesFetchAll();
 ```
 ### Available SalesOrder Methods
 
+#### Usage
 ``` php
+$bt = new Brightree\Brightree();
+$salesorder = $bt->SalesOrder()->BrightSHIPSalesOrderAck(['soKey'=> 12345]);
+return $salesorder;
+```
 
-
+``` php
 BrightSHIPSalesOrderAck($query);
 BrightShipSalesOrderFetch($query);
 OrderImport($query);
@@ -308,6 +367,13 @@ SearchWIPStatusWithUpdate($query);
 
 ```
 ### Available Documentation Methods
+
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$documentation = $bt->Documentation()->CMNFetchByBrightreeID(['BrightreeID'=>12345]);
+return $documentation;
+```
 
 ``` php
 CMNCreateFromPatient($query);
