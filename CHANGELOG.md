@@ -18,3 +18,5 @@ All notable changes to `brightree` will be documented in this file
 ## 1.0.1.2 - 2019-02-26
 
 - added doctor service
+- added inventory service
+- updated readme

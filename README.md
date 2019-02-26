@@ -129,6 +129,34 @@ InsuranceUpdate($query);
 
 ```
 
+### Available Inventory Methods
+
+``` php
+ClaimNoteTypeFetchAll();
+CoverageTypeFetchAll();
+FetchItemLocations($query);
+FetchItemQuantitiesAtLocation($query);
+InventoryItemAddLots($query);
+InventoryItemAddSerialNumbers($query);
+InventoryItemAdjustment($query);
+InventoryItemTransfer($query);
+ItemAddToLocation($query);
+ItemAddToLocations($query);
+ItemCreate($query);
+ItemFetchByBrightreeID($query);
+ItemFetchByExternalID($query);
+ItemFetchByItemID($query);
+ItemFetchReplacementItemsByBrightreeID($query);
+ItemFetchReplacementItemsByItemID($query);
+ItemLocationsUpdate($query);
+ItemLocationUpdate($query);
+ItemSearch($query);
+ItemUpdate($query);
+KitTypeFetchAll();
+NDCFetchAll();
+StockingUOMFetchAll();
+```
+
 ### Available Documentation Methods
 
 ``` php
