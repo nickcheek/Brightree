@@ -244,7 +244,69 @@ VendorsFetchAll();
 WIPStatesFetchAll();
 
 ```
+### Available SalesOrder Methods
 
+``` php
+
+
+BrightSHIPSalesOrderAck($query);
+BrightShipSalesOrderFetch($query);
+OrderImport($query);
+SalesOrderAddDeliveryException($query); 
+SalesOrderAddMarketingReferral($query);
+SalesOrderConfirm($query);
+SalesOrderCreate($query);
+SalesOrderFetchByBrightreeID($query);
+SalesOrderFetchByExternalID($query);
+SalesOrderFetchByPurchaseOrderID($query);
+SalesOrderFetchPendingByShippingCarrierKey($query);
+SalesOrderFetchReadyforShipping($query);
+SalesOrderFulfillmentVendorsFetchAll();
+SalesOrderItemAddDeliveryException($query);
+SalesOrderItemPriceOptionFetchByBrightreeID($query);
+SalesOrderItemReplaceGeneric($query); 
+SalesOrderItemUpdateLotNumbers($query); 
+SalesOrderItemUpdatePriceOption($query); 
+SalesOrderItemUpdateSerialNumbers($query);
+SalesOrderMessagesFetchByBrightreeID($query);
+SalesOrderPayorSearch($query);
+SalesOrderQuickAddItem($query);
+SalesOrderRemoveItem($query);
+SalesOrderRemoveMarketingReferral($query); 
+SalesOrderSearch($query); 
+SalesOrderSendPOD($query); 
+SalesOrderTemplateCreate($query);
+SalesOrderTemplateCreateSalesOrder($query);
+SalesOrderTemplateDelete($query); 
+SalesOrderTemplateFetchByBrightreeID($query);
+SalesOrderTemplateFetchByExternalID($query);
+SalesOrderTemplateItemPriceOptionFetchByBrightreeID($query);
+SalesOrderTemplateItemUpdatePriceOption($query);
+SalesOrderTemplateQuickAddItem($query);
+SalesOrderTemplateRemoveItem($query); 
+SalesOrderTemplateScheduleFetchBySOTemplateKey($query);
+SalesOrderTemplateScheduleLogSearch($query);
+SalesOrderTemplateScheduleSearch($query);
+SalesOrderTemplateScheduleUpdate($query);
+SalesOrderTemplateSearch($query);
+SalesOrderTemplateUpdate($query);
+SalesOrderTemplateUpdateInsurance($query);
+SalesOrderTemplateUpdateItem($query);
+SalesOrderTemplateUpdateItemsWithDefaultPriceOption($query);
+SalesOrderTemplateUpdateWIPState($query);
+SalesOrderUpdate($query);
+SalesOrderUpdateInsurance($query);
+SalesOrderUpdateItem($query);
+SalesOrderUpdateItemPayor($query);
+SalesOrderUpdateItemsWithDefaultPriceOption($query);
+SalesOrderUpdatePODStatus($query);
+SalesOrderUpdateTracking($query);
+SalesOrderUpdateWIPState($query);
+SalesOrderVoid($query);
+SalesOrderVoidSearch($query);
+SearchWIPStatusWithUpdate($query);
+
+```
 ### Available Documentation Methods
 
 ``` php

@@ -12,6 +12,7 @@ use Nickcheek\Brightree\Service\Insurance;
 use Nickcheek\Brightree\Service\Inventory;
 use Nickcheek\Brightree\Service\Reference;
 use Nickcheek\Brightree\Service\Pickup;
+use Nickcheek\Brightree\Service\SalesOrder;
 
 class Brightree
 {
@@ -59,6 +60,11 @@ class Brightree
     public function Reference()
     {
     	return new Reference();
+    }
+
+    public function SalesOrder()
+    {
+    	return new SalesOrder();
     }
     
         
