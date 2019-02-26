@@ -10,6 +10,7 @@ use Nickcheek\Brightree\Service\DocumentManagement;
 use Nickcheek\Brightree\Service\CustomField;
 use Nickcheek\Brightree\Service\Insurance;
 use Nickcheek\Brightree\Service\Inventory;
+use Nickcheek\Brightree\Service\Reference;
 use Nickcheek\Brightree\Service\Pickup;
 
 class Brightree
@@ -53,6 +54,11 @@ class Brightree
     public function Pickup()
     {
     	return new Pickup();
+    }
+
+    public function Reference()
+    {
+    	return new Reference();
     }
     
         

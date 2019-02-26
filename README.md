@@ -181,6 +181,69 @@ PickupExchangeUpdateItem($query);
 PickupExchangeUpdatePODStatus($query);
 
 ```
+### Available Reference Methods
+
+``` php
+
+AccountGroupFetchAll();
+AddFacilityReferralContact($query);
+BranchInfoFetchAll();
+BranchInfoFetchByBrightreeID($query);
+ClaimNoteTypeFetchAll();
+ContactTypeCreate($query);
+ContactTypeDelete($query);
+ContactTypeFetchAll();
+ContactTypeFetchByBrightreeID($query);
+ContactTypeUpdate($query);
+DelivryTechnicianFetchAll();
+DepreciationTypesFetchAll();
+EPSDTConditionCodeFetchAll();
+FacilityCreate($query);
+FacilityDelete($query);
+FacilityFetchByBrightreeID($query);
+FacilityFetchByExternalID($query);
+FacilityInfoFetchAll();
+FacilityReferralContactsFetchByFacilityKey($query);
+FacilityUpdate($query);
+FetchCurrentSecUser();
+FunctionalAssessmentFetchAll();
+GLAccountGroupsFetchAll();
+ItemGroupFetchAll();
+ItemManufacturerFetchAll();
+ItemStatusFetchAll();
+ItemTypesFetchAll();
+LocationInfoFetchAll();
+MarketingRepFetchAll();
+MarketingRepFetchByBrightreeID($query);
+MarketingRepFetchByExternalID($query);
+MarketingRepUpdateExternalID($query);
+MSPInsTypeFetchAll();
+PatientNoteReasonFetchAll();
+PlaceOfServiceFetchAll();
+PolicyClaimCodeFetchAll();
+PolicyTypeCodeFetchAll();
+PractitionerInfoFetchAll();
+ReferralContactCreate($query);
+ReferralContactFetchByBrightreeID($query);
+ReferralContactFetchByExternalID($query);
+ReferralContactSearch($query);
+ReferralContactUpdate($query);
+ReferralFetchByBrightreeID($query);
+ReferralSearch($query);
+RemoveFacilityReferralContact($query);
+SalesOrderClassificationFetchAll();
+SalesOrderManualHoldReasonFetchAll();
+SalesOrderVoidReasonFetchAll();
+SalesTypesFetchAll();
+SecUsersFetchAll();
+ShippingCarriersFetchAll();
+SiteInfoFetch($query);
+TaxZoneFetchAll();
+VendorFetchByBrightreeID($query);
+VendorsFetchAll();
+WIPStatesFetchAll();
+
+```
 
 ### Available Documentation Methods
 
