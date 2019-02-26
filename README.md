@@ -197,15 +197,15 @@ StockingUOMFetchAll();
 ``` php
 $bt = new Brightree\Brightree();
 $params = array(
-			'searchParams'=> array(
-				'Branch'=> array(
-					'ID' => '102'
-				)
-			),
-            'sortParams' => '',
-            'pageSize' => '100',
-            'page' => 1
-		);
+'searchParams'=> array(
+	'Branch'=> array(
+		'ID' => '102'
+	)
+),
+'sortParams' => '',
+'pageSize' => '100',
+'page' => 1
+);
 $puex = $bt->Pickup()->PickupExchangeSearch($params);
 return $puex;
 ```
