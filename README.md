@@ -156,6 +156,31 @@ KitTypeFetchAll();
 NDCFetchAll();
 StockingUOMFetchAll();
 ```
+### Available Pickup/Exchange Methods
+
+``` php
+
+PickupExchangeAddAllRentalItems($query);
+PickupExchangeAddDeliveryException($query);
+PickupExchangeAddPickupItem($query);
+PickupExchangeCancelPOD($query);
+PickupExchangeConfirm($query);
+PickupExchangeCreate($query);
+PickupExchangeDelete($query);
+PickupExchangeFetchByBrightreeID($query);
+PickupExchangeFetchByExternalID($query);
+PickupExchangeItemAddDeliveryException($query);
+PickupExchangeItemSpecifyExchangeItem($query);
+PickupExchangeMessagesFetchByBrightreeID($query);
+PickupExchangePayorSearch($query);
+PickupExchangeRemoveItem($query);
+PickupExchangeSearch($query);
+PickupExchangeSendPOD($query);
+PickupExchangeUpdate($query);
+PickupExchangeUpdateItem($query);
+PickupExchangeUpdatePODStatus($query);
+
+```
 
 ### Available Documentation Methods
 

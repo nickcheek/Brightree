@@ -9,6 +9,8 @@ use Nickcheek\Brightree\Service\Document;
 use Nickcheek\Brightree\Service\DocumentManagement;
 use Nickcheek\Brightree\Service\CustomField;
 use Nickcheek\Brightree\Service\Insurance;
+use Nickcheek\Brightree\Service\Inventory;
+use Nickcheek\Brightree\Service\Pickup;
 
 class Brightree
 {
@@ -41,6 +43,16 @@ class Brightree
     public function Doctor()
     {
     	return new Doctor();
+    }
+
+    public function Inventory()
+    {
+    	return new Inventory();
+    }
+
+    public function Pickup()
+    {
+    	return new Pickup();
     }
     
         
