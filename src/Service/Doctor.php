@@ -45,9 +45,9 @@ class Doctor
     	return $this->apiCall('DoctorFetchByExternalID',$query);
     }
     
-    public function DoctorGroupFetchAll($query)
+    public function DoctorGroupFetchAll()
     {
-    	return $this->apiCall('DoctorGroupFetchAll',$query);
+    	return $this->apiCall('DoctorGroupFetchAll',[]);
     }
     
     public function DoctorReferralContactsFetchByDoctorKey($query)
@@ -65,19 +65,19 @@ class Doctor
     	return $this->apiCall('DoctorUpdate',$query);
     }
 
-    public function FacilityFetchAll($query)
+    public function FacilityFetchAll()
     {
-    	return $this->apiCall('FacilityFetchAll',$query);
+    	return $this->apiCall('FacilityFetchAll',[]);
     }
 
-    public function FacilityGroupFetchAll($query)
+    public function FacilityGroupFetchAll()
     {
-    	return $this->apiCall('FacilityGroupFetchAll',$query);
+    	return $this->apiCall('FacilityGroupFetchAll',[]);
     }
 
-    public function MarketingRepFetchAll($query)
+    public function MarketingRepFetchAll()
     {
-    	return $this->apiCall('MarketingRepFetchAll',$query);
+    	return $this->apiCall('MarketingRepFetchAll',[]);
     }
 
     public function RemoveDoctorReferralContact($query)

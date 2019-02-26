@@ -108,13 +108,13 @@ AddDoctorReferralContact($query);
 DoctorCreate($query);
 DoctorFetchByBrightreeID($query);
 DoctorFetchByExternalID($query);
-DoctorGroupFetchAll($query);
+DoctorGroupFetchAll();
 DoctorReferralContactsFetchByDoctorKey($query);
 DoctorSearch($query);
 DoctorUpdate($query);
-FacilityFetchAll($query);
-FacilityGroupFetchAll($query);
-MarketingRepFetchAll($query);
+FacilityFetchAll();
+FacilityGroupFetchAll();
+MarketingRepFetchAll();
 RemoveDoctorReferralContact($query);
 
 ```
