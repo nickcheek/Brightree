@@ -139,3 +139,4 @@ class Patient
     {
     	return $this->apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id));
     }
+}

@@ -112,7 +112,6 @@ InsuranceUpdate($query);
 
 ```
 
-
 ### Available Documentation Methods
 
 ``` php
