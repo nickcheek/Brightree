@@ -14,8 +14,8 @@ class Inventory
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->inventory = $config->inventory;
-		$this->inventory_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->inventory,'location' => $this->inventory,'trace' => 1);
+		$this->inventory = $config->service['inventory'];
+		$this->inventory_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->inventory,'location' => $this->inventory,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)

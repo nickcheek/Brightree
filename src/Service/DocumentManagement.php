@@ -14,8 +14,8 @@ class DocumentManagement
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->documentation = $config->documentation;
-		$this->documentation_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->documentation,'location' => $this->documentation,'trace' => 1);
+		$this->documentation = $config->service['documentation'];
+		$this->documentation_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->documentation,'location' => $this->documentation,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)

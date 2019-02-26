@@ -14,8 +14,8 @@ class Reference
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->reference = $config->reference;
-		$this->reference_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->reference,'location' => $this->reference,'trace' => 1);
+		$this->reference = $config->service['reference'];
+		$this->reference_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->reference,'location' => $this->reference,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)

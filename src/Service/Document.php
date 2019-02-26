@@ -14,8 +14,8 @@ class Document
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->document = $config->document;
-		$this->document_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->document,'location' => $this->document,'trace' => 1);
+		$this->document = $config->service['document'];
+		$this->document_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->document,'location' => $this->document,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)

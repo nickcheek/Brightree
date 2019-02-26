@@ -14,8 +14,8 @@ class Doctor
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->doctor = $config->doctor;
-		$this->doctor_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->doctor,'location' => $this->doctor,'trace' => 1);
+		$this->doctor = $config->service['doctor'];
+		$this->doctor_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->doctor,'location' => $this->doctor,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)

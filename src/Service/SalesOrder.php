@@ -14,8 +14,8 @@ class SalesOrder
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->salesorder = $config->salesorder;
-		$this->salesorder_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->salesorder,'location' => $this->salesorder,'trace' => 1);
+		$this->salesorder = $config->service['salesorder'];
+		$this->salesorder_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->salesorder,'location' => $this->salesorder,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)

@@ -12,16 +12,16 @@ You can install the package via composer:
 ```bash
 composer require nickcheek/brightree
 ```
-## Laravel Setup
+## Setup
 
-Add user/pass to ENV file.
+Add user/pass to the config file (src/config/config.php).
 
 ```bash
-BT_USER=you@domain
-BT_Pass=yourpassword
+'name'=>'you@domain',
+'pass'=>'yourpassword',
 ```
 
-Add Service Provider and Facade to config/app
+If using Laravel, Add Service Provider and Facade to config/app
 
 ``` php
 Nickcheek\Brightree\BrighreeServiceProvider::class,

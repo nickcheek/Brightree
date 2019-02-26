@@ -13,8 +13,8 @@ class CustomField
 	{
 		DEFINE("BASE", dirname( __FILE__ ) ."/" );
 		$config = include(BASE . '../config/config.php');
-		$this->custom = $config->custom;
-		$this->custom_options = array('login' => env('BT_USER'),'password' => env('BT_PASS'),'uri' => $this->custom,'location' => $this->custom,'trace' => 1);
+		$this->custom = $config->service['custom'];
+		$this->custom_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->custom,'location' => $this->custom,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
