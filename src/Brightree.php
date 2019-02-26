@@ -9,7 +9,6 @@ use Nickcheek\Brightree\Service\DocumentManagement;
 use Nickcheek\Brightree\Service\CustomField;
 use Nickcheek\Brightree\Service\Insurance;
 
-
 class Brightree
 {
 
