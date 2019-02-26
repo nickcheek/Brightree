@@ -101,6 +101,23 @@ CustomFieldValueFetchAllByBrightreeID($query);
 CustomFieldValueSaveMultiple($query);
 
 ```
+### Available Doctor Methods
+
+``` php
+AddDoctorReferralContact($query);
+DoctorCreate($query);
+DoctorFetchByBrightreeID($query);
+DoctorFetchByExternalID($query);
+DoctorGroupFetchAll($query);
+DoctorReferralContactsFetchByDoctorKey($query);
+DoctorSearch($query);
+DoctorUpdate($query);
+FacilityFetchAll($query);
+FacilityGroupFetchAll($query);
+MarketingRepFetchAll($query);
+RemoveDoctorReferralContact($query);
+
+```
 
 ### Available Insurance Methods
 

@@ -14,3 +14,7 @@ All notable changes to `brightree` will be documented in this file
 - added Insurance Service
 - added Custom Field Service
 - divided services up
+
+## 1.0.1.2 - 2019-02-26
+
+- added doctor service
