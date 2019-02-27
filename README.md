@@ -142,7 +142,7 @@ RemoveDoctorReferralContact($query);
 ```
 
 ### Available Insurance Methods
-
+Use the [INSURANCE](ServicesGuide/INSURANCE.md) Readme to see available definitions.
 #### Usage
 ``` php
 $bt = new Brightree\Brightree();
