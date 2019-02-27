@@ -290,7 +290,7 @@
       </doc:DoctorCreate>
 ```
 
-### DoctorCreate
+### DoctorUpdate
 ``` html
     <doc:DoctorUpdate>
          <!--Optional:-->
