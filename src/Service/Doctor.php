@@ -25,9 +25,9 @@ class Doctor
         return $response;
     }
     
-	public function AddDoctorReferralContact($query)
+	public function AddDoctorReferralContact($docid,$refid)
     {
-    	return $this->apiCall('AddDoctorReferralContact',$query);
+    	return $this->apiCall('AddDoctorReferralContact',['DoctorBrightreeID'=>$docid,'ReferralContactBrightreeID'=>$refid]);
     }
     
     public function DoctorCreate($query)
@@ -35,14 +35,14 @@ class Doctor
     	return $this->apiCall('DoctorCreate',$query);
     }
     
-    public function DoctorFetchByBrightreeID($query)
+    public function DoctorFetchByBrightreeID($id)
     {
-    	return $this->apiCall('DoctorFetchByBrightreeID',$query);
+    	return $this->apiCall('DoctorFetchByBrightreeID',['BrightreeID'=>$id]);
     }
     
-    public function DoctorFetchByExternalID($query)
+    public function DoctorFetchByExternalID($id)
     {
-    	return $this->apiCall('DoctorFetchByExternalID',$query);
+    	return $this->apiCall('DoctorFetchByExternalID',['ExternalID'=>$id]);
     }
     
     public function DoctorGroupFetchAll()
@@ -50,9 +50,9 @@ class Doctor
     	return $this->apiCall('DoctorGroupFetchAll',[]);
     }
     
-    public function DoctorReferralContactsFetchByDoctorKey($query)
+    public function DoctorReferralContactsFetchByDoctorKey($key)
     {
-    	return $this->apiCall('DoctorReferralContactsFetchByDoctorKey',$query);
+    	return $this->apiCall('DoctorReferralContactsFetchByDoctorKey',['DoctorBrightreeID'=>$key]);
     }
     
     public function DoctorSearch($query)
@@ -80,8 +80,8 @@ class Doctor
     	return $this->apiCall('MarketingRepFetchAll',[]);
     }
 
-    public function RemoveDoctorReferralContact($query)
+    public function RemoveDoctorReferralContact($docid,$refid)
     {
-    	return $this->apiCall('RemoveDoctorReferralContact',$query);
+    	return $this->apiCall('RemoveDoctorReferralContact',['DoctorBrightreeID'=>$docid,'ReferralContactBrightreeID'=>$refid]);
     }
 }

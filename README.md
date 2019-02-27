@@ -117,27 +117,27 @@ CustomFieldValueSaveMultiple($query);
 
 ```
 ### Available Doctor Methods
-
+Use the [DOCTOR](ServicesGuide/DOCTOR.md) Readme to see available definitions.
 #### Usage
 ``` php
 $bt = new Brightree\Brightree();
-$doctor = $bt->Doctor()->DoctorFetchByBrightreeID(['BrightreeID'=>123]);
+$doctor = $bt->Doctor()->DoctorFetchByBrightreeID(123);
 return $doctor;
 ```
 
 ``` php
-AddDoctorReferralContact($query);
+AddDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
 DoctorCreate($query);
-DoctorFetchByBrightreeID($query);
-DoctorFetchByExternalID($query);
+DoctorFetchByBrightreeID($brightreeID);
+DoctorFetchByExternalID($externalID);
 DoctorGroupFetchAll();
-DoctorReferralContactsFetchByDoctorKey($query);
+DoctorReferralContactsFetchByDoctorKey($doctorBrightreeID);
 DoctorSearch($query);
 DoctorUpdate($query);
 FacilityFetchAll();
 FacilityGroupFetchAll();
 MarketingRepFetchAll();
-RemoveDoctorReferralContact($query);
+RemoveDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
 
 ```
 
