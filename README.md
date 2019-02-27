@@ -101,7 +101,7 @@ StoreDocument($document);
 ```
 
 ### Available Custom Field Methods
-
+Use the [CUSTOM FIELD](ServicesGuide/CUSTOMFIELD.md) Readme to see available definitions.
 #### Usage
 ``` php
 $bt = new Brightree\Brightree();
