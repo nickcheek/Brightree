@@ -105,13 +105,14 @@ StoreDocument($document);
 #### Usage
 ``` php
 $bt = new Brightree\Brightree();
-$cf = $bt->CustomField()->CustomFieldFetchAllByCategory(['category'=>'yourcategory']);
+//If you need to return the inactive records, pass the number 1 as the second variable
+$cf = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient');
 return $cf;
 ```
 
 ``` php
-CustomFieldFetchAllByCategory($query);
-CustomFieldValueFetchAllByBrightreeID($query);
+CustomFieldFetchAllByCategory($category,$includeInactive);
+CustomFieldValueFetchAllByBrightreeID($brightreeID,$category);
 CustomFieldValueSaveMultiple($query);
 
 ```
@@ -150,8 +151,8 @@ return $insurance;
 ```
 
 ``` php
-InsuranceFetchByBrightreeID($query);
-InsuranceFetchByExternalID($query);
+InsuranceFetchByBrightreeID($BrightreeID);
+InsuranceFetchByExternalID($ExternalID);
 InsuranceSearch($query);
 InsuranceUpdate($query);
 

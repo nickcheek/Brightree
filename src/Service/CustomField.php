@@ -24,14 +24,14 @@ class CustomField
         return $response;
     }
 		
-	public function CustomFieldFetchAllByCategory($query)
+	public function CustomFieldFetchAllByCategory($category,$includeInactive=0)
     {
-    	return $this->apiCall('CustomFieldFetchAllByCategory',$query);
+    	return $this->apiCall('CustomFieldFetchAllByCategory',['category'=>$category,'includeInactive'=>$includeInactive]);
     }
 	
-	public function CustomFieldValueFetchAllByBrightreeID($query)
+	public function CustomFieldValueFetchAllByBrightreeID($id,$category)
     {
-    	return $this->apiCall('CustomFieldValueFetchAllByBrightreeID',$query);
+    	return $this->apiCall('CustomFieldValueFetchAllByBrightreeID',['brightreeID'=>$id,'category'=>$category]);
     }
     
     public function CustomFieldValueSaveMultiple($query)

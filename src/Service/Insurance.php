@@ -24,14 +24,14 @@ class Insurance
         return $response;
     }
 		
-	public function InsuranceFetchByBrightreeID($query)
+	public function InsuranceFetchByBrightreeID($id)
     {
-    	return $this->apiCall('InsuranceFetchByBrightreeID',$query);
+    	return $this->apiCall('InsuranceFetchByBrightreeID',['BrightreeID'=>$id]);
     }
 	
-	public function InsuranceFetchByExternalID($query)
+	public function InsuranceFetchByExternalID($id)
     {
-    	return $this->apiCall('InsuranceFetchByExternalID',$query);
+    	return $this->apiCall('InsuranceFetchByExternalID',['ExternalID'=>$id]);
     }
     
     public function InsuranceSearch($query)
