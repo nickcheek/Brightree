@@ -3,6 +3,11 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 [![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/uspslookup)
+[![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/uspslookup)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nickcheek/Brightree/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nickcheek/USPSLookup/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/nickcheek/USPSLookup/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nickcheek/USPSLookup/build-status/master)
+
 Brightree API Wrapper.  
 
 ## Installation

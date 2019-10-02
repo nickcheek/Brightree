@@ -25,3 +25,9 @@ All notable changes to `brightree` will be documented in this file
 
 - refactored to improve config
 - Breaking changes from earlier versions.
+
+## 2.1.0 - 2019-10-02
+
+- refactored apiCall method
+- Added Security Service.
+- Added Pricing Service.

@@ -1,6 +1,8 @@
 {
     "name": "nickcheek/brightree",
     "description": "Brightree API Wrapper",
+    "homepage": "https://nicholascheek.com",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nick",

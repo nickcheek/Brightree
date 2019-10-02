@@ -66,7 +66,7 @@ class Pricing extends Brightree
         return $this->apiCall('PriceOptionLetterTypeFetchAll', $query);
     }
 
-    public function PriceTableFetchAll()
+    public function PriceTableFetchAll($query)
     {
         return $this->apiCall('PriceTableFetchAll', $query);
     }
