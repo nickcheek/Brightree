@@ -9,7 +9,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "ext-soap": "^7.3"
+        "ext-soap": "^7.*"
     },
     "autoload" : {
 	    "psr-4":{
