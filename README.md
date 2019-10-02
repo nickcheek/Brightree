@@ -21,14 +21,6 @@ Add user/pass to the config file (src/config/config.php).
 'pass'=>'yourpassword',
 ```
 
-If using Laravel, Add Service Provider and Facade to config/app
-
-``` php
-Nickcheek\Brightree\BrighreeServiceProvider::class,
-```
-``` php
-'Brightree' =>  Nickcheek\Brightree\Facades\Brightree::class
-```
 
 ## Usage
 

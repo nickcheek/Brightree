@@ -2,24 +2,22 @@
 
 namespace Nickcheek\Brightree\Service;
 
+use Nickcheek\Brightree\Brightree;
 use SoapClient;
 
-class Insurance
+class Insurance extends Brightree
 {
-	protected $insurance;
 	protected $insurance_options;
 	
 	public function __construct()
 	{
-		DEFINE("BASE", dirname( __FILE__ ) ."/" );
-		$config = include(BASE . '../config/config.php');
-		$this->insurance = $config->service['insurance'];
-		$this->insurance_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->insurance,'location' => $this->insurance,'trace' => 1);
+		parent::__construct();
+		$this->insurance_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['insurance'],'location' => $this->config->service['insurance'],'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->insurance .'?singleWsdl', $this->insurance_options);
+        $client     = new SoapClient( $this->config->service['insurance'] .'?singleWsdl', $this->insurance_options);
         $response 	= $client->$call($query);
         return $response;
     }

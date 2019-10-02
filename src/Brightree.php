@@ -2,7 +2,6 @@
 
 namespace Nickcheek\Brightree;
 
-use SoapClient;
 use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Doctor;
 use Nickcheek\Brightree\Service\Document;
@@ -16,8 +15,14 @@ use Nickcheek\Brightree\Service\SalesOrder;
 
 class Brightree
 {
+    protected $config;
 
-	public function Patient()
+    public function __construct()
+    {
+        $this->config = include('config/config.php');
+    }
+
+    public function Patient()
     {
     	return new Patient();
     }
@@ -27,9 +32,9 @@ class Brightree
     	return new Document();
     }
     
-	public function Documentation()
+	public function DocumentManagement()
     {
-    	return new Documentation();
+    	return new DocumentManagement();
     }
     
     public function CustomField()

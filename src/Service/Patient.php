@@ -2,25 +2,24 @@
 
 namespace Nickcheek\Brightree\Service;
 
+use Nickcheek\Brightree\Brightree;
 use SoapClient;
 
-class Patient
+class Patient extends Brightree
 {
 	protected $patient;
 	protected $patient_options;
-
 	
 	public function __construct()
 	{
-		DEFINE("BASE", dirname( __FILE__ ) ."/" );
-		$config = include(BASE . '../config/config.php');
-		$this->patient = $config->service['patient'];
-		$this->patient_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->patient,'location' => $this->patient,'trace' => 1);
+        parent::__construct();
+		$this->patient = $this->config->service['patient'];
+		$this->patient_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->patient,'location' => $this->patient,'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( config('brightree.patient') .'?singleWsdl', $this->patient_options);
+        $client     = new SoapClient( $this->config->service['patient'] .'?singleWsdl', $this->patient_options);
         $response 	= $client->$call($query);
         return $response;
     }

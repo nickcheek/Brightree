@@ -2,25 +2,22 @@
 
 namespace Nickcheek\Brightree\Service;
 
+use Nickcheek\Brightree\Brightree;
 use SoapClient;
 
-class SalesOrder
+class SalesOrder extends Brightree
 {
-	protected $salesorder;
 	protected $salesorder_options;
-
 	
 	public function __construct()
 	{
-		DEFINE("BASE", dirname( __FILE__ ) ."/" );
-		$config = include(BASE . '../config/config.php');
-		$this->salesorder = $config->service['salesorder'];
-		$this->salesorder_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->salesorder,'location' => $this->salesorder,'trace' => 1);
+		parent::__construct();
+		$this->salesorder_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['salesorder'],'location' => $this->config->service['salesorder'],'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->salesorder .'?singleWsdl', $this->salesorder_options);
+        $client     = new SoapClient( $this->config->service['salesorder'] .'?singleWsdl', $this->salesorder_options);
         $response 	= $client->$call($query);
         return $response;
     }

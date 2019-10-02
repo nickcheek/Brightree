@@ -2,25 +2,23 @@
 
 namespace Nickcheek\Brightree\Service;
 
+use Nickcheek\Brightree\Brightree;
 use SoapClient;
 
-class Reference
+class Reference extends Brightree
 {
-	protected $reference;
 	protected $reference_options;
 
 	
 	public function __construct()
 	{
-		DEFINE("BASE", dirname( __FILE__ ) ."/" );
-		$config = include(BASE . '../config/config.php');
-		$this->reference = $config->service['reference'];
-		$this->reference_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->reference,'location' => $this->reference,'trace' => 1);
+		parent::__construct();
+		$this->reference_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['reference'],'location' => $this->config->service['reference'],'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->reference .'?singleWsdl', $this->reference_options);
+        $client     = new SoapClient( $this->config->service['reference'] .'?singleWsdl', $this->reference_options);
         $response 	= $client->$call($query);
         return $response;
     }

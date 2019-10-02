@@ -2,25 +2,23 @@
 
 namespace Nickcheek\Brightree\Service;
 
+use Nickcheek\Brightree\Brightree;
 use SoapClient;
 
-class Document
+class Document extends Brightree
 {
-	protected $document;
 	protected $document_options;
 
-	
 	public function __construct()
 	{
-		DEFINE("BASE", dirname( __FILE__ ) ."/" );
-		$config = include(BASE . '../config/config.php');
-		$this->document = $config->service['document'];
-		$this->document_options = array('login' => $config->user['name'],'password' => $config->user['pass'],'uri' => $this->document,'location' => $this->document,'trace' => 1);
+		parent::__construct();
+
+		$this->document_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['document'],'location' => $this->config->service['document'],'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->document .'?singleWsdl', $this->document_options);
+        $client     = new SoapClient( $this->config->service['document'] .'?singleWsdl', $this->document_options);
         $response 	= $client->$call($query);
         return $response;
     }

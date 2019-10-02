@@ -15,8 +15,13 @@ All notable changes to `brightree` will be documented in this file
 - added Custom Field Service
 - divided services up
 
-## 1.0.1.2 - 2019-02-26
+## 1.0.2 - 2019-02-26
 
 - added doctor service
 - added inventory service
 - updated readme
+
+## 2.0.0 - 2019-10-02
+
+- refactored to improve config
+- Breaking changes from earlier versions.
