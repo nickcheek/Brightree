@@ -425,7 +425,42 @@ SalesOrderTemplateItemUnlinkPAR($query);
 SetParticipantComplianceDate($query);
 
 ```
+### Available Pricing Methods
 
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$pricing = $bt->Pricing()->NonTaxReasonFetchAll($query);
+return $pricing;
+```
+
+```php
+CMNFormFetchAll($query);
+NonTaxReasonFetchAll($query);
+PriceCreateItem($query);
+PriceCreateStandard($query);
+PriceDetailCreate($query);
+PriceDetailFetchByBrightreeDetailID($query);
+PriceDetailUpdate($query);
+PriceFetch($query);
+PriceOptionLetterTypeFetchAll($query);
+PriceTableFetchAll($query);
+```
+
+### Available Security Methods
+
+#### Usage
+``` php
+$bt = new Brightree\Brightree();
+$security = $bt->Security()->UserFetchByBrightreeID($query);
+return $security;
+```
+
+```php
+UserFetchByBrightreeID($query);
+UserSearch($query);
+UserUpdate($query);
+```
 
 ### Changelog
 

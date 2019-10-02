@@ -17,9 +17,8 @@ class Pickup extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['pickup'] .'?singleWsdl', $this->pickup_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['pickup'] .'?singleWsdl', $this->pickup_options);
+        return $client->$call($query);
     }
     
 	public function PickupExchangeAddAllRentalItems($query)

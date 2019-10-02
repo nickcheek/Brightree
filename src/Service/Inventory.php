@@ -19,9 +19,8 @@ class Inventory extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['inventory'] .'?singleWsdl', $this->inventory_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['inventory'] .'?singleWsdl', $this->inventory_options);
+        return $client->$call($query);
     }
     
 	public function CoverageTypeFetchAll()

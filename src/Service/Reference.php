@@ -18,9 +18,8 @@ class Reference extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['reference'] .'?singleWsdl', $this->reference_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['reference'] .'?singleWsdl', $this->reference_options);
+        return $client->$call($query);
     }
     
 	public function AccountGroupFetchAll()

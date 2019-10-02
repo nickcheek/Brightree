@@ -18,9 +18,8 @@ class DocumentManagement extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['documentation'] .'?singleWsdl', $this->documentation_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['documentation'] .'?singleWsdl', $this->documentation_options);
+        return $client->$call($query);
     }
     
     public function CMNCreateFromPatient($query)

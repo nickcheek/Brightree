@@ -17,9 +17,8 @@ class CustomField extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['custom'] .'?singleWsdl', $this->custom_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['custom'] .'?singleWsdl', $this->custom_options);
+        return $client->$call($query);
     }
 		
 	public function CustomFieldFetchAllByCategory($category,$includeInactive=0)

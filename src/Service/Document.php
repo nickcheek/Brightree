@@ -18,9 +18,8 @@ class Document extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['document'] .'?singleWsdl', $this->document_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['document'] .'?singleWsdl', $this->document_options);
+        return $client->$call($query);
     }
     
 	public function DocumentTypesFetchAll()

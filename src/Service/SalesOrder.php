@@ -17,9 +17,8 @@ class SalesOrder extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['salesorder'] .'?singleWsdl', $this->salesorder_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['salesorder'] .'?singleWsdl', $this->salesorder_options);
+        return $client->$call($query);
     }
     
 	public function BrightSHIPSalesOrderAck($query)

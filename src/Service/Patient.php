@@ -7,21 +7,18 @@ use SoapClient;
 
 class Patient extends Brightree
 {
-	protected $patient;
 	protected $patient_options;
 	
 	public function __construct()
 	{
         parent::__construct();
-		$this->patient = $this->config->service['patient'];
-		$this->patient_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->patient,'location' => $this->patient,'trace' => 1);
+		$this->patient_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['patient'],'location' => $this->config->service['patient'],'trace' => 1);
 	}
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['patient'] .'?singleWsdl', $this->patient_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['patient'] .'?singleWsdl', $this->patient_options);
+        return $client->$call($query);
     }
 	
 	public function PatientCreate($query)

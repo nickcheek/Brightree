@@ -17,9 +17,8 @@ class Insurance extends Brightree
 	
 	public function apiCall($call,$query)
     {
-        $client     = new SoapClient( $this->config->service['insurance'] .'?singleWsdl', $this->insurance_options);
-        $response 	= $client->$call($query);
-        return $response;
+        $client = new SoapClient( $this->config->service['insurance'] .'?singleWsdl', $this->insurance_options);
+        return $client->$call($query);
     }
 		
 	public function InsuranceFetchByBrightreeID($id)
