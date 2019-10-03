@@ -3,24 +3,20 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class DocumentManagement extends Brightree
 {
-	protected $documentation_options;
-	
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
+
 	public function __construct()
 	{
 	    parent::__construct();
-		
-		$this->documentation_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['documentation'],'location' => $this->config->service['documentation'],'trace' => 1);
+		$this->wsdl = $this->config->service['documentation'] .'?singleWsdl';
+		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['documentation'],'location' => $this->config->service['documentation'],'trace' => 1);
 	}
-	
-	public function apiCall($call,$query)
-    {
-        $client = new SoapClient( $this->config->service['documentation'] .'?singleWsdl', $this->documentation_options);
-        return $client->$call($query);
-    }
     
     public function CMNCreateFromPatient($query)
     {

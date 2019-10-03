@@ -3,25 +3,20 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class Inventory extends Brightree
 {
-	protected $inventory_options;
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
 
-	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->config->service['inventory'];
-		$this->inventory_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['inventory'],'location' => $this->config->service['inventory'],'trace' => 1);
+		$this->wsdl = $this->config->service['inventory'] .'?singleWsdl';
+		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['inventory'],'location' => $this->config->service['inventory'],'trace' => 1);
 	}
-	
-	public function apiCall($call,$query)
-    {
-        $client = new SoapClient( $this->config->service['inventory'] .'?singleWsdl', $this->inventory_options);
-        return $client->$call($query);
-    }
     
 	public function CoverageTypeFetchAll()
     {

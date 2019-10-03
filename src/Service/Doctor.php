@@ -3,24 +3,20 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class Doctor extends Brightree
 {
-	protected $doctor_options;
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->doctor_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['doctor'],'location' => $this->config->service['doctor'],'trace' => 1);
+		$this->wsdl = $this->config->service['doctor'] .'?singleWsdl';
+		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['doctor'],'location' => $this->config->service['doctor'],'trace' => 1);
 	}
-	
-	public function apiCall($call,$query)
-    {
-        $client = new SoapClient( $this->config->service['doctor'] .'?singleWsdl', $this->doctor_options);
-        return $client->$call($query);
-
-    }
     
 	public function AddDoctorReferralContact($docid,$refid)
     {

@@ -3,24 +3,20 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class Document extends Brightree
 {
-	protected $document_options;
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
 
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->document_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['document'],'location' => $this->config->service['document'],'trace' => 1);
+        $this->wsdl = $this->config->service['document'] .'?singleWsdl';
+		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['document'],'location' => $this->config->service['document'],'trace' => 1);
 	}
-	
-	public function apiCall($call,$query)
-    {
-        $client = new SoapClient( $this->config->service['document'] .'?singleWsdl', $this->document_options);
-        return $client->$call($query);
-    }
     
 	public function DocumentTypesFetchAll()
     {

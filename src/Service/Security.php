@@ -3,22 +3,19 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class Security extends Brightree
 {
-    protected $security_options;
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
 
     public function __construct()
     {
         parent::__construct();
-        $this->security_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['security'],'location' => $this->config->service['security'],'trace' => 1);
-    }
-
-    public function apiCall($call,$query)
-    {
-        $client     = new SoapClient( $this->config->service['security'] .'?singleWsdl', $this->security_options);
-        return $client->$call($query);
+        $this->wsdl = $this->config->service['security'] .'?singleWsdl';
+        $this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['security'],'location' => $this->config->service['security'],'trace' => 1);
     }
 
     public function UserSearch($query)

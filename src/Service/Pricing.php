@@ -3,22 +3,19 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class Pricing extends Brightree
 {
-    protected $pricing_options;
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
 
     public function __construct()
     {
         parent::__construct();
-        $this->pricing_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['pricing'],'location' => $this->config->service['pricing'],'trace' => 1);
-    }
-
-    public function apiCall($call,$query)
-    {
-        $client = new SoapClient( $this->config->service['pricing'] .'?singleWsdl', $this->pricing_options);
-        return $client->$call($query);
+        $this->wsdl = $this->config->service['pricing'] .'?singleWsdl';
+        $this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['pricing'],'location' => $this->config->service['pricing'],'trace' => 1);
     }
 
     public function CMNFormFetchAll($query)

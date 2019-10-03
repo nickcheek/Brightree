@@ -3,23 +3,20 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
-use SoapClient;
+use Nickcheek\Brightree\Traits\ApiCall;
 
 class Pickup extends Brightree
 {
-	protected $pickup_options;
+    use ApiCall;
+    protected $options;
+    protected $wsdl;
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->pickup_options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['pickup'],'location' => $this->config->service['pickup'],'trace' => 1);
+		$this->wsdl = $this->config->service['pickup'] .'?singleWsdl';
+		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['pickup'],'location' => $this->config->service['pickup'],'trace' => 1);
 	}
-	
-	public function apiCall($call,$query)
-    {
-        $client = new SoapClient( $this->config->service['pickup'] .'?singleWsdl', $this->pickup_options);
-        return $client->$call($query);
-    }
     
 	public function PickupExchangeAddAllRentalItems($query)
     {
