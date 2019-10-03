@@ -9,9 +9,11 @@ use Nickcheek\Brightree\Service\DocumentManagement;
 use Nickcheek\Brightree\Service\CustomField;
 use Nickcheek\Brightree\Service\Insurance;
 use Nickcheek\Brightree\Service\Inventory;
+use Nickcheek\Brightree\Service\Pricing;
 use Nickcheek\Brightree\Service\Reference;
 use Nickcheek\Brightree\Service\Pickup;
 use Nickcheek\Brightree\Service\SalesOrder;
+use Nickcheek\Brightree\Service\Security;
 
 class Brightree
 {
@@ -71,6 +73,15 @@ class Brightree
     {
     	return new SalesOrder();
     }
-    
+
+    public function Pricing()
+    {
+        return new Pricing();
+    }
+
+    public function Security()
+    {
+        return new Security();
+    }
         
 }
