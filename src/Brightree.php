@@ -26,52 +26,52 @@ class Brightree
 
     public function Patient()
     {
-    	return new Patient();
+        return new Patient();
     }
 	
-	public function Document()
+    public function Document()
     {
-    	return new Document();
+        return new Document();
     }
     
-	public function DocumentManagement()
+    public function DocumentManagement()
     {
-    	return new DocumentManagement();
+        return new DocumentManagement();
     }
     
     public function CustomField()
     {
-    	return new CustomField();
+        return new CustomField();
     }
     
     public function Insurance()
     {
-    	return new Insurance();
+        return new Insurance();
     }
 
     public function Doctor()
     {
-    	return new Doctor();
+        return new Doctor();
     }
 
     public function Inventory()
     {
-    	return new Inventory();
+        return new Inventory();
     }
 
     public function Pickup()
     {
-    	return new Pickup();
+        return new Pickup();
     }
 
     public function Reference()
     {
-    	return new Reference();
+        return new Reference();
     }
 
     public function SalesOrder()
     {
-    	return new SalesOrder();
+        return new SalesOrder();
     }
 
     public function Pricing()
