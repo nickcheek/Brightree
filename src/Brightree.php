@@ -4,7 +4,7 @@ namespace Nickcheek\Brightree;
 
 use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Doctor;
-use Nickcheek\Brightree\Service\Document;
+use Nickcheek\Brightree\Service\Documentation;
 use Nickcheek\Brightree\Service\DocumentManagement;
 use Nickcheek\Brightree\Service\CustomField;
 use Nickcheek\Brightree\Service\Insurance;
@@ -29,14 +29,14 @@ class Brightree
         return new Patient();
     }
 	
+    public function Documentation()
+    {
+        return new Documentation();
+    }
+    
     public function Document()
     {
         return new Document();
-    }
-    
-    public function DocumentManagement()
-    {
-        return new DocumentManagement();
     }
     
     public function CustomField()

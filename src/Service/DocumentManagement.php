@@ -14,8 +14,8 @@ class DocumentManagement extends Brightree
 	public function __construct()
 	{
 		parent::__construct();
-        $this->wsdl = $this->config->service['documentmanagement'] .'?singleWsdl';
-		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['documentmanagement'],'location' => $this->config->service['documentmanagement'],'trace' => 1);
+        $this->wsdl = $this->config->service['document'] .'?singleWsdl';
+		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['document'],'location' => $this->config->service['document'],'trace' => 1);
 	}
     
 	public function DocumentTypesFetchAll()

@@ -4,6 +4,7 @@
     <list default="true" id="62d32c3a-5602-4e86-8e74-a8cd00c4b789" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Brightree.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Brightree.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/DocumentManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/DocumentManagement.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +59,7 @@
       <workItem from="1570037187181" duration="1941000" />
       <workItem from="1570039777809" duration="203000" />
       <workItem from="1570040755299" duration="2075000" />
+      <workItem from="1570729002604" duration="36000" />
     </task>
     <servers />
   </component>
