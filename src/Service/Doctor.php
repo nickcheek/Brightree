@@ -8,72 +8,70 @@ use Nickcheek\Brightree\Traits\ApiCall;
 class Doctor extends Brightree
 {
     use ApiCall;
-    protected $options;
-    protected $wsdl;
 
-	public function __construct()
+	public function __construct($info)
 	{
-		parent::__construct();
-		$this->wsdl = $this->config->service['doctor'] .'?singleWsdl';
-		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['doctor'],'location' => $this->config->service['doctor'],'trace' => 1);
+	    $this->info = $info;
+		$this->wsdl = $this->info->config->service['doctor'] .'?singleWsdl';
+		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['doctor'],'location' => $this->info->config->service['doctor'],'trace' => 1);
 	}
     
-	public function AddDoctorReferralContact($docid,$refid)
+	public function AddDoctorReferralContact($docid,$refid): object
     {
     	return $this->apiCall('AddDoctorReferralContact',['DoctorBrightreeID'=>$docid,'ReferralContactBrightreeID'=>$refid]);
     }
     
-    public function DoctorCreate($query)
+    public function DoctorCreate($query): object
     {
     	return $this->apiCall('DoctorCreate',$query);
     }
     
-    public function DoctorFetchByBrightreeID($id)
+    public function DoctorFetchByBrightreeID($id): object
     {
     	return $this->apiCall('DoctorFetchByBrightreeID',['BrightreeID'=>$id]);
     }
     
-    public function DoctorFetchByExternalID($id)
+    public function DoctorFetchByExternalID($id): object
     {
     	return $this->apiCall('DoctorFetchByExternalID',['ExternalID'=>$id]);
     }
     
-    public function DoctorGroupFetchAll()
+    public function DoctorGroupFetchAll(): object
     {
     	return $this->apiCall('DoctorGroupFetchAll',[]);
     }
     
-    public function DoctorReferralContactsFetchByDoctorKey($key)
+    public function DoctorReferralContactsFetchByDoctorKey($key): object
     {
     	return $this->apiCall('DoctorReferralContactsFetchByDoctorKey',['DoctorBrightreeID'=>$key]);
     }
     
-    public function DoctorSearch($query)
+    public function DoctorSearch($query): object
     {
     	return $this->apiCall('DoctorSearch',$query);
     }
 
-    public function DoctorUpdate($query)
+    public function DoctorUpdate($query): object
     {
     	return $this->apiCall('DoctorUpdate',$query);
     }
 
-    public function FacilityFetchAll()
+    public function FacilityFetchAll(): object
     {
     	return $this->apiCall('FacilityFetchAll',[]);
     }
 
-    public function FacilityGroupFetchAll()
+    public function FacilityGroupFetchAll(): object
     {
     	return $this->apiCall('FacilityGroupFetchAll',[]);
     }
 
-    public function MarketingRepFetchAll()
+    public function MarketingRepFetchAll(): object
     {
     	return $this->apiCall('MarketingRepFetchAll',[]);
     }
 
-    public function RemoveDoctorReferralContact($docid,$refid)
+    public function RemoveDoctorReferralContact($docid,$refid): object
     {
     	return $this->apiCall('RemoveDoctorReferralContact',['DoctorBrightreeID'=>$docid,'ReferralContactBrightreeID'=>$refid]);
     }

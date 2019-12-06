@@ -15,10 +15,6 @@ return (object) [
         'invoice' => 'https://webservices.brightree.net/v0100-1909/InvoiceService/InvoiceService.svc',
         'security' => 'https://webservices.brightree.net/v0100-1906/SecurityService/UserSecurityService.svc',
         'pricing' => 'https://webservices.brightree.net/v0100-1908/InventoryService/PricingService.svc'
-	],
-	'user'=>[
-		'name'=>'username',
-		'pass'=>'pass',
 	]
 	
 ];

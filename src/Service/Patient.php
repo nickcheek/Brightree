@@ -8,128 +8,126 @@ use Nickcheek\Brightree\Traits\ApiCall;
 class Patient extends Brightree
 {
     use ApiCall;
-    protected $options;
-    protected $wsdl;
-	
-	public function __construct()
-	{
-        parent::__construct();
-        $this->wsdl = $this->config->service['patient'] .'?singleWsdl';
-		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['patient'],'location' => $this->config->service['patient'],'trace' => 1);
-	}
-	
-	public function PatientCreate($query)
+
+    public function __construct(object $info)
     {
-    	return $this->apiCall('PatientCreate',$query);
+        $this->info = $info;
+        $this->wsdl = $this->info->config->service['patient'] .'?singleWsdl';
+        $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['patient'],'location' => $this->info->config->service['patient'],'trace' => 1);
     }
-    
-    public function PatientSearch($query)
+
+    public function PatientCreate($query): object
     {
-    	return $this->apiCall('PatientSearch',$query);
+        return $this->apiCall('PatientCreate',$query);
     }
-    
-    public function PatientUpdate($query)
+
+    public function PatientSearch($query): object
     {
-    	return $this->apiCall('PatientUpdate',$query);
+        return $this->apiCall('PatientSearch',$query);
     }
-    
-    public function PatientFetchByExternalID($id=null)
+
+    public function PatientUpdate($query): object
     {
-    	return $this->apiCall('PatientFetchByExternalID',array('ExternalID' => $id));
+        return $this->apiCall('PatientUpdate',$query);
     }
-    
-    public function PatientFetchByPatientID($id=null)
+
+    public function PatientFetchByExternalID($id=null): object
     {
-    	return $this->apiCall('PatientFetchByPatientID',array('PatientID' => $id));
+        return $this->apiCall('PatientFetchByExternalID',array('ExternalID' => $id));
     }
-    
-    public function PatientNoteCreate($query)
+
+    public function PatientFetchByPatientID($id=null): object
     {
-    	return $this->apiCall('PatientNoteCreate',$query);
+        return $this->apiCall('PatientFetchByPatientID',array('PatientID' => $id));
     }
-    
-    public function PatientNoteFetchByKey($id=null)
+
+    public function PatientNoteCreate($query): object
     {
-    	return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id));
+        return $this->apiCall('PatientNoteCreate',$query);
     }
-    
-    public function PatientNoteFetchByPatient($id=null)
+
+    public function PatientNoteFetchByKey($id=null): object
     {
-    	return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id));
+        return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id));
     }
-    
-    public function PatientNoteSearch($query)
+
+    public function PatientNoteFetchByPatient($id=null): object
     {
-    	return $this->apiCall('PatientNoteSearch',$query);
+        return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id));
     }
-    
-    public function PatientNoteUpdate($query)
+
+    public function PatientNoteSearch($query): object
     {
-    	return $this->apiCall('PatientNoteUpdate',$query);
+        return $this->apiCall('PatientNoteSearch',$query);
     }
-    
-    public function PatientPayorAdd($query)
+
+    public function PatientNoteUpdate($query): object
     {
-    	return $this->apiCall('PatientPayorAdd',$query);
+        return $this->apiCall('PatientNoteUpdate',$query);
     }
-    
-    public function PatientPayorFetch($query)
+
+    public function PatientPayorAdd($query): object
     {
-    	return $this->apiCall('PatientPayorFetch',$query);
+        return $this->apiCall('PatientPayorAdd',$query);
     }
-    
-    public function PatientPayorFetchAll($key ='12345')
+
+    public function PatientPayorFetch($query): object
     {
-    	return $this->apiCall('PatientPayorFetchAll',array("PatientKey" => $key));
+        return $this->apiCall('PatientPayorFetch',$query);
     }
-    
-    public function PatientPayorRemove($id=null)
+
+    public function PatientPayorFetchAll($key ='12345'): object
     {
-    	return $this->apiCall('PatientPayorRemove',array('brightreeID' => $id));
+        return $this->apiCall('PatientPayorFetchAll',array("PatientKey" => $key));
     }
-    
-    public function PatientPayorUpdate($query)
+
+    public function PatientPayorRemove($id=null): object
     {
-    	return $this->apiCall('PatientPayorUpdate',$query);
+        return $this->apiCall('PatientPayorRemove',array('brightreeID' => $id));
     }
-    
-    public function PatientPhoneNumberSearch($query)
+
+    public function PatientPayorUpdate($query): object
     {
-    	return $this->apiCall('PatientPhoneNumberSearch',$query);
+        return $this->apiCall('PatientPayorUpdate',$query);
     }
-    
-    public function PatientRemoveMarketingReferral($id=null)
+
+    public function PatientPhoneNumberSearch($query): object
     {
-    	return $this->apiCall('PatientRemoveMarketingReferral',array('brightreeID' => $id));
+        return $this->apiCall('PatientPhoneNumberSearch',$query);
     }
-    
-	public function FacilityMasterInfoFetchAll()
+
+    public function PatientRemoveMarketingReferral($id=null): object
     {
-    	return $this->apiCall('FacilityMasterInfoFetchAll','');
+        return $this->apiCall('PatientRemoveMarketingReferral',array('brightreeID' => $id));
     }
-	
-	public function FacilityResidentCreate($query)
+
+    public function FacilityMasterInfoFetchAll(): object
     {
-    	return $this->apiCall('FacilityResidentCreate',$query);
+        return $this->apiCall('FacilityMasterInfoFetchAll','');
     }
-	
-	public function PatientAddMarketingReferral($btid=null,$refid=null)
+
+    public function FacilityResidentCreate($query): object
     {
-    	return $this->apiCall('FacilityResidentCreate',array('BrightreeID'=>$btid,'BrightreeReferralID'=>$refid));
+        return $this->apiCall('FacilityResidentCreate',$query);
     }
-	
-   public function GetNoteByKey($id='141508')
+
+    public function PatientAddMarketingReferral($btid=null,$refid=null): object
     {
-    	return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id));
+        return $this->apiCall('FacilityResidentCreate',array('BrightreeID'=>$btid,'BrightreeReferralID'=>$refid));
     }
-    
-    public function GetNotesByPatient($id='12345') 
+
+    public function GetNoteByKey($id='141508'): object
     {
-    	return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id));
+        return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id));
     }
-    
-    public function PatientFetchByBrightreeID($id='12345')
+
+    public function GetNotesByPatient($id='12345'): object
     {
-    	return $this->apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id));
+        return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id));
+    }
+
+    public function PatientFetchByBrightreeID($id='12345'): object
+    {
+        return $this->apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id));
     }
 }

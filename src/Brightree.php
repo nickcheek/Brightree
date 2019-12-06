@@ -5,7 +5,7 @@ namespace Nickcheek\Brightree;
 use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Doctor;
 use Nickcheek\Brightree\Service\Document;
-use Nickcheek\Brightree\Service\DocumentManagement;
+use Nickcheek\Brightree\Service\Documentation;
 use Nickcheek\Brightree\Service\CustomField;
 use Nickcheek\Brightree\Service\Insurance;
 use Nickcheek\Brightree\Service\Inventory;
@@ -17,71 +17,75 @@ use Nickcheek\Brightree\Service\Security;
 
 class Brightree
 {
-    protected $config;
+    protected object $info;
+    protected string $wsdl;
+    protected object $config;
+    protected array $options;
 
-    public function __construct()
+    public function __construct(string $username, string $password)
     {
         $this->config = include('config/config.php');
+        $this->info = (object)['username'=>$username,'password'=>$password,'config'=>$this->config];
     }
 
-    public function Patient()
+    public function Patient(): object
     {
-    	return new Patient();
-    }
-	
-	public function Document()
-    {
-    	return new Document();
-    }
-    
-	public function DocumentManagement()
-    {
-    	return new DocumentManagement();
-    }
-    
-    public function CustomField()
-    {
-    	return new CustomField();
-    }
-    
-    public function Insurance()
-    {
-    	return new Insurance();
+        return new Patient($this->info);
     }
 
-    public function Doctor()
+    public function Doctor(): object
     {
-    	return new Doctor();
+        return new Doctor($this->info);
     }
 
-    public function Inventory()
+    public function Document(): object
     {
-    	return new Inventory();
+        return new Document($this->info);
     }
 
-    public function Pickup()
+    public function Documentation(): object
     {
-    	return new Pickup();
+        return new Documentation($this->info);
     }
 
-    public function Reference()
+    public function CustomField(): object
     {
-    	return new Reference();
+        return new CustomField($this->info);
     }
 
-    public function SalesOrder()
+    public function Insurance(): object
     {
-    	return new SalesOrder();
+        return new Insurance($this->info);
     }
 
-    public function Pricing()
+    public function Inventory(): object
     {
-        return new Pricing();
+        return new Inventory($this->info);
     }
 
-    public function Security()
+    public function Pickup(): object
     {
-        return new Security();
+        return new Pickup($this->info);
     }
-        
+
+    public function Reference(): object
+    {
+        return new Reference($this->info);
+    }
+
+    public function SalesOrder(): object
+    {
+        return new SalesOrder($this->info);
+    }
+
+    public function Pricing(): object
+    {
+        return new Pricing($this->info);
+    }
+
+    public function Security(): object
+    {
+        return new Security($this->info);
+    }
+
 }

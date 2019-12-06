@@ -8,27 +8,25 @@ use Nickcheek\Brightree\Traits\ApiCall;
 class Security extends Brightree
 {
     use ApiCall;
-    protected $options;
-    protected $wsdl;
 
-    public function __construct()
+    public function __construct(object $info)
     {
-        parent::__construct();
-        $this->wsdl = $this->config->service['security'] .'?singleWsdl';
-        $this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['security'],'location' => $this->config->service['security'],'trace' => 1);
+        $this->info = $info;
+        $this->wsdl = $this->info->config->service['security'] .'?singleWsdl';
+        $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['security'],'location' => $this->info->config->service['security'],'trace' => 1);
     }
 
-    public function UserSearch($query)
+    public function UserSearch($query): object
     {
         return $this->apiCall('UserSearch',$query);
     }
 
-    public function UserFetchByBrightreeID($query)
+    public function UserFetchByBrightreeID($query): object
     {
         return $this->apiCall('UserFetchByBrightreeID',$query);
     }
 
-    public function UserUpdate($query)
+    public function UserUpdate($query): object
     {
         return $this->apiCall('UserUpdate',$query);
     }

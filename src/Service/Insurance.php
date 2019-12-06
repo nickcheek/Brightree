@@ -8,32 +8,30 @@ use Nickcheek\Brightree\Traits\ApiCall;
 class Insurance extends Brightree
 {
     use ApiCall;
-    protected $options;
-    protected $wsdl;
 	
-	public function __construct()
+	public function __construct(object $info)
 	{
-		parent::__construct();
+		$this->info = $info;
 		$this->wsdl = $this->config->service['insurance'] .'?singleWsdl';
 		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['insurance'],'location' => $this->config->service['insurance'],'trace' => 1);
 	}
 		
-	public function InsuranceFetchByBrightreeID($id)
+	public function InsuranceFetchByBrightreeID($id): object
     {
     	return $this->apiCall('InsuranceFetchByBrightreeID',['BrightreeID'=>$id]);
     }
 	
-	public function InsuranceFetchByExternalID($id)
+	public function InsuranceFetchByExternalID($id): object
     {
     	return $this->apiCall('InsuranceFetchByExternalID',['ExternalID'=>$id]);
     }
     
-    public function InsuranceSearch($query)
+    public function InsuranceSearch($query): object
     {
     	return $this->apiCall('InsuranceSearch',$query);
     }
     
-    public function InsuranceUpdate($query)
+    public function InsuranceUpdate($query): object
     {
     	return $this->apiCall('InsuranceUpdate',$query);
     }

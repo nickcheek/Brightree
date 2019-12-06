@@ -2,8 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62d32c3a-5602-4e86-8e74-a8cd00c4b789" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Brightree.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Brightree.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/CustomField.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CustomField.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Doctor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Doctor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Document.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Document.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/DocumentManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Documentation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Insurance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Insurance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Patient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Pickup.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Pickup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Pricing.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Pricing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Reference.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Reference.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/SalesOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SalesOrder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Security.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Security.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/config.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +72,9 @@
       <workItem from="1570033755622" duration="500000" />
       <workItem from="1570037187181" duration="1941000" />
       <workItem from="1570039777809" duration="203000" />
-      <workItem from="1570040755299" duration="2075000" />
+      <workItem from="1570040755299" duration="2222000" />
+      <workItem from="1575585639160" duration="631000" />
+      <workItem from="1575644875652" duration="4521000" />
     </task>
     <servers />
   </component>
