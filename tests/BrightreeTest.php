@@ -7,17 +7,21 @@ use PHPUnit\Framework\TestCase;
 
 class BrightreeTest extends TestCase
 {
-    protected object $bt;
+    protected object $brightree;
 
     protected function setUp(): void
     {
-       $this->bt =  new Brightree('Username','Password');
+       $this->brightree =  new Brightree('Username','Password');
     }
 
-    public function test_child_class_receives_info_variable()
+    public function test_class_receives_info_variable()
     {
-        $this->assertObjectHasAttribute('info',$this->bt->Patient());
+        $this->assertObjectHasAttribute('info',$this->brightree);
     }
 
+    public function test_child_class_can_reach_info_variable()
+    {
+        $this->assertObjectHasAttribute('info',$this->brightree->Patient());
+    }
 
 }

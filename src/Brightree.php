@@ -17,8 +17,8 @@ use Nickcheek\Brightree\Service\Security;
 
 class Brightree
 {
-    protected object $info;
     protected string $wsdl;
+    protected object $info;
     protected object $config;
     protected array $options;
 
