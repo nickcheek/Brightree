@@ -31,12 +31,12 @@ class Patient extends Brightree
         return $this->apiCall('PatientUpdate',$query);
     }
 
-    public function PatientFetchByExternalID($id=null): object
+    public function PatientFetchByExternalID(int $id=null): object
     {
         return $this->apiCall('PatientFetchByExternalID',array('ExternalID' => $id));
     }
 
-    public function PatientFetchByPatientID($id=null): object
+    public function PatientFetchByPatientID(int $id=null): object
     {
         return $this->apiCall('PatientFetchByPatientID',array('PatientID' => $id));
     }
@@ -46,12 +46,12 @@ class Patient extends Brightree
         return $this->apiCall('PatientNoteCreate',$query);
     }
 
-    public function PatientNoteFetchByKey($id=null): object
+    public function PatientNoteFetchByKey(int $id=null): object
     {
         return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id));
     }
 
-    public function PatientNoteFetchByPatient($id=null): object
+    public function PatientNoteFetchByPatient(int $id=null): object
     {
         return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id));
     }
@@ -76,12 +76,12 @@ class Patient extends Brightree
         return $this->apiCall('PatientPayorFetch',$query);
     }
 
-    public function PatientPayorFetchAll($key ='12345'): object
+    public function PatientPayorFetchAll(int $key =12345): object
     {
         return $this->apiCall('PatientPayorFetchAll',array("PatientKey" => $key));
     }
 
-    public function PatientPayorRemove($id=null): object
+    public function PatientPayorRemove(int $id=null): object
     {
         return $this->apiCall('PatientPayorRemove',array('brightreeID' => $id));
     }
@@ -96,7 +96,7 @@ class Patient extends Brightree
         return $this->apiCall('PatientPhoneNumberSearch',$query);
     }
 
-    public function PatientRemoveMarketingReferral($id=null): object
+    public function PatientRemoveMarketingReferral(int $id=null): object
     {
         return $this->apiCall('PatientRemoveMarketingReferral',array('brightreeID' => $id));
     }
@@ -111,22 +111,22 @@ class Patient extends Brightree
         return $this->apiCall('FacilityResidentCreate',$query);
     }
 
-    public function PatientAddMarketingReferral($btid=null,$refid=null): object
+    public function PatientAddMarketingReferral(int $btid=null, int $refid=null): object
     {
         return $this->apiCall('FacilityResidentCreate',array('BrightreeID'=>$btid,'BrightreeReferralID'=>$refid));
     }
 
-    public function GetNoteByKey($id='141508'): object
+    public function GetNoteByKey(int $id=141508): object
     {
         return $this->apiCall('PatientNoteFetchByKey',array('brightreeID' => $id));
     }
 
-    public function GetNotesByPatient($id='12345'): object
+    public function GetNotesByPatient(int $id=12345): object
     {
         return $this->apiCall('PatientNoteFetchByPatient',array('brightreeID' => $id));
     }
 
-    public function PatientFetchByBrightreeID($id='12345'): object
+    public function PatientFetchByBrightreeID(int $id=12345): object
     {
         return $this->apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id));
     }

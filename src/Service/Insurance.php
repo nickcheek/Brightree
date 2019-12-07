@@ -12,8 +12,8 @@ class Insurance extends Brightree
 	public function __construct(object $info)
 	{
 		$this->info = $info;
-		$this->wsdl = $this->config->service['insurance'] .'?singleWsdl';
-		$this->options = array('login' => $this->config->user['name'],'password' => $this->config->user['pass'],'uri' => $this->config->service['insurance'],'location' => $this->config->service['insurance'],'trace' => 1);
+		$this->wsdl = $this->info->config->service['insurance'] .'?singleWsdl';
+		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['insurance'],'location' => $this->info->config->service['insurance'],'trace' => 1);
 	}
 		
 	public function InsuranceFetchByBrightreeID($id): object

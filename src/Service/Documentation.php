@@ -13,7 +13,7 @@ class Documentation extends Brightree
 	{
 	    $this->info = $info;
 		$this->wsdl = $this->info->config->service['documentation'] .'?singleWsdl';
-		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['documentation'],'location' => $this->config->service['documentation'],'trace' => 1);
+		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['documentation'],'location' => $this->info->config->service['documentation'],'trace' => 1);
 	}
     
     public function CMNCreateFromPatient($query): object
