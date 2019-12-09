@@ -52,4 +52,9 @@ class BrightreeTest extends TestCase
     {
         $this->assertArrayHasKey('pageSize', $this->brightree->search($this->arr)->build());
     }
+
+    public function test_array_builder_returns_array()
+    {
+        $this->assertIsArray($this->brightree->search($this->arr)->build());
+    }
 }

@@ -67,7 +67,7 @@ class Pricing extends Brightree
 
     public function Ping(): object
     {
-        $this->apiCall('Ping', array('Ping'=>[]));
+        return $this->apiCall('Ping', array('Ping'=>[]));
     }
 
 }

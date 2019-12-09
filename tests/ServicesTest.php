@@ -73,4 +73,10 @@ class ServicesTest extends TestCase
     {
         $this->assertIsObject($this->brightree->Reference());
     }
+
+    public function test_invoice_class_returns_object(): void
+    {
+        $this->assertIsObject($this->brightree->Invoice());
+    }
+
 }

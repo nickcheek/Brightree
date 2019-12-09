@@ -20,9 +20,9 @@ class Security extends Brightree
         return $this->apiCall('UserSearch',$query);
     }
 
-    public function UserFetchByBrightreeID($query): object
+    public function UserFetchByBrightreeID($btid): object
     {
-        return $this->apiCall('UserFetchByBrightreeID',$query);
+        return $this->apiCall('UserFetchByBrightreeID',array('BrightreeID'=>$btid));
     }
 
     public function UserUpdate($query): object

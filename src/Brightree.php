@@ -2,6 +2,7 @@
 
 namespace Nickcheek\Brightree;
 
+use Nickcheek\Brightree\Service\Invoice;
 use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Doctor;
 use Nickcheek\Brightree\Service\Document;
@@ -19,7 +20,7 @@ use Nickcheek\Brightree\Helpers\arrayHelper;
 class Brightree extends arrayHelper
 {
     protected string $wsdl;
-    protected object $info;
+    public object $info;
     protected object $config;
     protected array $options;
 
@@ -87,6 +88,11 @@ class Brightree extends arrayHelper
     public function Security(): object
     {
         return new Security($this->info);
+    }
+
+    public function Invoice(): object
+    {
+        return new Invoice($this->info);
     }
 
 }

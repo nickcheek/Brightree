@@ -6,6 +6,7 @@ use Nickcheek\Brightree\Brightree;
 
 class CustomField extends Brightree
 {
+
     use \Nickcheek\Brightree\Traits\ApiCall;
 
     public function __construct(object $info)
@@ -15,17 +16,37 @@ class CustomField extends Brightree
         $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['custom'],'location' => $this->info->config->service['custom'],'trace' => 1);
     }
 
-    public function CustomFieldFetchAllByCategory($category,$includeInactive=0): object
+    /**
+     * Grabs all Custom Fields by category
+     *
+     * @param string $category
+     * @param int $includeInactive
+     * @return object
+     */
+    public function CustomFieldFetchAllByCategory(string $category,int $includeInactive=0): object
     {
         return $this->apiCall('CustomFieldFetchAllByCategory',['category'=>$category,'includeInactive'=>$includeInactive]);
     }
 
-    public function CustomFieldValueFetchAllByBrightreeID($id,$category): object
+    /**
+     * Grabs all custom fields by Brightree ID
+     *
+     * @param int $id
+     * @param string $category
+     * @return object
+     */
+    public function CustomFieldValueFetchAllByBrightreeID(int $id, string $category): object
     {
         return $this->apiCall('CustomFieldValueFetchAllByBrightreeID',['brightreeID'=>$id,'category'=>$category]);
     }
 
-    public function CustomFieldValueSaveMultiple($query): object
+    /**
+     * Save one or multiple custom field values
+     *
+     * @param array $query
+     * @return object
+     */
+    public function CustomFieldValueSaveMultiple(array $query): object
     {
         return $this->apiCall('CustomFieldValueSaveMultiple',$query);
     }
