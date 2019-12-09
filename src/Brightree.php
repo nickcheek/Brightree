@@ -16,7 +16,7 @@ use Nickcheek\Brightree\Service\SalesOrder;
 use Nickcheek\Brightree\Service\Security;
 use Nickcheek\Brightree\Helpers\arrayHelper;
 
-class Brightree
+class Brightree extends arrayHelper
 {
     protected string $wsdl;
     protected object $info;
