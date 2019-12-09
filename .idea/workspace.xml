@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62d32c3a-5602-4e86-8e74-a8cd00c4b789" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/example.myClass.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/patient.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/example.myClass.php" beforeDir="false" afterPath="$PROJECT_DIR$/examples/example.myClass.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +109,7 @@
       <workItem from="1575644875652" duration="5501000" />
       <workItem from="1575734009315" duration="1903000" />
       <workItem from="1575740596222" duration="3184000" />
-      <workItem from="1575895828299" duration="1799000" />
+      <workItem from="1575895828299" duration="2111000" />
     </task>
     <servers />
   </component>
@@ -134,9 +133,9 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="764" y="467" key="NewPhpFileDialog" timestamp="1575898412409">
+    <state x="764" y="467" key="NewPhpFileDialog" timestamp="1575898905381">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="764" y="467" key="NewPhpFileDialog/1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1575898412409" />
+    <state x="764" y="467" key="NewPhpFileDialog/1920.23.1920.1057/0.23.1920.1057@0.23.1920.1057" timestamp="1575898905381" />
   </component>
 </project>
