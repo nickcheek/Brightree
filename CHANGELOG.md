@@ -31,3 +31,14 @@ All notable changes to `brightree` will be documented in this file
 - refactored apiCall method
 - Added Security Service.
 - Added Pricing Service.
+
+## 3.0.0 - 2019-12-09
+
+- removed user/pass from config
+- updated typecasts for php 7.4
+
+## 3.1.0 - 2019-12-09
+
+- Added arrayHelper Class
+- Added Invoice API Class
+- Changed Readme Docs

@@ -49,9 +49,9 @@ return $order;
 ```
 
 
-##Methods
+#API's
 
-### Available Patient Methods
+## Patient Class
 
 #### Usage
 ``` php
@@ -60,6 +60,7 @@ $note = $bt->Patient()->GetNoteByKey('141508');
 return $note;
 ```
 
+#### Methods
 ``` php
 PatientCreate($patient);
 PatientSearch($patient);
@@ -88,7 +89,7 @@ FacilityResidentCreate($resident);
 
 ```
 
-### Available Document Management Methods
+## Document Management Class
 
 #### Usage
 ``` php
@@ -97,6 +98,7 @@ $document = $bt->Document()->DocumentTypesFetchAll();
 return $document;
 ```
 
+#### Methods
 ``` php
 DocumentTypesFetchAll();
 DocumentBatchCreate($batch);
@@ -108,8 +110,8 @@ StoreDocument($document);
 
 ```
 
-### Available Custom Field Methods
-Use the [CUSTOM FIELD](ServicesGuide/CUSTOMFIELD.md) Readme to see available definitions.
+## Custom Field Class
+
 #### Usage
 ``` php
 $bt = new Brightree\Brightree($username,$password);
@@ -118,14 +120,15 @@ $cf = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient');
 return $cf;
 ```
 
+#### Methods
 ``` php
 CustomFieldFetchAllByCategory($category,$includeInactive);
 CustomFieldValueFetchAllByBrightreeID($brightreeID,$category);
 CustomFieldValueSaveMultiple($query);
 
 ```
-### Available Doctor Methods
-Use the [DOCTOR](ServicesGuide/DOCTOR.md) Readme to see available definitions.
+## Doctor Class
+
 #### Usage
 ``` php
 $bt = new Brightree\Brightree($username,$password);
@@ -133,6 +136,7 @@ $doctor = $bt->Doctor()->DoctorFetchByBrightreeID(123);
 return $doctor;
 ```
 
+#### Methods
 ``` php
 AddDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
 DoctorCreate($query);
@@ -149,7 +153,7 @@ RemoveDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
 
 ```
 
-### Available Insurance Methods
+## Insurance Class
 Use the [INSURANCE](ServicesGuide/INSURANCE.md) Readme to see available definitions.
 #### Usage
 ``` php
@@ -158,6 +162,7 @@ $insurance = $bt->Insurance()->InsuranceFetchByBrightreeID(['BrightreeID'=>123])
 return $insurance;
 ```
 
+#### Methods
 ``` php
 InsuranceFetchByBrightreeID($BrightreeID);
 InsuranceFetchByExternalID($ExternalID);
@@ -166,7 +171,7 @@ InsuranceUpdate($query);
 
 ```
 
-### Available Inventory Methods
+## Inventory Class
 
 #### Usage
 ``` php
@@ -175,6 +180,7 @@ $inventory = $bt->Inventory()->ClaimNoteTypeFetchAll();
 return $inventory;
 ```
 
+#### Methods
 ``` php
 ClaimNoteTypeFetchAll();
 CoverageTypeFetchAll();
@@ -200,7 +206,7 @@ KitTypeFetchAll();
 NDCFetchAll();
 StockingUOMFetchAll();
 ```
-### Available Pickup/Exchange Methods
+## Pickup/Exchange Class
 
 #### Usage
 ``` php
@@ -219,6 +225,7 @@ $puex = $bt->Pickup()->PickupExchangeSearch($params);
 return $puex;
 ```
 
+#### Methods
 ``` php
 
 PickupExchangeAddAllRentalItems($query);
@@ -242,7 +249,7 @@ PickupExchangeUpdateItem($query);
 PickupExchangeUpdatePODStatus($query);
 
 ```
-### Available Reference Methods
+## Reference Class
 
 #### Usage
 ``` php
@@ -251,6 +258,7 @@ $reference = $bt->Reference()->AccountGroupFetchAll();
 return $reference;
 ```
 
+#### Methods
 ``` php
 
 AccountGroupFetchAll();
@@ -312,7 +320,7 @@ VendorsFetchAll();
 WIPStatesFetchAll();
 
 ```
-### Available SalesOrder Methods
+## SalesOrder Class
 
 #### Usage
 ``` php
@@ -321,6 +329,7 @@ $salesorder = $bt->SalesOrder()->BrightSHIPSalesOrderAck(['soKey'=> 12345]);
 return $salesorder;
 ```
 
+#### Methods
 ``` php
 BrightSHIPSalesOrderAck($query);
 BrightShipSalesOrderFetch($query);
@@ -384,7 +393,7 @@ StopReasonSalesOrderTemplateUpdate($query);
 StopReasonSalesOrderUpdate($query);
 
 ```
-### Available Documentation Methods
+## Documentation Class
 
 #### Usage
 ``` php
@@ -393,6 +402,7 @@ $documentation = $bt->Documentation()->CMNFetchByBrightreeID(['BrightreeID'=>123
 return $documentation;
 ```
 
+#### Methods
 ``` php
 CMNCreateFromPatient($query);
 CMNDetailCreate($query);
@@ -445,7 +455,7 @@ SalesOrderTemplateItemUnlinkPAR($query);
 SetParticipantComplianceDate($query);
 
 ```
-### Available Pricing Methods
+## Pricing Class
 
 #### Usage
 ``` php
@@ -453,7 +463,7 @@ $bt = new Brightree\Brightree($username,$password);
 $pricing = $bt->Pricing()->NonTaxReasonFetchAll($query);
 return $pricing;
 ```
-
+#### Methods
 ```php
 CMNFormFetchAll($query);
 NonTaxReasonFetchAll($query);
@@ -467,7 +477,7 @@ PriceOptionLetterTypeFetchAll($query);
 PriceTableFetchAll($query);
 ```
 
-### Available Security Methods
+## Security Class
 
 #### Usage
 ``` php
@@ -476,10 +486,32 @@ $security = $bt->Security()->UserFetchByBrightreeID($query);
 return $security;
 ```
 
+#### Methods
 ```php
 UserFetchByBrightreeID($query);
 UserSearch($query);
 UserUpdate($query);
+```
+
+## Invoice Class 
+###### (new as of 12/9/19)
+#### Usage
+``` php
+$bt = new Brightree\Brightree($username,$password);
+$security = $bt->Security()->UserFetchByBrightreeID($query);
+return $security;
+```
+
+#### Methods
+```php
+InvoiceCreatePrintActivity($brightreeID);
+InvoiceFetchByBrightreeID($brightreeID);
+InvoiceFetchByInvoiceID($invoiceID);
+InvoiceItemUpdate($query);
+InvoiceUpdate($query);
+OpenInvoiceAgedBalanceFetchByPatient($id);
+OpenInvoiceBalanceFetchByPatient($id);
+Resubmitinvoices($query);
 ```
 
 ### Changelog
