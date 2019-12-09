@@ -65,4 +65,9 @@ class Pricing extends Brightree
         return $this->apiCall('PriceTableFetchAll', $query);
     }
 
+    public function Ping(): object
+    {
+        $this->apiCall('Ping', array('Ping'=>[]));
+    }
+
 }
