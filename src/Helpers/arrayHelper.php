@@ -4,12 +4,34 @@ namespace Nickcheek\Brightree\Helpers;
 
 class arrayHelper
 {
+    /**
+     * @var array
+     */
     protected array $arr;
+
+    /**
+     * @var array|null
+     */
     protected ?array $sort;
+
+    /**
+     * @var array
+     */
     protected array $pages;
+
+    /**
+     * @var array
+     */
     protected array $search;
+
+    /**
+     * @var array
+     */
     protected array $pageSize;
 
+    /**
+     * arrayHelper constructor.
+     */
     public function __construct()
     {
         $this->pages = [];
@@ -59,6 +81,7 @@ class arrayHelper
         $this->pages = $this->pages ?? ['page' => 1];
         $this->pageSize = $this->pageSize ?? ['pageSize' => 10];
         $this->sort = $this->sort ?? ['SortParams' => []];
+
         $this->arr = array_merge($this->search,$this->sort, $this->pages,$this->pageSize);
         return $this->arr;
     }

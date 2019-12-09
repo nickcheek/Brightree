@@ -294,4 +294,24 @@ class SalesOrder extends Brightree
     {
         return $this->apiCall('SearchWIPStatusWithUpdate',$query);
     }
+
+    public function StopReasonSalesOrderFetchByBrightreeID(int $BrightreeID): object
+    {
+        return $this->apiCall('StopReasonSalesOrderFetchByBrightreeID', array('BrightreeID' => $BrightreeID));
+    }
+
+    public function StopReasonSalesOrderTemplateFetchByBrightreeID(int $BrightreeID): object
+    {
+        return $this->apiCall('StopReasonSalesOrderTemplateFetchByBrightreeID',array('BrightreeID'=> $BrightreeID));
+    }
+
+    public function StopReasonSalesOrderTemplateUpdate($query): object
+    {
+        return $this->apiCall('StopReasonSalesOrderTemplateUpdate',$query);
+    }
+
+    public function StopReasonSalesOrderUpdate($query): object
+    {
+        return $this->apiCall('StopReasonSalesOrderUpdate',$query);
+    }
 }
