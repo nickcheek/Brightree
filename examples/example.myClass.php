@@ -3,7 +3,6 @@
 include 'vendor/autoload.php';
 
 use Nickcheek\Brightree\Brightree;
-use Carbon;
 
 class myClass {
 
@@ -18,8 +17,7 @@ class myClass {
 
     public function getSalesNumber(): int
     {
-        $date = Carbon::now();
-        $today = $date->format('Y-m-d');
+        $today = date('Y-m-d');
         $orderSearch = [
             'SearchParams' => [
                 'Branch' => ['ID' => 102],
