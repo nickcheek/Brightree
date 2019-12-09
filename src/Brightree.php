@@ -14,6 +14,7 @@ use Nickcheek\Brightree\Service\Reference;
 use Nickcheek\Brightree\Service\Pickup;
 use Nickcheek\Brightree\Service\SalesOrder;
 use Nickcheek\Brightree\Service\Security;
+use Nickcheek\Brightree\Helpers\arrayHelper;
 
 class Brightree
 {

@@ -28,6 +28,29 @@ $bt = new Brightree\Brightree($username,$password);
 $note = $bt->Patient()->GetNoteByKey('141508');
 return $note;
 ```
+##ArrayHelper
+Since Brightree has so many different ways to build arrays depending on the method you're using, I've tried to make it a bit easier by including a helper.  You can use it like so:
+``` php
+$bt = new Brightree\Brightree($username,$password);
+
+//setup the search part
+$orderSearch = ['SearchParams' => ['Branch'=>['Value'=>102]]];
+
+//and since Brightree decided to change up the sort definition depending on what api you're using instead of keeping it all the same, we have to use...
+$orderSort = ['SortParams'=>[]];
+
+//now we build it using the arrayHelper, we can specify page and pageSize also, but by omitting, it will insert the default values of pageSize of 10 and page of 1.  You can chain page(2) or pageSize(25) or both.
+
+$search = $bt->search($orderSearch)->sort($sort)->build();
+
+$order = $bt->SalesOrder()->SalesOrderSearch($search);
+
+return $order;
+```
+
+
+##Methods
+
 ### Available Patient Methods
 
 #### Usage
