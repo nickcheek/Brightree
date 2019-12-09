@@ -16,39 +16,39 @@ class BrightreeTest extends TestCase
        $this->arr = ['mySearch'=>'mySearch'];
     }
 
-    public function test_class_receives_info_variable()
+    public function test_class_receives_info_variable(): void
     {
         $this->assertObjectHasAttribute('info',$this->brightree);
     }
 
-    public function test_child_class_can_reach_info_variable()
+    public function test_child_class_can_reach_info_variable(): void
     {
         $this->assertObjectHasAttribute('info',$this->brightree->Patient());
     }
 
-    public function test_array_builder_response_is_array()
+    public function test_array_builder_response_is_array(): void
     {
         $array = $this->brightree->search($this->arr)->build();
         $this->assertIsArray($array);
     }
 
-    public function test_array_builder_builds_sort_method()
+    public function test_array_builder_builds_sort_method(): void
     {
         $this->assertArrayHasKey('SortParams',$this->brightree->search($this->arr)->build());
     }
 
-    public function test_array_builder_can_change_sort_name()
+    public function test_array_builder_can_change_sort_name(): void
     {
         $sort = ['sortName'=>['sort'=>'bythis']];
         $this->assertArrayHasKey('sortName', $this->brightree->search($this->arr)->sort($sort)->build());
     }
 
-    public function test_array_builder_builds_page_method()
+    public function test_array_builder_builds_page_method(): void
     {
         $this->assertArrayHasKey('page', $this->brightree->search($this->arr)->build());
     }
 
-    public function test_array_builder_builds_pageSize_method()
+    public function test_array_builder_builds_pageSize_method(): void
     {
         $this->assertArrayHasKey('pageSize', $this->brightree->search($this->arr)->build());
     }
