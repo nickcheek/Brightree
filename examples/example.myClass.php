@@ -30,7 +30,7 @@ class myClass {
         $orderSort = ['SortParams' => []];
 
         //use the included arrayHelper to help you build your query.
-        $order = $this->bt->search($orderSearch)->sort($sort)->build();
+        $order = $this->bt->search($orderSearch)->sort($orderSort)->build();
 
         $number = $this->bt->SalesOrder()->SalesOrderSearch($order);
         return $number->SalesOrderSearchResult->TotalItemCount;
