@@ -26,8 +26,8 @@ class Brightree extends arrayHelper
 
     public function __construct(string $username, string $password)
     {
-        $this->config = include('config/config.php');
-        $this->info = (object)['username'=>$username,'password'=>$password,'config'=>$this->config];
+        $this->config = include('Config/config.php');
+        $this->info = (object)['username'=>$username,'password'=>$password,'Config'=>$this->config];
     }
 
     public function Patient(): object

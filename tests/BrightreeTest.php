@@ -26,12 +26,6 @@ class BrightreeTest extends TestCase
         $this->assertObjectHasAttribute('info',$this->brightree->Patient());
     }
 
-    public function test_array_builder_response_is_array(): void
-    {
-        $array = $this->brightree->search($this->arr)->build();
-        $this->assertIsArray($array);
-    }
-
     public function test_array_builder_builds_sort_method(): void
     {
         $this->assertArrayHasKey('SortParams',$this->brightree->search($this->arr)->build());
@@ -57,4 +51,5 @@ class BrightreeTest extends TestCase
     {
         $this->assertIsArray($this->brightree->search($this->arr)->build());
     }
+
 }
