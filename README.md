@@ -378,6 +378,10 @@ SalesOrderUpdateWIPState($query);
 SalesOrderVoid($query);
 SalesOrderVoidSearch($query);
 SearchWIPStatusWithUpdate($query);
+StopReasonSalesOrderFetchByBrightreeID($brightreeID);
+StopReasonSalesOrderTemplateFetchByBrightreeID($brightreeID);
+StopReasonSalesOrderTemplateUpdate($query);
+StopReasonSalesOrderUpdate($query);
 
 ```
 ### Available Documentation Methods
