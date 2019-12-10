@@ -14,38 +14,79 @@ class Document extends Brightree
         $this->wsdl = $this->info->config->service['document'] .'?singleWsdl';
 		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['document'],'location' => $this->info->config->service['document'],'trace' => 1);
 	}
-    
+
+    /**
+     * Fetch all document types
+     *
+     * @return object
+     */
 	public function DocumentTypesFetchAll(): object
     {
     	return $this->apiCall('DocumentTypesFetchAll',[]);
     }
-    
-    public function DocumentBatchCreate($query): object
+
+    /**
+     * Create batch document
+     *
+     * @param array $query
+     * @return object
+     */
+    public function DocumentBatchCreate(array $query): object
     {
     	return $this->apiCall('DocumentBatchCreate',$query);
     }
-    
-    public function DocumentBatchSearch($query): object
+
+    /**
+     * Search batch document
+     *
+     * @param array $query
+     * @return object
+     */
+    public function DocumentBatchSearch(array $query): object
     {
     	return $this->apiCall('DocumentBatchSearch',$query);
     }
-    
-    public function DocumentSearch($query): object
+
+    /**
+     * Search for a document
+     *
+     * @param array $query
+     * @return object
+     */
+    public function DocumentSearch(array $query): object
     {
     	return $this->apiCall('DocumentSearch',$query);
     }
-    
-    public function FetchDocumentContent($key='12345'): object
+
+    /**
+     * Get content of a document
+     *
+     * @param int $key
+     * @return object
+     */
+    public function FetchDocumentContent(int $key=12345): object
     {
     	return $this->apiCall('FetchDocumentContent',array('documentKey' => $key));
     }
-    
-    public function GenerateDocumentID($query): object
+
+    /**
+     * Generate a document id number
+     *
+     * @param array $query
+     * @return object
+     */
+    public function GenerateDocumentID(array $query): object
     {
     	return $this->apiCall('GenerateDocumentID',$query);
     }
-    
-    public function StoreDocument($query): object
+
+    /**
+     * Store a document
+     *
+     * @param array $query
+     * @return object
+     */
+    public function StoreDocument(array $query): object
     {
     	return $this->apiCall('StoreDocument',$query);
     }

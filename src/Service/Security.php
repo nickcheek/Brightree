@@ -15,17 +15,32 @@ class Security extends Brightree
         $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['security'],'location' => $this->info->config->service['security'],'trace' => 1);
     }
 
-    public function UserSearch($query): object
+    /**
+     * Search for a user
+     * @param array $query
+     * @return object
+     */
+    public function UserSearch(array $query): object
     {
         return $this->apiCall('UserSearch',$query);
     }
 
-    public function UserFetchByBrightreeID($btid): object
+    /**
+     * Fetch user by Brightree ID
+     * @param int $BrightreeID
+     * @return object
+     */
+    public function UserFetchByBrightreeID(int $BrightreeID): object
     {
-        return $this->apiCall('UserFetchByBrightreeID',array('BrightreeID'=>$btid));
+        return $this->apiCall('UserFetchByBrightreeID',array('BrightreeID'=>$BrightreeID));
     }
 
-    public function UserUpdate($query): object
+    /**
+     * Update User
+     * @param array $query
+     * @return object
+     */
+    public function UserUpdate(array $query): object
     {
         return $this->apiCall('UserUpdate',$query);
     }

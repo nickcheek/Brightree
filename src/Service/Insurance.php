@@ -14,23 +14,47 @@ class Insurance extends Brightree
 		$this->wsdl = $this->info->config->service['insurance'] .'?singleWsdl';
 		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['insurance'],'location' => $this->info->config->service['insurance'],'trace' => 1);
 	}
-		
-	public function InsuranceFetchByBrightreeID($id): object
+
+    /**
+     * Get insurance by brightree id
+     *
+     * @param int $id
+     * @return object
+     */
+	public function InsuranceFetchByBrightreeID(int $id): object
     {
     	return $this->apiCall('InsuranceFetchByBrightreeID',['BrightreeID'=>$id]);
     }
-	
-	public function InsuranceFetchByExternalID($id): object
+
+    /**
+     * Get insurance by external id
+     *
+     * @param int $id
+     * @return object
+     */
+	public function InsuranceFetchByExternalID(int $id): object
     {
     	return $this->apiCall('InsuranceFetchByExternalID',['ExternalID'=>$id]);
     }
-    
-    public function InsuranceSearch($query): object
+
+    /**
+     * Search for an insurance carrier
+     *
+     * @param array $query
+     * @return object
+     */
+    public function InsuranceSearch(array $query): object
     {
     	return $this->apiCall('InsuranceSearch',$query);
     }
-    
-    public function InsuranceUpdate($query): object
+
+    /**
+     * Update Insurance
+     *
+     * @param array $query
+     * @return object
+     */
+    public function InsuranceUpdate(array $query): object
     {
     	return $this->apiCall('InsuranceUpdate',$query);
     }

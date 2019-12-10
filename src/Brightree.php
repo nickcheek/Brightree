@@ -2,7 +2,6 @@
 
 namespace Nickcheek\Brightree;
 
-use Nickcheek\Brightree\Service\Invoice;
 use Nickcheek\Brightree\Service\Patient;
 use Nickcheek\Brightree\Service\Doctor;
 use Nickcheek\Brightree\Service\Document;
@@ -15,6 +14,7 @@ use Nickcheek\Brightree\Service\Reference;
 use Nickcheek\Brightree\Service\Pickup;
 use Nickcheek\Brightree\Service\SalesOrder;
 use Nickcheek\Brightree\Service\Security;
+use Nickcheek\Brightree\Service\Invoice;
 use Nickcheek\Brightree\Helpers\arrayHelper;
 
 class Brightree extends arrayHelper
