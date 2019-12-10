@@ -2,20 +2,22 @@
 
 namespace Nickcheek\Brightree;
 
-use Nickcheek\Brightree\Service\Patient;
-use Nickcheek\Brightree\Service\Doctor;
-use Nickcheek\Brightree\Service\Document;
-use Nickcheek\Brightree\Service\Documentation;
-use Nickcheek\Brightree\Service\CustomField;
-use Nickcheek\Brightree\Service\Insurance;
-use Nickcheek\Brightree\Service\Inventory;
-use Nickcheek\Brightree\Service\Pricing;
-use Nickcheek\Brightree\Service\Reference;
-use Nickcheek\Brightree\Service\Pickup;
-use Nickcheek\Brightree\Service\SalesOrder;
-use Nickcheek\Brightree\Service\Security;
-use Nickcheek\Brightree\Service\Invoice;
 use Nickcheek\Brightree\Helpers\arrayHelper;
+use Nickcheek\Brightree\Service\{
+    CustomField,
+    Doctor,
+    Document,
+    Documentation,
+    Insurance,
+    Inventory,
+    Invoice,
+    Patient,
+    Pickup,
+    Pricing,
+    Reference,
+    SalesOrder,
+    Security
+};
 
 class Brightree extends arrayHelper
 {
