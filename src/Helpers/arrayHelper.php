@@ -78,9 +78,9 @@ class arrayHelper
      */
     public function build(): array
     {
-        $this->pages = $this->pages ?? ['page' => 1];
-        $this->pageSize = $this->pageSize ?? ['pageSize' => 10];
-        $this->sort = $this->sort ?? ['SortParams' => []];
+        $this->pages ??= ['page' => 1];
+        $this->pageSize ??= ['pageSize' => 10];
+        $this->sort ??= ['SortParams' => []];
 
         $this->arr = array_merge($this->search,$this->sort, $this->pages,$this->pageSize);
         return $this->arr;
