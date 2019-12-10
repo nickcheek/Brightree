@@ -5,29 +5,29 @@ namespace Nickcheek\Brightree\Helpers;
 class arrayHelper
 {
     /**
-     * @var array
+     * @var iterable
      */
-    protected array $arr;
+    protected iterable $arr;
 
     /**
-     * @var array|null
+     * @var iterable|null
      */
-    protected ?array $sort;
+    protected ?iterable $sort;
 
     /**
-     * @var array
+     * @var iterable
      */
-    protected array $pages;
+    protected iterable $pages;
 
     /**
-     * @var array
+     * @var iterable
      */
-    protected array $search;
+    protected iterable $search;
 
     /**
-     * @var array
+     * @var iterable
      */
-    protected array $pageSize;
+    protected iterable $pageSize;
 
     /**
      * arrayHelper constructor.
@@ -74,9 +74,9 @@ class arrayHelper
      * Builds out the array allowing for blank methods so
      * you don't have to chain things you don't need to.
      *
-     * @return array
+     * @return iterable
      */
-    public function build(): array
+    public function build(): iterable
     {
         $this->pages ??= ['page' => 1];
         $this->pageSize ??= ['pageSize' => 10];

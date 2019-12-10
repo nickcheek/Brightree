@@ -17,10 +17,10 @@ class Security extends Brightree
 
     /**
      * Search for a user
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function UserSearch(array $query): object
+    public function UserSearch(iterable $query): object
     {
         return $this->apiCall('UserSearch',$query);
     }
@@ -37,10 +37,10 @@ class Security extends Brightree
 
     /**
      * Update User
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function UserUpdate(array $query): object
+    public function UserUpdate(iterable $query): object
     {
         return $this->apiCall('UserUpdate',$query);
     }

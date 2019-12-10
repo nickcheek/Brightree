@@ -43,10 +43,10 @@ class CustomField extends Brightree
     /**
      * Save one or multiple custom field values
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function CustomFieldValueSaveMultiple(array $query): object
+    public function CustomFieldValueSaveMultiple(iterable $query): object
     {
         return $this->apiCall('CustomFieldValueSaveMultiple',$query);
     }

@@ -16,172 +16,172 @@ class Pickup extends Brightree
 	}
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-	public function PickupExchangeAddAllRentalItems(array $query): object
+	public function PickupExchangeAddAllRentalItems(iterable $query): object
     {
     	return $this->apiCall('PickupExchangeAddAllRentalItems',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeAddDeliveryException(array $query): object
+    public function PickupExchangeAddDeliveryException(iterable $query): object
     {
         return $this->apiCall('PickupExchangeAddDeliveryException',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeAddPickupItem(array $query): object
+    public function PickupExchangeAddPickupItem(iterable $query): object
     {
         return $this->apiCall('PickupExchangeAddPickupItem',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeCancelPOD(array $query): object
+    public function PickupExchangeCancelPOD(iterable $query): object
     {
         return $this->apiCall('PickupExchangeCancelPOD',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeConfirm(array $query): object
+    public function PickupExchangeConfirm(iterable $query): object
     {
         return $this->apiCall('PickupExchangeConfirm',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeCreate(array $query): object
+    public function PickupExchangeCreate(iterable $query): object
     {
         return $this->apiCall('PickupExchangeCreate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeDelete(array $query): object
+    public function PickupExchangeDelete(iterable $query): object
     {
         return $this->apiCall('PickupExchangeDelete',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeFetchByBrightreeID(array $query): object
+    public function PickupExchangeFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('PickupExchangeFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeFetchByExternalID(array $query): object
+    public function PickupExchangeFetchByExternalID(iterable $query): object
     {
         return $this->apiCall('PickupExchangeFetchByExternalID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeItemAddDeliveryException(array $query): object
+    public function PickupExchangeItemAddDeliveryException(iterable $query): object
     {
         return $this->apiCall('PickupExchangeItemAddDeliveryException',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeItemSpecifyExchangeItem(array $query): object
+    public function PickupExchangeItemSpecifyExchangeItem(iterable $query): object
     {
         return $this->apiCall('PickupExchangeItemSpecifyExchangeItem',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeMessagesFetchByBrightreeID(array $query): object
+    public function PickupExchangeMessagesFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('PickupExchangeMessagesFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangePayorSearch(array $query): object
+    public function PickupExchangePayorSearch(iterable $query): object
     {
         return $this->apiCall('PickupExchangePayorSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeRemoveItem(array $query): object
+    public function PickupExchangeRemoveItem(iterable $query): object
     {
         return $this->apiCall('PickupExchangeRemoveItem',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeSearch(array $query): object
+    public function PickupExchangeSearch(iterable $query): object
     {
         return $this->apiCall('PickupExchangeSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeSendPOD(array $query): object
+    public function PickupExchangeSendPOD(iterable $query): object
     {
         return $this->apiCall('PickupExchangeSendPOD',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeUpdate(array $query): object
+    public function PickupExchangeUpdate(iterable $query): object
     {
         return $this->apiCall('PickupExchangeUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeUpdateItem(array $query): object
+    public function PickupExchangeUpdateItem(iterable $query): object
     {
         return $this->apiCall('PickupExchangeUpdateItem',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PickupExchangeUpdatePODStatus(array $query): object
+    public function PickupExchangeUpdatePODStatus(iterable $query): object
     {
         return $this->apiCall('PickupExchangeUpdatePODStatus',$query);
     }

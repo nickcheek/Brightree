@@ -30,10 +30,10 @@ class Doctor extends Brightree
     /**
      * Create a new Doctor
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function DoctorCreate(array $query): object
+    public function DoctorCreate(iterable $query): object
     {
     	return $this->apiCall('DoctorCreate',$query);
     }
@@ -84,10 +84,10 @@ class Doctor extends Brightree
     /**
      * Search for doctor
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function DoctorSearch(array $query): object
+    public function DoctorSearch(iterable $query): object
     {
     	return $this->apiCall('DoctorSearch',$query);
     }
@@ -95,10 +95,10 @@ class Doctor extends Brightree
     /**
      * Update doctor
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function DoctorUpdate(array $query): object
+    public function DoctorUpdate(iterable $query): object
     {
     	return $this->apiCall('DoctorUpdate',$query);
     }

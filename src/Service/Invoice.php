@@ -43,19 +43,19 @@ class Invoice extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InvoiceItemUpdate(array $query): object
+    public function InvoiceItemUpdate(iterable $query): object
     {
         return $this->apiCall('InvoiceItemUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InvoiceUpdate(array $query): object 
+    public function InvoiceUpdate(iterable $query): object 
     {
         return $this->apiCall('InvoiceUpdate',$query);
     }
@@ -79,10 +79,10 @@ class Invoice extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ResubmitInvoices(array $query): object
+    public function ResubmitInvoices(iterable $query): object
     {
         return $this->apiCall('ResubmitInvoices',$query);
     }

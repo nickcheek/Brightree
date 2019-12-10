@@ -32,163 +32,163 @@ class Inventory extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FetchItemLocations(array $query): object
+    public function FetchItemLocations(iterable $query): object
     {
         return $this->apiCall('FetchItemLocations',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FetchItemQuantitiesAtLocation(array $query): object
+    public function FetchItemQuantitiesAtLocation(iterable $query): object
     {
         return $this->apiCall('FetchItemQuantitiesAtLocation',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InventoryItemAddLots(array $query): object
+    public function InventoryItemAddLots(iterable $query): object
     {
         return $this->apiCall('InventoryItemAddLots',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InventoryItemAddSerialNumbers(array $query): object
+    public function InventoryItemAddSerialNumbers(iterable $query): object
     {
         return $this->apiCall('InventoryItemAddSerialNumbers',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InventoryItemAdjustment(array $query): object
+    public function InventoryItemAdjustment(iterable $query): object
     {
         return $this->apiCall('InventoryItemAdjustment',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InventoryItemTransfer(array $query): object
+    public function InventoryItemTransfer(iterable $query): object
     {
         return $this->apiCall('InventoryItemTransfer',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemAddToLocation(array $query): object
+    public function ItemAddToLocation(iterable $query): object
     {
         return $this->apiCall('ItemAddToLocation',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemAddToLocations(array $query): object
+    public function ItemAddToLocations(iterable $query): object
     {
         return $this->apiCall('ItemAddToLocations',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemCreate(array $query): object
+    public function ItemCreate(iterable $query): object
     {
         return $this->apiCall('ItemCreate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemFetchByBrightreeID(array $query): object
+    public function ItemFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('ItemFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemFetchByExternalID(array $query): object
+    public function ItemFetchByExternalID(iterable $query): object
     {
         return $this->apiCall('ItemFetchByExternalID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemFetchByItemID(array $query): object
+    public function ItemFetchByItemID(iterable $query): object
     {
         return $this->apiCall('ItemFetchByItemID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemFetchReplacementItemsByBrightreeID(array $query): object
+    public function ItemFetchReplacementItemsByBrightreeID(iterable $query): object
     {
         return $this->apiCall('ItemFetchReplacementItemsByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemFetchReplacementItemsByItemID(array $query): object
+    public function ItemFetchReplacementItemsByItemID(iterable $query): object
     {
         return $this->apiCall('ItemFetchReplacementItemsByItemID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemLocationsUpdate(array $query): object
+    public function ItemLocationsUpdate(iterable $query): object
     {
         return $this->apiCall('ItemLocationsUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemLocationUpdate(array $query): object
+    public function ItemLocationUpdate(iterable $query): object
     {
         return $this->apiCall('ItemLocationUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemSearch(array $query): object
+    public function ItemSearch(iterable $query): object
     {
         return $this->apiCall('ItemSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ItemUpdate(array $query): object
+    public function ItemUpdate(iterable $query): object
     {
         return $this->apiCall('ItemUpdate',$query);
     }

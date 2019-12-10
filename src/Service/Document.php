@@ -28,10 +28,10 @@ class Document extends Brightree
     /**
      * Create batch document
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function DocumentBatchCreate(array $query): object
+    public function DocumentBatchCreate(iterable $query): object
     {
     	return $this->apiCall('DocumentBatchCreate',$query);
     }
@@ -39,10 +39,10 @@ class Document extends Brightree
     /**
      * Search batch document
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function DocumentBatchSearch(array $query): object
+    public function DocumentBatchSearch(iterable $query): object
     {
     	return $this->apiCall('DocumentBatchSearch',$query);
     }
@@ -50,10 +50,10 @@ class Document extends Brightree
     /**
      * Search for a document
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function DocumentSearch(array $query): object
+    public function DocumentSearch(iterable $query): object
     {
     	return $this->apiCall('DocumentSearch',$query);
     }
@@ -72,10 +72,10 @@ class Document extends Brightree
     /**
      * Generate a document id number
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function GenerateDocumentID(array $query): object
+    public function GenerateDocumentID(iterable $query): object
     {
     	return $this->apiCall('GenerateDocumentID',$query);
     }
@@ -83,10 +83,10 @@ class Document extends Brightree
     /**
      * Store a document
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function StoreDocument(array $query): object
+    public function StoreDocument(iterable $query): object
     {
     	return $this->apiCall('StoreDocument',$query);
     }

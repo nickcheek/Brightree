@@ -16,28 +16,28 @@ class Patient extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientCreate(array $query): object
+    public function PatientCreate(iterable $query): object
     {
         return $this->apiCall('PatientCreate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientSearch(array $query): object
+    public function PatientSearch(iterable $query): object
     {
         return $this->apiCall('PatientSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientUpdate(array $query): object
+    public function PatientUpdate(iterable $query): object
     {
         return $this->apiCall('PatientUpdate',$query);
     }
@@ -61,10 +61,10 @@ class Patient extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientNoteCreate(array $query): object
+    public function PatientNoteCreate(iterable $query): object
     {
         return $this->apiCall('PatientNoteCreate',$query);
     }
@@ -88,37 +88,37 @@ class Patient extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientNoteSearch(array $query): object
+    public function PatientNoteSearch(iterable $query): object
     {
         return $this->apiCall('PatientNoteSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientNoteUpdate(array $query): object
+    public function PatientNoteUpdate(iterable $query): object
     {
         return $this->apiCall('PatientNoteUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientPayorAdd(array $query): object
+    public function PatientPayorAdd(iterable $query): object
     {
         return $this->apiCall('PatientPayorAdd',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientPayorFetch(array $query): object
+    public function PatientPayorFetch(iterable $query): object
     {
         return $this->apiCall('PatientPayorFetch',$query);
     }
@@ -142,19 +142,19 @@ class Patient extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientPayorUpdate(array $query): object
+    public function PatientPayorUpdate(iterable $query): object
     {
         return $this->apiCall('PatientPayorUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PatientPhoneNumberSearch(array $query): object
+    public function PatientPhoneNumberSearch(iterable $query): object
     {
         return $this->apiCall('PatientPhoneNumberSearch',$query);
     }
@@ -177,10 +177,10 @@ class Patient extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityResidentCreate(array $query): object
+    public function FacilityResidentCreate(iterable $query): object
     {
         return $this->apiCall('FacilityResidentCreate',$query);
     }

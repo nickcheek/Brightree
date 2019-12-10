@@ -16,91 +16,91 @@ class Pricing extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function CMNFormFetchAll(array $query): object
+    public function CMNFormFetchAll(iterable $query): object
     {
         return $this->apiCall('CMNFormFetchAll',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function NonTaxReasonFetchAll(array $query): object
+    public function NonTaxReasonFetchAll(iterable $query): object
     {
         return $this->apiCall('NonTaxReasonFetchAll',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceCreateItem(array $query): object
+    public function PriceCreateItem(iterable $query): object
     {
         return $this->apiCall('PriceCreateItem', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceCreateStandard(array $query): object
+    public function PriceCreateStandard(iterable $query): object
     {
         return $this->apiCall('PriceCreateStandard', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceDetailCreate(array $query): object
+    public function PriceDetailCreate(iterable $query): object
     {
         return $this->apiCall('PriceDetailCreate', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceDetailFetchByBrightreeDetailID(array $query): object
+    public function PriceDetailFetchByBrightreeDetailID(iterable $query): object
     {
         return $this->apiCall('PriceDetailFetchByBrightreeDetailID', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceDetailUpdate(array $query): object
+    public function PriceDetailUpdate(iterable $query): object
     {
         return $this->apiCall('PriceDetailUpdate', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceFetch(array $query): object
+    public function PriceFetch(iterable $query): object
     {
         return $this->apiCall('PriceFetch', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceOptionLetterTypeFetchAll(array $query): object
+    public function PriceOptionLetterTypeFetchAll(iterable $query): object
     {
         return $this->apiCall('PriceOptionLetterTypeFetchAll', $query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function PriceTableFetchAll(array $query): object
+    public function PriceTableFetchAll(iterable $query): object
     {
         return $this->apiCall('PriceTableFetchAll', $query);
     }

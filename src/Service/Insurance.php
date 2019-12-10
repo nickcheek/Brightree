@@ -40,10 +40,10 @@ class Insurance extends Brightree
     /**
      * Search for an insurance carrier
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InsuranceSearch(array $query): object
+    public function InsuranceSearch(iterable $query): object
     {
     	return $this->apiCall('InsuranceSearch',$query);
     }
@@ -51,10 +51,10 @@ class Insurance extends Brightree
     /**
      * Update Insurance
      *
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function InsuranceUpdate(array $query): object
+    public function InsuranceUpdate(iterable $query): object
     {
     	return $this->apiCall('InsuranceUpdate',$query);
     }

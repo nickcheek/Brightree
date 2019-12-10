@@ -24,10 +24,10 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function AddFacilityReferralContact(array $query): object
+    public function AddFacilityReferralContact(iterable $query): object
     {
         return $this->apiCall('AddFacilityReferralContact',$query);
     }
@@ -41,10 +41,10 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function BranchInfoFetchByBrightreeID(array $query): object
+    public function BranchInfoFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('BranchInfoFetchByBrightreeID',$query);
     }
@@ -58,19 +58,19 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ContactTypeCreate(array $query): object
+    public function ContactTypeCreate(iterable $query): object
     {
         return $this->apiCall('ContactTypeCreate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ContactTypeDelete(array $query): object
+    public function ContactTypeDelete(iterable $query): object
     {
         return $this->apiCall('ContactTypeDelete',$query);
     }
@@ -84,19 +84,19 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ContactTypeFetchByBrightreeID(array $query): object
+    public function ContactTypeFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('ContactTypeFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ContactTypeUpdate(array $query): object
+    public function ContactTypeUpdate(iterable $query): object
     {
         return $this->apiCall('ContactTypeUpdate',$query);
     }
@@ -126,37 +126,37 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityCreate(array $query): object
+    public function FacilityCreate(iterable $query): object
     {
         return $this->apiCall('FacilityCreate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityDelete(array $query): object
+    public function FacilityDelete(iterable $query): object
     {
         return $this->apiCall('FacilityDelete',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityFetchByBrightreeID(array $query): object
+    public function FacilityFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('FacilityFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityFetchByExternalID(array $query): object
+    public function FacilityFetchByExternalID(iterable $query): object
     {
         return $this->apiCall('FacilityFetchByExternalID',$query);
     }
@@ -170,19 +170,19 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityReferralContactsFetchByFacilityKey(array $query): object
+    public function FacilityReferralContactsFetchByFacilityKey(iterable $query): object
     {
         return $this->apiCall('FacilityReferralContactsFetchByFacilityKey',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function FacilityUpdate(array $query): object
+    public function FacilityUpdate(iterable $query): object
     {
         return $this->apiCall('FacilityUpdate',$query);
     }
@@ -260,28 +260,28 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function MarketingRepFetchByBrightreeID(array $query): object
+    public function MarketingRepFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('MarketingRepFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function MarketingRepFetchByExternalID(array $query): object
+    public function MarketingRepFetchByExternalID(iterable $query): object
     {
         return $this->apiCall('MarketingRepFetchByExternalID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function MarketingRepUpdateExternalID(array $query): object
+    public function MarketingRepUpdateExternalID(iterable $query): object
     {
         return $this->apiCall('MarketingRepUpdateExternalID',$query);
     }
@@ -335,73 +335,73 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralContactCreate(array $query): object
+    public function ReferralContactCreate(iterable $query): object
     {
         return $this->apiCall('ReferralContactCreate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralContactFetchByBrightreeID(array $query): object
+    public function ReferralContactFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('ReferralContactFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralContactFetchByExternalID(array $query): object
+    public function ReferralContactFetchByExternalID(iterable $query): object
     {
         return $this->apiCall('ReferralContactFetchByExternalID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralContactSearch(array $query): object
+    public function ReferralContactSearch(iterable $query): object
     {
         return $this->apiCall('ReferralContactSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralContactUpdate(array $query): object
+    public function ReferralContactUpdate(iterable $query): object
     {
         return $this->apiCall('ReferralContactUpdate',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralFetchByBrightreeID(array $query): object
+    public function ReferralFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('ReferralFetchByBrightreeID',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function ReferralSearch(array $query): object
+    public function ReferralSearch(iterable $query): object
     {
         return $this->apiCall('ReferralSearch',$query);
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function RemoveFacilityReferralContact(array $query): object
+    public function RemoveFacilityReferralContact(iterable $query): object
     {
         return $this->apiCall('RemoveFacilityReferralContact',$query);
     }
@@ -455,10 +455,10 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function SiteInfoFetch(array $query): object
+    public function SiteInfoFetch(iterable $query): object
     {
         return $this->apiCall('SiteInfoFetch',$query);
     }
@@ -472,10 +472,10 @@ class Reference extends Brightree
     }
 
     /**
-     * @param array $query
+     * @param iterable $query
      * @return object
      */
-    public function VendorFetchByBrightreeID(array $query): object
+    public function VendorFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('VendorFetchByBrightreeID',$query);
     }
