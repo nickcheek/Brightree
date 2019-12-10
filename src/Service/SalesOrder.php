@@ -14,303 +14,543 @@ class SalesOrder extends Brightree
 		$this->wsdl = $this->info->config->service['salesorder'] .'?singleWsdl';
 		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['salesorder'],'location' => $this->info->config->service['salesorder'],'trace' => 1);
 	}
-    
-	public function BrightSHIPSalesOrderAck($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function BrightSHIPSalesOrderAck(array $query): object
     {
     	return $this->apiCall('BrightSHIPSalesOrderAck',$query);
     }
-    
-    public function BrightShipSalesOrderFetch($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function BrightShipSalesOrderFetch(array $query): object
     {
         return $this->apiCall('BrightShipSalesOrderFetch',$query);
     }
 
-    public function OrderImport($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function OrderImport(array $query): object
     {
         return $this->apiCall('OrderImport',$query);
     }
 
-    public function SalesOrderAddDeliveryException($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderAddDeliveryException(array $query): object
     {
         return $this->apiCall('SalesOrderAddDeliveryException',$query);
     }
-   
-    public function SalesOrderAddMarketingReferral($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderAddMarketingReferral(array $query): object
     {
         return $this->apiCall('SalesOrderAddMarketingReferral',$query);
     }
 
-    public function SalesOrderConfirm($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderConfirm(array $query): object
     {
         return $this->apiCall('SalesOrderConfirm',$query);
     }
 
-    public function SalesOrderCreate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderCreate(array $query): object
     {
         return $this->apiCall('SalesOrderCreate',$query);
     }
 
-    public function SalesOrderFetchByBrightreeID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('SalesOrderFetchByBrightreeID',$query);
     }
 
-    public function SalesOrderFetchByExternalID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderFetchByExternalID(array $query): object
     {
         return $this->apiCall('SalesOrderFetchByExternalID',$query);
     }
 
-    public function SalesOrderFetchByPurchaseOrderID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderFetchByPurchaseOrderID(array $query): object
     {
         return $this->apiCall('SalesOrderFetchByPurchaseOrderID',$query);
     }
 
-    public function SalesOrderFetchPendingByShippingCarrierKey($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderFetchPendingByShippingCarrierKey(array $query): object
     {
         return $this->apiCall('SalesOrderFetchPendingByShippingCarrierKey',$query);
     }
 
-    public function SalesOrderFetchReadyforShipping($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderFetchReadyforShipping(array $query): object
     {
         return $this->apiCall('SalesOrderFetchReadyforShipping',$query);
     }
 
+    /**
+     * @return object
+     */
     public function SalesOrderFulfillmentVendorsFetchAll(): object
     {
         return $this->apiCall('SalesOrderFulfillmentVendorsFetchAll',[]);
     }
 
-    public function SalesOrderItemAddDeliveryException($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemAddDeliveryException(array $query): object
     {
         return $this->apiCall('SalesOrderItemAddDeliveryException',$query);
     }
 
-    public function SalesOrderItemPriceOptionFetchByBrightreeID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemPriceOptionFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('SalesOrderItemPriceOptionFetchByBrightreeID',$query);
     }
 
-    public function SalesOrderItemReplaceGeneric($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemReplaceGeneric(array $query): object
     {
         return $this->apiCall('SalesOrderItemReplaceGeneric',$query);
     }
 
-    public function SalesOrderItemUpdateLotNumbers($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemUpdateLotNumbers(array $query): object
     {
         return $this->apiCall('SalesOrderItemUpdateLotNumbers',$query);
     }
 
-    public function SalesOrderItemUpdatePriceOption($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemUpdatePriceOption(array $query): object
     {
         return $this->apiCall('SalesOrderItemUpdatePriceOption',$query);
     }
 
-    public function SalesOrderItemUpdateSerialNumbers($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemUpdateSerialNumbers(array $query): object
     {
         return $this->apiCall('SalesOrderItemUpdateSerialNumbers',$query);
     }
 
-    public function SalesOrderMessagesFetchByBrightreeID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderMessagesFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('SalesOrderMessagesFetchByBrightreeID',$query);
     }
 
-    public function SalesOrderPayorSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderPayorSearch(array $query): object
     {
         return $this->apiCall('SalesOrderPayorSearch',$query);
     }
 
-    public function SalesOrderQuickAddItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderQuickAddItem(array $query): object
     {
         return $this->apiCall('SalesOrderQuickAddItem',$query);
     }
 
-    public function SalesOrderRemoveItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderRemoveItem(array $query): object
     {
         return $this->apiCall('SalesOrderRemoveItem',$query);
     }
 
-    public function SalesOrderRemoveMarketingReferral($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderRemoveMarketingReferral(array $query): object
     {
         return $this->apiCall('SalesOrderRemoveMarketingReferral',$query);
     }
 
-    public function SalesOrderSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderSearch(array $query): object
     {
         return $this->apiCall('SalesOrderSearch',$query);
     }
 
-    public function SalesOrderSendPOD($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderSendPOD(array $query): object
     {
         return $this->apiCall('SalesOrderSendPOD',$query);
     }
 
-    public function SalesOrderTemplateCreate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateCreate(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateCreate',$query);
     }
 
-    public function SalesOrderTemplateCreateSalesOrder($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateCreateSalesOrder(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateCreateSalesOrder',$query);
     }
 
-    public function SalesOrderTemplateDelete($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateDelete(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateDelete',$query);
     }
 
-    public function SalesOrderTemplateFetchByBrightreeID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+
+    public function SalesOrderTemplateFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateFetchByBrightreeID',$query);
     }
 
-    public function SalesOrderTemplateFetchByExternalID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateFetchByExternalID(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateFetchByExternalID',$query);
     }
 
-    public function SalesOrderTemplateItemPriceOptionFetchByBrightreeID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemPriceOptionFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateItemPriceOptionFetchByBrightreeID',$query);
     }
 
-    public function SalesOrderTemplateItemUpdatePriceOption($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemUpdatePriceOption(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateItemUpdatePriceOption',$query);
     }
-    
-    public function SalesOrderTemplateQuickAddItem($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateQuickAddItem(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateQuickAddItem',$query);
     }
 
-    public function SalesOrderTemplateRemoveItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateRemoveItem(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateRemoveItem',$query);
     }
 
-    public function SalesOrderTemplateScheduleFetchBySOTemplateKey($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateScheduleFetchBySOTemplateKey(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateScheduleFetchBySOTemplateKey',$query);
     }
 
-    public function SalesOrderTemplateScheduleLogSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateScheduleLogSearch(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateScheduleLogSearch',$query);
     }
 
-    public function SalesOrderTemplateScheduleSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateScheduleSearch(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateScheduleSearch',$query);
     }
 
-    public function SalesOrderTemplateScheduleUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateScheduleUpdate(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateScheduleUpdate',$query);
     }
 
-    public function SalesOrderTemplateSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateSearch(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateSearch',$query);
     }
 
-    public function SalesOrderTemplateUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateUpdate(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateUpdate',$query);
     }
 
-    public function SalesOrderTemplateUpdateInsurance($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateUpdateInsurance(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateUpdateInsurance',$query);
     }
 
-    public function SalesOrderTemplateUpdateItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateUpdateItem(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateUpdateItem',$query);
     }
 
-    public function SalesOrderTemplateUpdateItemsWithDefaultPriceOption($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateUpdateItemsWithDefaultPriceOption(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateUpdateItemsWithDefaultPriceOption',$query);
     }
 
-    public function SalesOrderTemplateUpdateWIPState($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateUpdateWIPState(array $query): object
     {
         return $this->apiCall('SalesOrderTemplateUpdateWIPState',$query);
     }
 
-    public function SalesOrderUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdate(array $query): object
     {
         return $this->apiCall('SalesOrderUpdate',$query);
     }
 
-    public function SalesOrderUpdateInsurance($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdateInsurance(array $query): object
     {
         return $this->apiCall('SalesOrderUpdateInsurance',$query);
     }
 
-    public function SalesOrderUpdateItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdateItem(array $query): object
     {
         return $this->apiCall('SalesOrderUpdateItem',$query);
     }
 
-    public function SalesOrderUpdateItemPayor($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdateItemPayor(array $query): object
     {
         return $this->apiCall('SalesOrderUpdateItemPayor',$query);
     }
 
-    public function SalesOrderUpdateItemsWithDefaultPriceOption($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdateItemsWithDefaultPriceOption(array $query): object
     {
         return $this->apiCall('SalesOrderUpdateItemsWithDefaultPriceOption',$query);
     }
 
-    public function SalesOrderUpdatePODStatus($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdatePODStatus(array $query): object
     {
         return $this->apiCall('SalesOrderUpdatePODStatus',$query);
     }
 
-    public function SalesOrderUpdateTracking($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdateTracking(array $query): object
     {
         return $this->apiCall('SalesOrderUpdateTracking',$query);
     }
 
-    public function SalesOrderUpdateWIPState($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderUpdateWIPState(array $query): object
     {
         return $this->apiCall('SalesOrderUpdateWIPState',$query);
     }
 
-    public function SalesOrderVoid($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderVoid(array $query): object
     {
         return $this->apiCall('SalesOrderVoid',$query);
     }
 
-    public function SalesOrderVoidSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderVoidSearch(array $query): object
     {
         return $this->apiCall('SalesOrderVoidSearch',$query);
     }
 
-    public function SearchWIPStatusWithUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SearchWIPStatusWithUpdate(array $query): object
     {
         return $this->apiCall('SearchWIPStatusWithUpdate',$query);
     }
 
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
     public function StopReasonSalesOrderFetchByBrightreeID(int $BrightreeID): object
     {
         return $this->apiCall('StopReasonSalesOrderFetchByBrightreeID', array('BrightreeID' => $BrightreeID));
     }
 
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
     public function StopReasonSalesOrderTemplateFetchByBrightreeID(int $BrightreeID): object
     {
         return $this->apiCall('StopReasonSalesOrderTemplateFetchByBrightreeID',array('BrightreeID'=> $BrightreeID));
     }
 
-    public function StopReasonSalesOrderTemplateUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function StopReasonSalesOrderTemplateUpdate(array $query): object
     {
         return $this->apiCall('StopReasonSalesOrderTemplateUpdate',$query);
     }
 
-    public function StopReasonSalesOrderUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function StopReasonSalesOrderUpdate(array $query): object
     {
         return $this->apiCall('StopReasonSalesOrderUpdate',$query);
     }

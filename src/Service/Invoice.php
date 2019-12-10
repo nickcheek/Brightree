@@ -15,41 +15,73 @@ class Invoice extends Brightree
         $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['invoice'],'location' => $this->info->config->service['invoice'],'trace' => 1);
     }
 
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
     public function InvoiceCreatePrintActivity(int $BrightreeID): object
     {
         return $this->apiCall('InvoiceCreatePrintActivity',array('BrightreeID'=>$BrightreeID));
     }
 
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
     public function InvoiceFetchByBrightreeID(int $BrightreeID): object
     {
         return $this->apiCall('InvoiceFetchByBrightreeID',array('BrightreeID'=>$BrightreeID));
     }
 
+    /**
+     * @param int $InvoiceID
+     * @return object
+     */
     public function InvoiceFetchByInvoiceID(int $InvoiceID): object
     {
         return $this->apiCall('InvoiceFetchByInvoiceID',array('InvoiceID'=>$InvoiceID));
     }
 
+    /**
+     * @param array $query
+     * @return object
+     */
     public function InvoiceItemUpdate(array $query): object
     {
         return $this->apiCall('InvoiceItemUpdate',$query);
     }
 
+    /**
+     * @param array $query
+     * @return object
+     */
     public function InvoiceUpdate(array $query): object 
     {
         return $this->apiCall('InvoiceUpdate',$query);
     }
 
-    public function OpenInvoiceAgedBalanceFetchByPatient($BrightreeID): object
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
+    public function OpenInvoiceAgedBalanceFetchByPatient(int $BrightreeID): object
     {
         return $this->apiCall('OpenInvoiceAgedBalanceFetchByPatient',array('PatientBrightreeID'=>$BrightreeID));
     }
 
-    public function OpenInvoiceBalanceFetchByPatient($BrightreeID): object
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
+    public function OpenInvoiceBalanceFetchByPatient(int $BrightreeID): object
     {
         return $this->apiCall('OpenInvoiceBalanceFetchByPatient',array('PatientBrightreeID'=>$BrightreeID));
     }
 
+    /**
+     * @param array $query
+     * @return object
+     */
     public function ResubmitInvoices(array $query): object
     {
         return $this->apiCall('ResubmitInvoices',$query);

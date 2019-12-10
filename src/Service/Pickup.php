@@ -14,98 +14,174 @@ class Pickup extends Brightree
 		$this->wsdl = $this->info->config->service['pickup'] .'?singleWsdl';
 		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['pickup'],'location' => $this->info->config->service['pickup'],'trace' => 1);
 	}
-    
-	public function PickupExchangeAddAllRentalItems($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PickupExchangeAddAllRentalItems(array $query): object
     {
     	return $this->apiCall('PickupExchangeAddAllRentalItems',$query);
     }
 
-    public function PickupExchangeAddDeliveryException($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeAddDeliveryException(array $query): object
     {
         return $this->apiCall('PickupExchangeAddDeliveryException',$query);
     }
 
-    public function PickupExchangeAddPickupItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeAddPickupItem(array $query): object
     {
         return $this->apiCall('PickupExchangeAddPickupItem',$query);
     }
 
-    public function PickupExchangeCancelPOD($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeCancelPOD(array $query): object
     {
         return $this->apiCall('PickupExchangeCancelPOD',$query);
     }
 
-    public function PickupExchangeConfirm($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeConfirm(array $query): object
     {
         return $this->apiCall('PickupExchangeConfirm',$query);
     }
-    
-    public function PickupExchangeCreate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeCreate(array $query): object
     {
         return $this->apiCall('PickupExchangeCreate',$query);
     }
 
-    public function PickupExchangeDelete($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeDelete(array $query): object
     {
         return $this->apiCall('PickupExchangeDelete',$query);
     }
 
-    public function PickupExchangeFetchByBrightreeID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('PickupExchangeFetchByBrightreeID',$query);
     }
 
-    public function PickupExchangeFetchByExternalID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeFetchByExternalID(array $query): object
     {
         return $this->apiCall('PickupExchangeFetchByExternalID',$query);
     }
 
-    public function PickupExchangeItemAddDeliveryException($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeItemAddDeliveryException(array $query): object
     {
         return $this->apiCall('PickupExchangeItemAddDeliveryException',$query);
     }
 
-    public function PickupExchangeItemSpecifyExchangeItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeItemSpecifyExchangeItem(array $query): object
     {
         return $this->apiCall('PickupExchangeItemSpecifyExchangeItem',$query);
     }
-    
-    public function PickupExchangeMessagesFetchByBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeMessagesFetchByBrightreeID(array $query): object
     {
         return $this->apiCall('PickupExchangeMessagesFetchByBrightreeID',$query);
     }
 
-    public function PickupExchangePayorSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangePayorSearch(array $query): object
     {
         return $this->apiCall('PickupExchangePayorSearch',$query);
     }
 
-    public function PickupExchangeRemoveItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeRemoveItem(array $query): object
     {
         return $this->apiCall('PickupExchangeRemoveItem',$query);
     }
 
-    public function PickupExchangeSearch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeSearch(array $query): object
     {
         return $this->apiCall('PickupExchangeSearch',$query);
     }
 
-    public function PickupExchangeSendPOD($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeSendPOD(array $query): object
     {
         return $this->apiCall('PickupExchangeSendPOD',$query);
     }
 
-    public function PickupExchangeUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeUpdate(array $query): object
     {
         return $this->apiCall('PickupExchangeUpdate',$query);
     }
 
-    public function PickupExchangeUpdateItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeUpdateItem(array $query): object
     {
         return $this->apiCall('PickupExchangeUpdateItem',$query);
     }
 
-    public function PickupExchangeUpdatePODStatus($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PickupExchangeUpdatePODStatus(array $query): object
     {
         return $this->apiCall('PickupExchangeUpdatePODStatus',$query);
     }

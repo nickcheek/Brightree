@@ -14,248 +14,445 @@ class Documentation extends Brightree
 		$this->wsdl = $this->info->config->service['documentation'] .'?singleWsdl';
 		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['documentation'],'location' => $this->info->config->service['documentation'],'trace' => 1);
 	}
-    
-    public function CMNCreateFromPatient($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function CMNCreateFromPatient(array $query): object
     {
         return $this->apiCall('CMNCreateFromPatient',$query);
     }
+
+    /**
+     * @param array $query
+     * @return object
+     */
 	
-	public function CMNDetailCreate($query): object
+	public function CMNDetailCreate(array $query): object
 	{
 		return $this->apiCall('CMNDetailCreate',$query);
 	}
-	
-	public function CMNDetailDelete($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNDetailDelete(array $query): object
 	{
 		return $this->apiCall('CMNDetailDelete',$query);
 	}
-	
-	public function CMNDetailUpdate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNDetailUpdate(array $query): object
 	{
 		return $this->apiCall('CMNDetailUpdate',$query);
 	}
-	
-	public function CMNFetchByBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNFetchByBrightreeID(array $query): object
 	{
 		return $this->apiCall('CMNFetchByBrightreeID',$query);
 	}
-	
-	public function CMNFetchByExternalID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNFetchByExternalID(array $query): object
 	{
 		return $this->apiCall('CMNFetchByExternalID',$query);
 	}
-	
-	public function CMNFetchByPatientBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNFetchByPatientBrightreeID(array $query): object
 	{
 		return $this->apiCall('CMNFetchByPatientBrightreeID',$query);
 	}
-	
-	public function CMNFetchBySalesOrderBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNFetchBySalesOrderBrightreeID(array $query): object
 	{
 		return $this->apiCall('CMNFetchBySalesOrderBrightreeID',$query);
 	}
-	
-	public function CMNLog($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNLog(array $query): object
 	{
 		return $this->apiCall('CMNLog',$query);
 	}
-	
-	public function CMNPreview($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNPreview(array $query): object
 	{
 		return $this->apiCall('CMNPreview',$query);
 	}
-	
-	public function CMNPrint($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNPrint(array $query): object
 	{
 		return $this->apiCall('CMNPrint',$query);
 	}
-	
-	public function CMNQuestionAnswerConfiguration($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNQuestionAnswerConfiguration(array $query): object
 	{
 		return $this->apiCall('CMNQuestionAnswerConfiguration',$query);
 	}
-	
-	public function CMNReasonFetchAll($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNReasonFetchAll(array $query): object
 	{
 		return $this->apiCall('CMNReasonFetchAll',$query);
 	}
-	
-	public function CMNRenew($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNRenew(array $query): object
 	{
 		return $this->apiCall('CMNRenew',$query);
 	}
-	
-	public function CMNRevise($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNRevise(array $query): object
 	{
 		return $this->apiCall('CMNRevise',$query);
 	}
-	
-	public function CMNSearch($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNSearch(array $query): object
 	{
 		return $this->apiCall('CMNSearch',$query);
 	}
-	
-	public function CMNTaskCreate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNTaskCreate(array $query): object
 	{
 		return $this->apiCall('CMNTaskCreate',$query);
 	}
-	
-	public function CMNTaskUpdate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNTaskUpdate(array $query): object
 	{
 		return $this->apiCall('CMNTaskUpdate',$query);
 	}
-	
-	public function CMNUpdate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function CMNUpdate(array $query): object
 	{
 		return $this->apiCall('CMNUpdate',$query);
 	}
-	
-	public function PARAddPurchaseLimit($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARAddPurchaseLimit(array $query): object
 	{
 		return $this->apiCall('PARAddPurchaseLimit',$query);
 	}
-	
-	public function PARCreateFromPatient($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARCreateFromPatient(array $query): object
 	{
 		return $this->apiCall('PARCreateFromPatient',$query);
 	}
-	
-	public function PARDelete($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARDelete(array $query): object
 	{
 		return $this->apiCall('PARDelete',$query);
 	}
-	
-	public function PARFetchByBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARFetchByBrightreeID(array $query): object
 	{
 		return $this->apiCall('PARFetchByBrightreeID',$query);
 	}
-	
-	public function PARFetchByExternalID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARFetchByExternalID(array $query): object
 	{
 		return $this->apiCall('PARFetchByExternalID',$query);
 	}
-	
-	public function PARFetchByPatientBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARFetchByPatientBrightreeID(array $query): object
 	{
 		return $this->apiCall('PARFetchByPatientBrightreeID',$query);
 	}
-	
-	public function PARFetchBySalesOrderBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARFetchBySalesOrderBrightreeID(array $query): object
 	{
 		return $this->apiCall('PARFetchBySalesOrderBrightreeID',$query);
 	}
-	
-	public function PARFetchBySalesOrderTemplateBrightreeID($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARFetchBySalesOrderTemplateBrightreeID(array $query): object
 	{
 		return $this->apiCall('PARFetchBySalesOrderTemplateBrightreeID',$query);
 	}
-	
-	public function PARLog($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARLog(array $query): object
 	{
 		return $this->apiCall('PARLog',$query);
 	}
-	
-	public function PARRenew($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARRenew(array $query): object
 	{
 		return $this->apiCall('PARRenew',$query);
 	}
-	
-	public function PARSearch($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARSearch(array $query): object
 	{
 		return $this->apiCall('PARSearch',$query);
 	}
-	
-	public function PARUpdate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARUpdate(array $query): object
 	{
 		return $this->apiCall('PARUpdate',$query);
 	}
-	
-	public function PARUpdatePurchaseLimit($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function PARUpdatePurchaseLimit(array $query): object
 	{
 		return $this->apiCall('PARUpdatePurchaseLimit',$query);
 	}
-	
-	public function SalesOrderItemLinkCMN($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function SalesOrderItemLinkCMN(array $query): object
 	{
 		return $this->apiCall('SalesOrderItemLinkCMN',$query);
 	}
-	
-	public function SalesOrderItemLinkNewCMN($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+	public function SalesOrderItemLinkNewCMN(array $query): object
 	{
 		return $this->apiCall('SalesOrderItemLinkNewCMN',$query);
 	}
-	    
-    public function SalesOrderItemLinkToNewPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemLinkToNewPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderItemLinkToNewPAR',$query);
     }
-    
-    public function SalesOrderItemLinkToPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemLinkToPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderItemLinkToPAR',$query);
     }
-    
-    public function SalesOrderItemsLinkCMN($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemsLinkCMN(array $query): object
     {
     	return $this->apiCall('SalesOrderItemsLinkCMN',$query);
     }
-    
-    public function SalesOrderItemsLinkNewCMN($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemsLinkNewCMN(array $query): object
     {
     	return $this->apiCall('SalesOrderItemsLinkNewCMN',$query);
     }
-    
-    public function SalesOrderItemsLinkToNewPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemsLinkToNewPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderItemsLinkToNewPAR',$query);
     }
-    
-    public function SalesOrderItemsLinkToPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemsLinkToPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderItemsLinkToPAR',$query);
     }
-    
-    public function SalesOrderItemsUnlinkCMN($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemsUnlinkCMN(array $query): object
     {
     	return $this->apiCall('SalesOrderItemsUnlinkCMN',$query);
     }
-    
-    public function SalesOrderItemsUnlinkPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemsUnlinkPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderItemsUnlinkPAR',$query);
     }
-    
-    public function SalesOrderItemUnlinkCMN($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemUnlinkCMN(array $query): object
     {
     	return $this->apiCall('SalesOrderItemUnlinkCMN',$query);
     }
-    
-    public function SalesOrderItemUnlinkPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderItemUnlinkPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderItemUnlinkPAR',$query);
     }
-    
-    public function SalesOrderTemplateItemLinkToPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemLinkToPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderTemplateItemLinkToPAR',$query);
     }
-    
-    public function SalesOrderTemplateItemsLinkToPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemsLinkToPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderTemplateItemsLinkToPAR',$query);
     }
-    
-    public function SalesOrderTemplateItemsUnlinkPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemsUnlinkPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderTemplateItemsUnlinkPAR',$query);
     }
-    
-    public function SalesOrderTemplateItemUnlinkPAR($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemUnlinkPAR(array $query): object
     {
     	return $this->apiCall('SalesOrderTemplateItemUnlinkPAR',$query);
     }
-    
-    public function SetParticipantComplianceDate($query): object
+
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function SetParticipantComplianceDate(array $query): object
     {
     	return $this->apiCall('SetParticipantComplianceDate',$query);
     }

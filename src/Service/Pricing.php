@@ -15,56 +15,99 @@ class Pricing extends Brightree
         $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['pricing'],'location' => $this->info->config->service['pricing'],'trace' => 1);
     }
 
-    public function CMNFormFetchAll($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function CMNFormFetchAll(array $query): object
     {
         return $this->apiCall('CMNFormFetchAll',$query);
     }
 
-    public function NonTaxReasonFetchAll($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function NonTaxReasonFetchAll(array $query): object
     {
         return $this->apiCall('NonTaxReasonFetchAll',$query);
     }
 
-    public function PriceCreateItem($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceCreateItem(array $query): object
     {
         return $this->apiCall('PriceCreateItem', $query);
     }
 
-    public function PriceCreateStandard($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceCreateStandard(array $query): object
     {
         return $this->apiCall('PriceCreateStandard', $query);
     }
 
-    public function PriceDetailCreate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceDetailCreate(array $query): object
     {
         return $this->apiCall('PriceDetailCreate', $query);
     }
 
-    public function PriceDetailFetchByBrightreeDetailID($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceDetailFetchByBrightreeDetailID(array $query): object
     {
         return $this->apiCall('PriceDetailFetchByBrightreeDetailID', $query);
     }
 
-    public function PriceDetailUpdate($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceDetailUpdate(array $query): object
     {
         return $this->apiCall('PriceDetailUpdate', $query);
     }
 
-    public function PriceFetch($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceFetch(array $query): object
     {
         return $this->apiCall('PriceFetch', $query);
     }
 
-    public function PriceOptionLetterTypeFetchAll($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceOptionLetterTypeFetchAll(array $query): object
     {
         return $this->apiCall('PriceOptionLetterTypeFetchAll', $query);
     }
 
-    public function PriceTableFetchAll($query): object
+    /**
+     * @param array $query
+     * @return object
+     */
+    public function PriceTableFetchAll(array $query): object
     {
         return $this->apiCall('PriceTableFetchAll', $query);
     }
 
+    /**
+     * @return object
+     */
     public function Ping(): object
     {
         return $this->apiCall('Ping', array('Ping'=>[]));
