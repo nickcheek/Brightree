@@ -19,19 +19,19 @@ composer require nickcheek/brightree
 
 Reference Class in your controller
 ``` php
-use \Nickcheek\Brightree;
+use \Nickcheek\Brightree\Brightree;
 ```
 
 Create a new instance of the service and the API Call you're looking for, for instance, if you wanted to get a note by it's key
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $note = $bt->Patient()->GetNoteByKey('141508');
 return $note;
 ```
 ##ArrayHelper
 Since Brightree has so many different ways to build arrays depending on the method you're using, I've tried to make it a bit easier by including a helper.  You can use it like so:
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 
 //setup the search part
 $orderSearch = ['SearchParams' => ['Branch'=>['Value'=>102]]];
@@ -55,7 +55,7 @@ return $order;
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $note = $bt->Patient()->GetNoteByKey('141508');
 return $note;
 ```
@@ -93,7 +93,7 @@ FacilityResidentCreate($resident);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $document = $bt->Document()->DocumentTypesFetchAll();
 return $document;
 ```
@@ -114,7 +114,7 @@ StoreDocument($document);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 //If you need to return the inactive records, pass the number 1 as the second variable
 $cf = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient');
 return $cf;
@@ -131,7 +131,7 @@ CustomFieldValueSaveMultiple($query);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $doctor = $bt->Doctor()->DoctorFetchByBrightreeID(123);
 return $doctor;
 ```
@@ -157,7 +157,7 @@ RemoveDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
 Use the [INSURANCE](ServicesGuide/INSURANCE.md) Readme to see available definitions.
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $insurance = $bt->Insurance()->InsuranceFetchByBrightreeID(['BrightreeID'=>123]);
 return $insurance;
 ```
@@ -175,7 +175,7 @@ InsuranceUpdate($query);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $inventory = $bt->Inventory()->ClaimNoteTypeFetchAll();
 return $inventory;
 ```
@@ -210,7 +210,7 @@ StockingUOMFetchAll();
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $params = array(
     'searchParams'=> array(
         'Branch'=> array(
@@ -253,7 +253,7 @@ PickupExchangeUpdatePODStatus($query);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $reference = $bt->Reference()->AccountGroupFetchAll();
 return $reference;
 ```
@@ -324,7 +324,7 @@ WIPStatesFetchAll();
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $salesorder = $bt->SalesOrder()->BrightSHIPSalesOrderAck(['soKey'=> 12345]);
 return $salesorder;
 ```
@@ -397,7 +397,7 @@ StopReasonSalesOrderUpdate($query);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $documentation = $bt->Documentation()->CMNFetchByBrightreeID(['BrightreeID'=>12345]);
 return $documentation;
 ```
@@ -459,7 +459,7 @@ SetParticipantComplianceDate($query);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $pricing = $bt->Pricing()->NonTaxReasonFetchAll($query);
 return $pricing;
 ```
@@ -481,7 +481,7 @@ PriceTableFetchAll($query);
 
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $security = $bt->Security()->UserFetchByBrightreeID($query);
 return $security;
 ```
@@ -497,7 +497,7 @@ UserUpdate($query);
 ###### (new as of 12/9/19)
 #### Usage
 ``` php
-$bt = new Brightree\Brightree($username,$password);
+$bt = new Brightree($username,$password);
 $security = $bt->Security()->UserFetchByBrightreeID($query);
 return $security;
 ```
