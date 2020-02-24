@@ -219,6 +219,6 @@ class Patient extends Brightree
      */
     public function PatientFetchByBrightreeID(int $id=12345): object
     {
-        return $this->apiCall('PatientFetchByBrightreeID',array('brightreeID' => $id));
+        return $this->apiCall('PatientFetchByBrightreeID',array('BrightreeID' => $id));
     }
 }
