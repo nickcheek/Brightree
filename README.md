@@ -1,4 +1,4 @@
-# Brightree API Wrapper v3.0.3
+# Brightree API Wrapper v3.2.2
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 [![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)

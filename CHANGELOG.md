@@ -42,3 +42,7 @@ All notable changes to `brightree` will be documented in this file
 - Added arrayHelper Class
 - Added Invoice API Class
 - Changed Readme Docs
+
+## 3.2.2 - 2020-07-23
+
+- Updated API Definitions
