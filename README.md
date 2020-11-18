@@ -1,4 +1,4 @@
-# Brightree API Wrapper v3.2.2
+# Brightree API Wrapper v3.3.0
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 [![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
@@ -493,7 +493,6 @@ UserUpdate($query);
 ```
 
 ## Invoice Class 
-###### (new as of 12/9/19)
 #### Usage
 ``` php
 $bt = new Brightree($username,$password);
@@ -512,6 +511,15 @@ OpenInvoiceAgedBalanceFetchByPatient($id);
 OpenInvoiceBalanceFetchByPatient($id);
 Resubmitinvoices($query);
 ```
+## Custom 
+###### (new as of 11/16/20)
+Any function that may not be defined can now be used in a custom query inside any service.
+``` php
+$bt = new Brightree($username,$password);
+$patient = $bt->Patient()->Custom('PatientFetchByPatientID', array('PatientID' => $id));
+return $patient;
+```
+
 
 ### Changelog
 
