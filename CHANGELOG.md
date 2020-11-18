@@ -46,3 +46,7 @@ All notable changes to `brightree` will be documented in this file
 ## 3.2.2 - 2020-07-23
 
 - Updated API Definitions
+
+## 3.3.0 - 2020-11-18
+
+- Added Custom method to catch all non use cases

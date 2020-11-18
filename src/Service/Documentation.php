@@ -7,6 +7,7 @@ use Nickcheek\Brightree\Brightree;
 class Documentation extends Brightree
 {
     use \Nickcheek\Brightree\Traits\ApiCall;
+    use \Nickcheek\Brightree\Traits\Custom;
 
 	public function __construct(object $info)
 	{

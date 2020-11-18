@@ -7,6 +7,7 @@ use Nickcheek\Brightree\Brightree;
 class Inventory extends Brightree
 {
     use \Nickcheek\Brightree\Traits\ApiCall;
+    use \Nickcheek\Brightree\Traits\Custom;
 
 	public function __construct(object $info)
 	{

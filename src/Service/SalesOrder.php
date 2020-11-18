@@ -7,7 +7,8 @@ use Nickcheek\Brightree\Brightree;
 class SalesOrder extends Brightree
 {
     use \Nickcheek\Brightree\Traits\ApiCall;
-	
+    use \Nickcheek\Brightree\Traits\Custom;
+
 	public function __construct(object $info)
 	{
 		$this->info = $info;
