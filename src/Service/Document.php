@@ -49,6 +49,28 @@ class Document extends Brightree
     }
 
     /**
+     * Document batch update
+     *
+     * @param iterable $query
+     * @return object
+     */
+    public function DocumentPropertyUpdate(iterable $query): object
+    {
+    	return $this->apiCall('DocumentPropertyUpdate',$query);
+    }
+
+    /**
+     * Document Review update
+     *
+     * @param iterable $query
+     * @return object
+     */
+    public function DocumentReviewUpdate(iterable $query): object
+    {
+    	return $this->apiCall('DocumentReviewUpdate',$query);
+    }
+
+    /**
      * Search for a document
      *
      * @param iterable $query

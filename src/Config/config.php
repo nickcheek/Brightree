@@ -2,7 +2,7 @@
 
 return (object) [
 	'service'=>[
-        'document'=>'https://webservices.brightree.net/v0100-1910/DocumentationService/DocumentManagementService.svc',
+        'document'=>'https://webservices.brightree.net/v0100-2108/DocumentationService/DocumentManagementService.svc',
         'patient' => 'https://webservices.brightree.net/v0100-2006/OrderEntryService/patientservice.svc',
         'documentation' => 'https://webservices.brightree.net/v0100-2001/DocumentationService/DocumentationService.svc',
         'custom' => 'https://webservices.brightree.net/v0100-1610/CustomFieldService/CustomFieldService.svc',
@@ -13,7 +13,7 @@ return (object) [
         'pickup' => 'https://webservices.brightree.net/v0100-2007/OrderEntryService/PickupExchangeService.svc',
         'salesorder' => 'https://webservices.brightree.net/v0100-2005/OrderEntryService/SalesOrderService.svc',
         'invoice' => 'https://webservices.brightree.net/v0100-1909/InvoiceService/InvoiceService.svc',
-        'security' => 'https://webservices.brightree.net/v0100-1906/SecurityService/UserSecurityService.svc',
+        'security' => 'https://webservices.brightree.net/v0100-2109/SecurityService/UserSecurityService.svc',
         'pricing' => 'https://webservices.brightree.net/v0100-1908/InventoryService/PricingService.svc'
 	]
 ];

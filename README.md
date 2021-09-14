@@ -55,7 +55,7 @@ return $order;
 #### Usage
 ``` php
 $bt = new Brightree($username,$password);
-$note = $bt->Patient()->GetNoteByKey('141508');
+$note = $bt->Patient()->GetNoteByKey(141508);
 return $note;
 ```
 
@@ -64,14 +64,14 @@ return $note;
 PatientCreate($patient);
 PatientSearch($patient);
 PatientUpdate($patient);
-PatientFetchByExternalID($id);
-PatientFetchByPatientID($id);
-PatientFetchByBrightreeID($id);
-PatientFetchByPatientID($id);
+PatientFetchByExternalID($externalId);
+PatientFetchByPatientID($patientId);
+PatientFetchByBrightreeID($brightreeId);
+PatientFetchByPatientID($patientId);
 PatientPhoneNumberSearch($patient);
 PatientNoteCreate($note);
-PatientNoteFetchByKey($id);
-PatientNoteFetchByPatient($id);
+PatientNoteFetchByKey($key);
+PatientNoteFetchByPatient($brightreeId);
 PatientNoteSearch($search);
 PatientNoteUpdate($update);
 GetNotesByPatient($id);
@@ -115,7 +115,7 @@ StoreDocument($document);
 ``` php
 $bt = new Brightree($username,$password);
 //If you need to return the inactive records, pass the number 1 as the second variable
-$cf = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient');
+$cf = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient',1);
 return $cf;
 ```
 

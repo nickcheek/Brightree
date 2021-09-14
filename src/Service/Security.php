@@ -16,6 +16,16 @@ class Security extends Brightree
         $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['security'],'location' => $this->info->config->service['security'],'trace' => 1);
     }
 
+     /**
+     * Create User
+     * @param iterable $query
+     * @return object
+     */
+    public function UserCreate(iterable $query): object
+    {
+        return $this->apiCall('UserCreate',$query);
+    }
+
     /**
      * Search for a user
      * @param iterable $query
@@ -44,5 +54,45 @@ class Security extends Brightree
     public function UserUpdate(iterable $query): object
     {
         return $this->apiCall('UserUpdate',$query);
+    }
+
+     /**
+     * User Group Create
+     * @param iterable $query
+     * @return object
+     */
+    public function UserGroupCreate(iterable $query): object
+    {
+        return $this->apiCall('UserGroupCreate',$query);
+    }
+
+         /**
+     * User Group Create
+     * @param iterable $query
+     * @return object
+     */
+    public function UserGroupUpdate(iterable $query): object
+    {
+        return $this->apiCall('UserGroupUpdate',$query);
+    }
+
+         /**
+     * User Group Create
+     * @param iterable $query
+     * @return object
+     */
+    public function UserGroupFetchByBrightreeID(iterable $query): object
+    {
+        return $this->apiCall('UserGroupFetchByBrightreeID',$query);
+    }
+
+         /**
+     * User Group Create
+     * @param iterable $query
+     * @return object
+     */
+    public function UserGroupFetchAll(iterable $query): object
+    {
+        return $this->apiCall('UserGroupFetchAll',$query);
     }
 }
