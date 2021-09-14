@@ -103,6 +103,7 @@ DocumentTypesFetchAll();
 DocumentBatchCreate($batch);
 DocumentBatchSearch($search);
 DocumentSearch($search);
+DocumentPropertyUpdate($query);
 FetchDocumentContent($key);
 GenerateDocumentID($query);
 StoreDocument($document);
@@ -490,6 +491,10 @@ return $security;
 UserFetchByBrightreeID($query);
 UserSearch($query);
 UserUpdate($query);
+UserGroupCreate($query);
+UserGroupUpdate($query);
+UserGroupFetchByBrightreeID($query);
+UserGroupFetchAll($query);
 ```
 
 ## Invoice Class 
