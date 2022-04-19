@@ -351,6 +351,8 @@ SalesOrderItemUpdateLotNumbers($query);
 SalesOrderItemUpdatePriceOption($query); 
 SalesOrderItemUpdateSerialNumbers($query);
 SalesOrderMessagesFetchByBrightreeID($query);
+SalesOrderOverrideValidationDetailMessage($query);
+SalesOrderOverrideValidationHeaderMessage($query);
 SalesOrderPayorSearch($query);
 SalesOrderQuickAddItem($query);
 SalesOrderRemoveItem($query);
@@ -495,6 +497,8 @@ UserGroupCreate($query);
 UserGroupUpdate($query);
 UserGroupFetchByBrightreeID($query);
 UserGroupFetchAll($query);
+UserGroupPermissionsFetchByUserGroupBrightreeID($query);
+UserGroupPermissionsUpdate($query);
 ```
 
 ## Invoice Class 

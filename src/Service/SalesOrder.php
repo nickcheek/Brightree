@@ -195,6 +195,24 @@ class SalesOrder extends Brightree
         return $this->apiCall('SalesOrderMessagesFetchByBrightreeID',$query);
     }
 
+     /**
+     * @param iterable $query
+     * @return object
+     */
+    public function SalesOrderOverrideValidationDetailMessage(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderOverrideValidationDetailMessage',$query);
+    }
+
+     /**
+     * @param iterable $query
+     * @return object
+     */
+    public function SalesOrderOverrideValidationHeaderMessage(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderOverrideValidationHeaderMessage',$query);
+    }
+
     /**
      * @param iterable $query
      * @return object

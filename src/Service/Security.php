@@ -12,18 +12,18 @@ class Security extends Brightree
     public function __construct(object $info)
     {
         $this->info = $info;
-        $this->wsdl = $this->info->config->service['security'] .'?singleWsdl';
-        $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['security'],'location' => $this->info->config->service['security'],'trace' => 1);
+        $this->wsdl = $this->info->config->service['security'] . '?singleWsdl';
+        $this->options = array('login' => $this->info->username, 'password' => $this->info->password, 'uri' => $this->info->config->service['security'], 'location' => $this->info->config->service['security'], 'trace' => 1);
     }
 
-     /**
+    /**
      * Create User
      * @param iterable $query
      * @return object
      */
     public function UserCreate(iterable $query): object
     {
-        return $this->apiCall('UserCreate',$query);
+        return $this->apiCall('UserCreate', $query);
     }
 
     /**
@@ -33,7 +33,7 @@ class Security extends Brightree
      */
     public function UserSearch(iterable $query): object
     {
-        return $this->apiCall('UserSearch',$query);
+        return $this->apiCall('UserSearch', $query);
     }
 
     /**
@@ -43,7 +43,7 @@ class Security extends Brightree
      */
     public function UserFetchByBrightreeID(int $BrightreeID): object
     {
-        return $this->apiCall('UserFetchByBrightreeID',array('BrightreeID'=>$BrightreeID));
+        return $this->apiCall('UserFetchByBrightreeID', array('BrightreeID' => $BrightreeID));
     }
 
     /**
@@ -53,46 +53,66 @@ class Security extends Brightree
      */
     public function UserUpdate(iterable $query): object
     {
-        return $this->apiCall('UserUpdate',$query);
+        return $this->apiCall('UserUpdate', $query);
     }
 
-     /**
+    /**
      * User Group Create
      * @param iterable $query
      * @return object
      */
     public function UserGroupCreate(iterable $query): object
     {
-        return $this->apiCall('UserGroupCreate',$query);
+        return $this->apiCall('UserGroupCreate', $query);
     }
 
-         /**
-     * User Group Create
+    /**
+     * User Group Update
      * @param iterable $query
      * @return object
      */
     public function UserGroupUpdate(iterable $query): object
     {
-        return $this->apiCall('UserGroupUpdate',$query);
+        return $this->apiCall('UserGroupUpdate', $query);
     }
 
-         /**
-     * User Group Create
+    /**
+     * User Group Fetch By BT ID
      * @param iterable $query
      * @return object
      */
     public function UserGroupFetchByBrightreeID(iterable $query): object
     {
-        return $this->apiCall('UserGroupFetchByBrightreeID',$query);
+        return $this->apiCall('UserGroupFetchByBrightreeID', $query);
     }
 
-         /**
-     * User Group Create
+    /**
+     * User Group Fetch ALl
      * @param iterable $query
      * @return object
      */
     public function UserGroupFetchAll(iterable $query): object
     {
-        return $this->apiCall('UserGroupFetchAll',$query);
+        return $this->apiCall('UserGroupFetchAll', $query);
+    }
+
+    /**
+     * User Group Permissions Fetch By User Group BT ID
+     * @param iterable $query
+     * @return object
+     */
+    public function UserGroupPermissionsFetchByUserGroupBrightreeID(iterable $query): object
+    {
+        return $this->apiCall('UserGroupPermissionsFetchByUserGroupBrightreeID', $query);
+    }
+
+    /**
+     * User Group Permissions Fetch By User Group BT ID
+     * @param iterable $query
+     * @return object
+     */
+    public function UserGroupPermissionsUpdate(iterable $query): object
+    {
+        return $this->apiCall('UserGroupFetchByUserGroupBrightreeID', $query);
     }
 }
