@@ -51,14 +51,14 @@ All notable changes to `brightree` will be documented in this file
 
 - Added Custom method to catch all non use cases
 
-## 3.4.2 - 2022-04-19
+## 3.4.2 - 2021-09-14
 
 - Added UserGroupPermissionsFetchByUserGroupBrightreeID, and UserGroupPermissionsUpdate to Security Service.
 - Updated definition to latest definitions.
 - Added SalesOrderOverrideValidationDetailMessage, SalesOrderOverrideValidationHeaderMessage to sales order service.
 - Updated Readme
 
-## 3.5.1 - 2021-09-14
+## 3.5.1 - 2022-04-19
 
 - Added Document Propery Update to Document Management Service
 - Added UserGroupCreate, UserGroupUpdate, UserGroupFetchByBrightreeID, and UserGroupFetchAll to Security Service
