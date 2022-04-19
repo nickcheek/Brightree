@@ -51,7 +51,7 @@ All notable changes to `brightree` will be documented in this file
 
 - Added Custom method to catch all non use cases
 
-## 3.5.0 - 2021-09-14
+## 3.5.1 - 2021-09-14
 
 - Added Document Propery Update to Document Management Service
 - Added UserGroupCreate, UserGroupUpdate, UserGroupFetchByBrightreeID, and UserGroupFetchAll to Security Service
