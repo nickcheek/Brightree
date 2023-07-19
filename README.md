@@ -85,6 +85,11 @@ PatientAddMarketingReferral($brightreeid,$referralid);
 PatientRemoveMarketingReferral($id);
 FacilityMasterInfoFetchAll();
 FacilityResidentCreate($resident);
+PharmacyPatientClinicalInfoFetchByBrightreeID($query);
+PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID($patientID, $brightreeID);
+PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID($patientID, $brightreeID);
+PharmacyPatientMostRecentLabResultsFetchByPatientBrightreeID($patientID);
+
 
 ```
 
@@ -168,6 +173,38 @@ InsuranceFetchByBrightreeID($BrightreeID);
 InsuranceFetchByExternalID($ExternalID);
 InsuranceSearch($query);
 InsuranceUpdate($query);
+InsuranceCreate($query);
+BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID($branchID,$insuranceID);
+BranchOfficeInsuranceUpdate($InsuranceCarrierCodeUpdate);
+BundleBillingRuleSetFetchAll();
+ClaimFormFetchAll();
+CommercialEligibilityPayerSearch($InsuranceCarrierCodeUpdate);
+CommercialPayerSearch($InsuranceCarrierCodeUpdate);
+CoverageLimitFetchAll();
+CustomAppealFormFetchAll();
+FetchPmtSubTypeByPmtTypeBrightreeID($paymentTypeBrightreeID);
+InsuranceCarrierCodeCreate($query);
+InsuranceCarrierCodeUpdate($query);
+InsuranceCarrierCodeDelete($brightreeID);
+InsuranceCompanyFetchAll();
+InsuranceCreate($query);
+InsuranceGroupFetchAll();
+InsurancePlanTypeFetchAll();
+InsurancePrintedFormsClaimFieldsFetch();
+InsurancePrintedFormsPARFieldsFetch();
+InsuranceSpanDateHoldInclusionCreate($query);
+InsuranceSpanDateHoldInclusionDelete($brightreeID);
+InsuranceSpanDateOverrideCreate($query);
+InsuranceSpanDateOverrideDelete($brightreeID);
+InsuranceSpanDateOverrideUpdate($query);
+InsuranceValidationRuleSetCreate($validationRuleSetBrightreeID,$insuranceBrightreeID);
+InsuranceValidationRuleSetDelete($insuranceBrightreeID);
+ItemGroupFetchAll();
+ItemGroupFetchByInsuranceBrightreeID($insuranceBrightreeID);
+PARFormFetchAll();
+Ping();
+PriceTableSearch($query);
+SpanDateSplit($query);
 
 ```
 
