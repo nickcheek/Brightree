@@ -89,6 +89,24 @@ class Documentation extends Brightree
 		return $this->apiCall('CMNFetchBySalesOrderBrightreeID',$query);
 	}
 
+    /**     
+     * @param int $BrightreeID
+     * @return object
+     */
+    public function CMNFrequencyFetchbyBrightreeID(int $BrightreeID): object
+    {
+        return $this->apiCall('CMNFrequencyFetchbyBrightreeID', ['BrightreeID' => $BrightreeID]);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+	public function CMNFrequencyUpdate(iterable $query): object
+	{
+		return $this->apiCall('CMNFrequencyUpdate',$query);
+	}
+
     /**
      * @param iterable $query
      * @return object
@@ -285,6 +303,42 @@ class Documentation extends Brightree
 	public function PARSearch(iterable $query): object
 	{
 		return $this->apiCall('PARSearch',$query);
+	}
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+	public function PARTaskCreate(iterable $query): object
+	{
+		return $this->apiCall('PARTaskCreate',$query);
+	}
+
+    /**
+     * @param int $PARBrightreeID
+     * @return object
+     */
+    public function PARTaskFetchByPARBrightreeID(int $PARBrightreeID): object
+    {
+        return $this->apiCall('PARTaskFetchByPARBrightreeID', ['BrightreeID' => $PARBrightreeID]);
+    }
+
+    /**
+     * @param none
+     * @return object
+     */
+    public function PARTaskReasonFetchAll(): object
+    {
+        return $this->apiCall('PARTaskReasonFetchAll', []);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+	public function PARTaskUpdate(iterable $query): object
+	{
+		return $this->apiCall('PARTaskUpdate',$query);
 	}
 
     /**
