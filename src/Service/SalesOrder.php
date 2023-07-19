@@ -83,6 +83,24 @@ class SalesOrder extends Brightree
      * @param iterable $query
      * @return object
      */
+    public function SalesOrderEvaluateDropShip(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderEvaluateDropShip',$query);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+    public function SalesOrderEvaluateDropShipWithAccountNumber(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderEvaluateDropShipWithAccountNumber',$query);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
     public function SalesOrderFetchByBrightreeID(iterable $query): object
     {
         return $this->apiCall('SalesOrderFetchByBrightreeID',$query);

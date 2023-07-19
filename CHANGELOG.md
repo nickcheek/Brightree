@@ -64,4 +64,41 @@ All notable changes to `brightree` will be documented in this file
 - Added UserGroupCreate, UserGroupUpdate, UserGroupFetchByBrightreeID, and UserGroupFetchAll to Security Service
 - Updated Readme
 
+## 3.5.2 - 2023-07-19
 
+- Added PharmacyPatientClinicalInfoFetchByBrightreeID to Patient Service
+- Added PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID to Patient Service
+- Added PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID to Patient Service
+- Added PharmacyPatientMostRecentLabResultsFetchByPatientBrightreeID to Patient Service
+
+- Added the following fields to the insurance service:
+- BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID
+- BranchOfficeInsuranceUpdate
+- BundleBillingRuleSetFetchAll
+- ClaimFormFetchAll
+- CommercialEligibilityPayerSearch
+- CommercialPayerSearch
+- CoverageLimitFetchAll
+- CustomAppealFormFetchAll
+- FetchPmtSubTypeByPmtTypeBrightreeID
+- InsuranceCarrierCodeCreate
+- InsuranceCarrierCodeUpdate
+- InsuranceCompanyFetchAll
+- InsuranceCreate
+- InsuranceGroupFetchAll
+- InsurancePlanTypeFetchAll
+- InsurancePrintedFormsClaimFieldsFetch
+- InsurancePrintedFormsPARFieldsFetch
+- InsuranceSpanDateHoldInclusionCreate
+- InsuranceSpanDateHoldInclusionDelete
+- InsuranceSpanDateOverrideCreate
+- InsuranceSpanDateOverrideDelete
+- InsuranceSpanDateOverrideUpdate
+- InsuranceValidationRuleSetCreate
+- InsuranceValidationRuleSetDelete
+- ItemGroupFetchAll
+- ItemGroupFetchByInsuranceBrightreeID
+- PARFormFetchAll
+- Ping
+- PriceTableSearch
+- SpanDateSplit
