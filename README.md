@@ -424,6 +424,7 @@ SalesOrderTemplateUpdateWIPState($query);
 SalesOrderUpdate($query);
 SalesOrderUpdateInsurance($query);
 SalesOrderUpdateItem($query);
+SalesOrderUpdateItemGeneric($query);
 SalesOrderUpdateItemNextBilling($query);
 SalesOrderUpdateItemPayor($query);
 SalesOrderUpdateItemsWithDefaultPriceOption($query);

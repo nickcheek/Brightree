@@ -515,6 +515,15 @@ class SalesOrder extends Brightree
      * @param iterable $query
      * @return object
      */
+    public function SalesOrderUpdateItemGeneric(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderUpdateItemGeneric', $query);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
     public function SalesOrderUpdateItemNextBilling(iterable $query): object
     {
         return $this->apiCall('SalesOrderUpdateItemNextBilling', $query);
