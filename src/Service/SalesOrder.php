@@ -9,20 +9,20 @@ class SalesOrder extends Brightree
     use \Nickcheek\Brightree\Traits\ApiCall;
     use \Nickcheek\Brightree\Traits\Custom;
 
-	public function __construct(object $info)
-	{
-		$this->info = $info;
-		$this->wsdl = $this->info->config->service['salesorder'] .'?singleWsdl';
-		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['salesorder'],'location' => $this->info->config->service['salesorder'],'trace' => 1);
-	}
+    public function __construct(object $info)
+    {
+        $this->info = $info;
+        $this->wsdl = $this->info->config->service['salesorder'] . '?singleWsdl';
+        $this->options = array('login' => $this->info->username, 'password' => $this->info->password, 'uri' => $this->info->config->service['salesorder'], 'location' => $this->info->config->service['salesorder'], 'trace' => 1);
+    }
 
     /**
      * @param iterable $query
      * @return object
      */
-	public function BrightSHIPSalesOrderAck(iterable $query): object
+    public function BrightSHIPSalesOrderAck(iterable $query): object
     {
-    	return $this->apiCall('BrightSHIPSalesOrderAck',$query);
+        return $this->apiCall('BrightSHIPSalesOrderAck', $query);
     }
 
     /**
@@ -31,7 +31,7 @@ class SalesOrder extends Brightree
      */
     public function BrightShipSalesOrderFetch(iterable $query): object
     {
-        return $this->apiCall('BrightShipSalesOrderFetch',$query);
+        return $this->apiCall('BrightShipSalesOrderFetch', $query);
     }
 
     /**
@@ -40,7 +40,7 @@ class SalesOrder extends Brightree
      */
     public function OrderImport(iterable $query): object
     {
-        return $this->apiCall('OrderImport',$query);
+        return $this->apiCall('OrderImport', $query);
     }
 
     /**
@@ -49,7 +49,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderAddDeliveryException(iterable $query): object
     {
-        return $this->apiCall('SalesOrderAddDeliveryException',$query);
+        return $this->apiCall('SalesOrderAddDeliveryException', $query);
     }
 
     /**
@@ -58,7 +58,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderAddMarketingReferral(iterable $query): object
     {
-        return $this->apiCall('SalesOrderAddMarketingReferral',$query);
+        return $this->apiCall('SalesOrderAddMarketingReferral', $query);
     }
 
     /**
@@ -67,7 +67,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderConfirm(iterable $query): object
     {
-        return $this->apiCall('SalesOrderConfirm',$query);
+        return $this->apiCall('SalesOrderConfirm', $query);
     }
 
     /**
@@ -76,7 +76,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderCreate(iterable $query): object
     {
-        return $this->apiCall('SalesOrderCreate',$query);
+        return $this->apiCall('SalesOrderCreate', $query);
     }
 
     /**
@@ -85,7 +85,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderEvaluateDropShip(iterable $query): object
     {
-        return $this->apiCall('SalesOrderEvaluateDropShip',$query);
+        return $this->apiCall('SalesOrderEvaluateDropShip', $query);
     }
 
     /**
@@ -94,7 +94,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderEvaluateDropShipWithAccountNumber(iterable $query): object
     {
-        return $this->apiCall('SalesOrderEvaluateDropShipWithAccountNumber',$query);
+        return $this->apiCall('SalesOrderEvaluateDropShipWithAccountNumber', $query);
     }
 
     /**
@@ -103,7 +103,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderFetchByBrightreeID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderFetchByBrightreeID',$query);
+        return $this->apiCall('SalesOrderFetchByBrightreeID', $query);
     }
 
     /**
@@ -112,7 +112,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderFetchByExternalID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderFetchByExternalID',$query);
+        return $this->apiCall('SalesOrderFetchByExternalID', $query);
     }
 
     /**
@@ -121,7 +121,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderFetchByPurchaseOrderID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderFetchByPurchaseOrderID',$query);
+        return $this->apiCall('SalesOrderFetchByPurchaseOrderID', $query);
     }
 
     /**
@@ -130,7 +130,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderFetchPendingByShippingCarrierKey(iterable $query): object
     {
-        return $this->apiCall('SalesOrderFetchPendingByShippingCarrierKey',$query);
+        return $this->apiCall('SalesOrderFetchPendingByShippingCarrierKey', $query);
     }
 
     /**
@@ -139,7 +139,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderFetchReadyforShipping(iterable $query): object
     {
-        return $this->apiCall('SalesOrderFetchReadyforShipping',$query);
+        return $this->apiCall('SalesOrderFetchReadyforShipping', $query);
     }
 
     /**
@@ -147,7 +147,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderFulfillmentVendorsFetchAll(): object
     {
-        return $this->apiCall('SalesOrderFulfillmentVendorsFetchAll',[]);
+        return $this->apiCall('SalesOrderFulfillmentVendorsFetchAll', []);
     }
 
     /**
@@ -156,7 +156,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderItemAddDeliveryException(iterable $query): object
     {
-        return $this->apiCall('SalesOrderItemAddDeliveryException',$query);
+        return $this->apiCall('SalesOrderItemAddDeliveryException', $query);
     }
 
     /**
@@ -165,7 +165,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderItemPriceOptionFetchByBrightreeID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderItemPriceOptionFetchByBrightreeID',$query);
+        return $this->apiCall('SalesOrderItemPriceOptionFetchByBrightreeID', $query);
     }
 
     /**
@@ -174,7 +174,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderItemReplaceGeneric(iterable $query): object
     {
-        return $this->apiCall('SalesOrderItemReplaceGeneric',$query);
+        return $this->apiCall('SalesOrderItemReplaceGeneric', $query);
     }
 
     /**
@@ -183,7 +183,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderItemUpdateLotNumbers(iterable $query): object
     {
-        return $this->apiCall('SalesOrderItemUpdateLotNumbers',$query);
+        return $this->apiCall('SalesOrderItemUpdateLotNumbers', $query);
     }
 
     /**
@@ -192,7 +192,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderItemUpdatePriceOption(iterable $query): object
     {
-        return $this->apiCall('SalesOrderItemUpdatePriceOption',$query);
+        return $this->apiCall('SalesOrderItemUpdatePriceOption', $query);
     }
 
     /**
@@ -201,7 +201,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderItemUpdateSerialNumbers(iterable $query): object
     {
-        return $this->apiCall('SalesOrderItemUpdateSerialNumbers',$query);
+        return $this->apiCall('SalesOrderItemUpdateSerialNumbers', $query);
     }
 
     /**
@@ -210,25 +210,25 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderMessagesFetchByBrightreeID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderMessagesFetchByBrightreeID',$query);
+        return $this->apiCall('SalesOrderMessagesFetchByBrightreeID', $query);
     }
 
-     /**
+    /**
      * @param iterable $query
      * @return object
      */
     public function SalesOrderOverrideValidationDetailMessage(iterable $query): object
     {
-        return $this->apiCall('SalesOrderOverrideValidationDetailMessage',$query);
+        return $this->apiCall('SalesOrderOverrideValidationDetailMessage', $query);
     }
 
-     /**
+    /**
      * @param iterable $query
      * @return object
      */
     public function SalesOrderOverrideValidationHeaderMessage(iterable $query): object
     {
-        return $this->apiCall('SalesOrderOverrideValidationHeaderMessage',$query);
+        return $this->apiCall('SalesOrderOverrideValidationHeaderMessage', $query);
     }
 
     /**
@@ -237,7 +237,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderPayorSearch(iterable $query): object
     {
-        return $this->apiCall('SalesOrderPayorSearch',$query);
+        return $this->apiCall('SalesOrderPayorSearch', $query);
     }
 
     /**
@@ -246,7 +246,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderQuickAddItem(iterable $query): object
     {
-        return $this->apiCall('SalesOrderQuickAddItem',$query);
+        return $this->apiCall('SalesOrderQuickAddItem', $query);
     }
 
     /**
@@ -255,7 +255,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderRemoveItem(iterable $query): object
     {
-        return $this->apiCall('SalesOrderRemoveItem',$query);
+        return $this->apiCall('SalesOrderRemoveItem', $query);
     }
 
     /**
@@ -264,7 +264,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderRemoveMarketingReferral(iterable $query): object
     {
-        return $this->apiCall('SalesOrderRemoveMarketingReferral',$query);
+        return $this->apiCall('SalesOrderRemoveMarketingReferral', $query);
     }
 
     /**
@@ -273,7 +273,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderSearch(iterable $query): object
     {
-        return $this->apiCall('SalesOrderSearch',$query);
+        return $this->apiCall('SalesOrderSearch', $query);
     }
 
     /**
@@ -282,7 +282,16 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderSendPOD(iterable $query): object
     {
-        return $this->apiCall('SalesOrderSendPOD',$query);
+        return $this->apiCall('SalesOrderSendPOD', $query);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+    public function SalesOrderSubmitDropShip(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderSubmitDropShip', $query);
     }
 
     /**
@@ -291,7 +300,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateCreate(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateCreate',$query);
+        return $this->apiCall('SalesOrderTemplateCreate', $query);
     }
 
     /**
@@ -300,7 +309,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateCreateSalesOrder(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateCreateSalesOrder',$query);
+        return $this->apiCall('SalesOrderTemplateCreateSalesOrder', $query);
     }
 
     /**
@@ -309,7 +318,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateDelete(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateDelete',$query);
+        return $this->apiCall('SalesOrderTemplateDelete', $query);
     }
 
     /**
@@ -319,7 +328,7 @@ class SalesOrder extends Brightree
 
     public function SalesOrderTemplateFetchByBrightreeID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateFetchByBrightreeID',$query);
+        return $this->apiCall('SalesOrderTemplateFetchByBrightreeID', $query);
     }
 
     /**
@@ -328,7 +337,25 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateFetchByExternalID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateFetchByExternalID',$query);
+        return $this->apiCall('SalesOrderTemplateFetchByExternalID', $query);
+    }
+
+    /**
+     * @param int $BrightreeID
+     * @return object
+     */
+    public function SalesOrderTemplateItemFrequencyFetchByBrightreeID(int $BrightreeID): object
+    {
+        return $this->apiCall('SalesOrderTemplateItemFrequencyFetchByBrightreeID', array('BrightreeID' => $BrightreeID));
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+    public function SalesOrderTemplateItemFrequencyUpdate(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderTemplateItemFrequencyUpdate', $query);
     }
 
     /**
@@ -337,7 +364,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateItemPriceOptionFetchByBrightreeID(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateItemPriceOptionFetchByBrightreeID',$query);
+        return $this->apiCall('SalesOrderTemplateItemPriceOptionFetchByBrightreeID', $query);
     }
 
     /**
@@ -346,7 +373,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateItemUpdatePriceOption(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateItemUpdatePriceOption',$query);
+        return $this->apiCall('SalesOrderTemplateItemUpdatePriceOption', $query);
     }
 
     /**
@@ -355,7 +382,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateQuickAddItem(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateQuickAddItem',$query);
+        return $this->apiCall('SalesOrderTemplateQuickAddItem', $query);
     }
 
     /**
@@ -364,7 +391,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateRemoveItem(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateRemoveItem',$query);
+        return $this->apiCall('SalesOrderTemplateRemoveItem', $query);
     }
 
     /**
@@ -373,7 +400,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateScheduleFetchBySOTemplateKey(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateScheduleFetchBySOTemplateKey',$query);
+        return $this->apiCall('SalesOrderTemplateScheduleFetchBySOTemplateKey', $query);
     }
 
     /**
@@ -382,7 +409,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateScheduleLogSearch(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateScheduleLogSearch',$query);
+        return $this->apiCall('SalesOrderTemplateScheduleLogSearch', $query);
     }
 
     /**
@@ -391,7 +418,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateScheduleSearch(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateScheduleSearch',$query);
+        return $this->apiCall('SalesOrderTemplateScheduleSearch', $query);
     }
 
     /**
@@ -400,7 +427,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateScheduleUpdate(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateScheduleUpdate',$query);
+        return $this->apiCall('SalesOrderTemplateScheduleUpdate', $query);
     }
 
     /**
@@ -409,7 +436,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateSearch(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateSearch',$query);
+        return $this->apiCall('SalesOrderTemplateSearch', $query);
     }
 
     /**
@@ -418,7 +445,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateUpdate(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateUpdate',$query);
+        return $this->apiCall('SalesOrderTemplateUpdate', $query);
     }
 
     /**
@@ -427,7 +454,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateUpdateInsurance(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateUpdateInsurance',$query);
+        return $this->apiCall('SalesOrderTemplateUpdateInsurance', $query);
     }
 
     /**
@@ -436,7 +463,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateUpdateItem(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateUpdateItem',$query);
+        return $this->apiCall('SalesOrderTemplateUpdateItem', $query);
     }
 
     /**
@@ -445,7 +472,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateUpdateItemsWithDefaultPriceOption(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateUpdateItemsWithDefaultPriceOption',$query);
+        return $this->apiCall('SalesOrderTemplateUpdateItemsWithDefaultPriceOption', $query);
     }
 
     /**
@@ -454,7 +481,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderTemplateUpdateWIPState(iterable $query): object
     {
-        return $this->apiCall('SalesOrderTemplateUpdateWIPState',$query);
+        return $this->apiCall('SalesOrderTemplateUpdateWIPState', $query);
     }
 
     /**
@@ -463,7 +490,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdate(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdate',$query);
+        return $this->apiCall('SalesOrderUpdate', $query);
     }
 
     /**
@@ -472,7 +499,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdateInsurance(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdateInsurance',$query);
+        return $this->apiCall('SalesOrderUpdateInsurance', $query);
     }
 
     /**
@@ -481,7 +508,16 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdateItem(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdateItem',$query);
+        return $this->apiCall('SalesOrderUpdateItem', $query);
+    }
+
+    /**
+     * @param iterable $query
+     * @return object
+     */
+    public function SalesOrderUpdateItemNextBilling(iterable $query): object
+    {
+        return $this->apiCall('SalesOrderUpdateItemNextBilling', $query);
     }
 
     /**
@@ -490,7 +526,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdateItemPayor(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdateItemPayor',$query);
+        return $this->apiCall('SalesOrderUpdateItemPayor', $query);
     }
 
     /**
@@ -499,7 +535,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdateItemsWithDefaultPriceOption(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdateItemsWithDefaultPriceOption',$query);
+        return $this->apiCall('SalesOrderUpdateItemsWithDefaultPriceOption', $query);
     }
 
     /**
@@ -508,7 +544,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdatePODStatus(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdatePODStatus',$query);
+        return $this->apiCall('SalesOrderUpdatePODStatus', $query);
     }
 
     /**
@@ -517,7 +553,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdateTracking(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdateTracking',$query);
+        return $this->apiCall('SalesOrderUpdateTracking', $query);
     }
 
     /**
@@ -526,7 +562,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderUpdateWIPState(iterable $query): object
     {
-        return $this->apiCall('SalesOrderUpdateWIPState',$query);
+        return $this->apiCall('SalesOrderUpdateWIPState', $query);
     }
 
     /**
@@ -535,7 +571,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderVoid(iterable $query): object
     {
-        return $this->apiCall('SalesOrderVoid',$query);
+        return $this->apiCall('SalesOrderVoid', $query);
     }
 
     /**
@@ -544,7 +580,7 @@ class SalesOrder extends Brightree
      */
     public function SalesOrderVoidSearch(iterable $query): object
     {
-        return $this->apiCall('SalesOrderVoidSearch',$query);
+        return $this->apiCall('SalesOrderVoidSearch', $query);
     }
 
     /**
@@ -553,7 +589,15 @@ class SalesOrder extends Brightree
      */
     public function SearchWIPStatusWithUpdate(iterable $query): object
     {
-        return $this->apiCall('SearchWIPStatusWithUpdate',$query);
+        return $this->apiCall('SearchWIPStatusWithUpdate', $query);
+    }
+
+    /**
+     * @return object
+     */
+    public function StopReasonFetchAll(): object
+    {
+        return $this->apiCall('StopReasonFetchAll', []);
     }
 
     /**
@@ -571,7 +615,7 @@ class SalesOrder extends Brightree
      */
     public function StopReasonSalesOrderTemplateFetchByBrightreeID(int $BrightreeID): object
     {
-        return $this->apiCall('StopReasonSalesOrderTemplateFetchByBrightreeID',array('BrightreeID'=> $BrightreeID));
+        return $this->apiCall('StopReasonSalesOrderTemplateFetchByBrightreeID', array('BrightreeID' => $BrightreeID));
     }
 
     /**
@@ -580,7 +624,7 @@ class SalesOrder extends Brightree
      */
     public function StopReasonSalesOrderTemplateUpdate(iterable $query): object
     {
-        return $this->apiCall('StopReasonSalesOrderTemplateUpdate',$query);
+        return $this->apiCall('StopReasonSalesOrderTemplateUpdate', $query);
     }
 
     /**
@@ -589,6 +633,6 @@ class SalesOrder extends Brightree
      */
     public function StopReasonSalesOrderUpdate(iterable $query): object
     {
-        return $this->apiCall('StopReasonSalesOrderUpdate',$query);
+        return $this->apiCall('StopReasonSalesOrderUpdate', $query);
     }
 }

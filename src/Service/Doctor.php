@@ -9,12 +9,12 @@ class Doctor extends Brightree
     use \Nickcheek\Brightree\Traits\ApiCall;
     use \Nickcheek\Brightree\Traits\Custom;
 
-	public function __construct($info)
-	{
-	    $this->info = $info;
-		$this->wsdl = $this->info->config->service['doctor'] .'?singleWsdl';
-		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['doctor'],'location' => $this->info->config->service['doctor'],'trace' => 1);
-	}
+    public function __construct($info)
+    {
+        $this->info = $info;
+        $this->wsdl = $this->info->config->service['doctor'] . '?singleWsdl';
+        $this->options = array('login' => $this->info->username, 'password' => $this->info->password, 'uri' => $this->info->config->service['doctor'], 'location' => $this->info->config->service['doctor'], 'trace' => 1);
+    }
 
     /**
      * Add referral contact for a doctor
@@ -23,9 +23,9 @@ class Doctor extends Brightree
      * @param int $ReferralBrightreeID
      * @return object
      */
-	public function AddDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
+    public function AddDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
     {
-    	return $this->apiCall('AddDoctorReferralContact',['DoctorBrightreeID'=>$DocBrightreeID,'ReferralContactBrightreeID'=>$ReferralBrightreeID]);
+        return $this->apiCall('AddDoctorReferralContact', ['DoctorBrightreeID' => $DocBrightreeID, 'ReferralContactBrightreeID' => $ReferralBrightreeID]);
     }
 
     /**
@@ -36,7 +36,7 @@ class Doctor extends Brightree
      */
     public function DoctorCreate(iterable $query): object
     {
-    	return $this->apiCall('DoctorCreate',$query);
+        return $this->apiCall('DoctorCreate', $query);
     }
 
     /**
@@ -47,7 +47,7 @@ class Doctor extends Brightree
      */
     public function DoctorFetchByBrightreeID(int $BrightreeID): object
     {
-    	return $this->apiCall('DoctorFetchByBrightreeID',['BrightreeID'=>$BrightreeID]);
+        return $this->apiCall('DoctorFetchByBrightreeID', ['BrightreeID' => $BrightreeID]);
     }
 
     /**
@@ -58,7 +58,7 @@ class Doctor extends Brightree
      */
     public function DoctorFetchByExternalID(int $ExternalID): object
     {
-    	return $this->apiCall('DoctorFetchByExternalID',['ExternalID'=>$ExternalID]);
+        return $this->apiCall('DoctorFetchByExternalID', ['ExternalID' => $ExternalID]);
     }
 
     /**
@@ -68,7 +68,51 @@ class Doctor extends Brightree
      */
     public function DoctorGroupFetchAll(): object
     {
-    	return $this->apiCall('DoctorGroupFetchAll',[]);
+        return $this->apiCall('DoctorGroupFetchAll', []);
+    }
+
+    /**
+     * Doctor note create
+     *
+     * @param iterable $query
+     * @return object
+     */
+    public function DoctorNoteCreate(iterable $query): object
+    {
+        return $this->apiCall('DoctorNoteCreate', $query);
+    }
+
+    /**
+     * Doctor note update
+     *
+     * @param iterable $query
+     * @return object
+     */
+    public function DoctorNoteUpdate(iterable $query): object
+    {
+        return $this->apiCall('DoctorNoteUpdate', $query);
+    }
+
+    /**
+     * Fetch doc note by doctor note key
+     *
+     * @param int $brightreeID
+     * @return object
+     */
+    public function DoctorNoteFetchByKey(int $brightreeID): object
+    {
+        return $this->apiCall('DoctorNoteFetchByKey', ['brightreeID' => $brightreeID]);
+    }
+
+    /**
+     * Fetch doc note by doctor
+     *
+     * @param int $brightreeID
+     * @return object
+     */
+    public function DoctorNoteFetchByDoctor(int $brightreeID): object
+    {
+        return $this->apiCall('DoctorNoteFetchByDoctor', ['brightreeID' => $brightreeID]);
     }
 
     /**
@@ -79,7 +123,7 @@ class Doctor extends Brightree
      */
     public function DoctorReferralContactsFetchByDoctorKey(int $DocBrightreeID): object
     {
-    	return $this->apiCall('DoctorReferralContactsFetchByDoctorKey',['DoctorBrightreeID'=>$DocBrightreeID]);
+        return $this->apiCall('DoctorReferralContactsFetchByDoctorKey', ['DoctorBrightreeID' => $DocBrightreeID]);
     }
 
     /**
@@ -90,7 +134,7 @@ class Doctor extends Brightree
      */
     public function DoctorSearch(iterable $query): object
     {
-    	return $this->apiCall('DoctorSearch',$query);
+        return $this->apiCall('DoctorSearch', $query);
     }
 
     /**
@@ -101,7 +145,7 @@ class Doctor extends Brightree
      */
     public function DoctorUpdate(iterable $query): object
     {
-    	return $this->apiCall('DoctorUpdate',$query);
+        return $this->apiCall('DoctorUpdate', $query);
     }
 
     /**
@@ -111,7 +155,7 @@ class Doctor extends Brightree
      */
     public function FacilityFetchAll(): object
     {
-    	return $this->apiCall('FacilityFetchAll',[]);
+        return $this->apiCall('FacilityFetchAll', []);
     }
 
     /**
@@ -121,7 +165,7 @@ class Doctor extends Brightree
      */
     public function FacilityGroupFetchAll(): object
     {
-    	return $this->apiCall('FacilityGroupFetchAll',[]);
+        return $this->apiCall('FacilityGroupFetchAll', []);
     }
 
     /**
@@ -131,7 +175,7 @@ class Doctor extends Brightree
      */
     public function MarketingRepFetchAll(): object
     {
-    	return $this->apiCall('MarketingRepFetchAll',[]);
+        return $this->apiCall('MarketingRepFetchAll', []);
     }
 
 
@@ -142,8 +186,8 @@ class Doctor extends Brightree
      * @param int $ReferralBrightreeID
      * @return object
      */
-    public function RemoveDoctorReferralContact(int $DocBrightreeID,int $ReferralBrightreeID): object
+    public function RemoveDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
     {
-    	return $this->apiCall('RemoveDoctorReferralContact',['DoctorBrightreeID'=>$DocBrightreeID,'ReferralContactBrightreeID'=>$ReferralBrightreeID]);
+        return $this->apiCall('RemoveDoctorReferralContact', ['DoctorBrightreeID' => $DocBrightreeID, 'ReferralContactBrightreeID' => $ReferralBrightreeID]);
     }
 }

@@ -102,3 +102,9 @@ All notable changes to `brightree` will be documented in this file
 - Ping
 - PriceTableSearch
 - SpanDateSplit
+
+- Added the following fields to the Doctor service:
+- DoctorNoteCreate, DoctorNoteFetchByDoctor, DoctorNoteUpdate, DoctorNoteFetchByKey
+
+- Added the following to SalesOrder service:
+- SalesOrderTemplateItemFrequencyFetchByBrightreeID,SalesOrderTemplateItemFrequencyUpdate, SalesOrderUpdateItemNextBilling, StopReasonFetchAll
