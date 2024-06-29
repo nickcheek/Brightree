@@ -2,7 +2,6 @@
 
 namespace Nickcheek\Brightree;
 
-use Nickcheek\Brightree\Helpers\arrayHelper;
 use Nickcheek\Brightree\Service\{
     CustomField,
     Doctor,
@@ -18,6 +17,7 @@ use Nickcheek\Brightree\Service\{
     SalesOrder,
     Security
 };
+use Nickcheek\Brightree\Helpers\arrayHelper;
 
 class Brightree extends arrayHelper
 {

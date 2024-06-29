@@ -3,11 +3,17 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
+use Nickcheek\Brightree\Traits\ApiCall;
+use Nickcheek\Brightree\Traits\Custom;
 
 class Documentation extends Brightree
 {
-    use \Nickcheek\Brightree\Traits\ApiCall;
-    use \Nickcheek\Brightree\Traits\Custom;
+    use ApiCall;
+    use Custom;
+
+	public object $info;
+	protected string $wsdl;
+	protected array $options;
 
 	public function __construct(object $info)
 	{
@@ -324,7 +330,6 @@ class Documentation extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
     public function PARTaskReasonFetchAll(): object

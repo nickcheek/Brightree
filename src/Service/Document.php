@@ -3,11 +3,13 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
+use Nickcheek\Brightree\Traits\ApiCall;
+use Nickcheek\Brightree\Traits\Custom;
 
 class Document extends Brightree
 {
-    use \Nickcheek\Brightree\Traits\ApiCall;
-    use \Nickcheek\Brightree\Traits\Custom;
+    use ApiCall;
+    use Custom;
 
 	public function __construct(object $info)
 	{
