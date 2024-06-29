@@ -11,6 +11,10 @@ class Document extends Brightree
     use ApiCall;
     use Custom;
 
+	public object $info;
+	protected string $wsdl;
+	protected array $options;
+
 	public function __construct(object $info)
 	{
 	    $this->info = $info;
