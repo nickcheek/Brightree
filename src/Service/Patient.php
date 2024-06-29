@@ -3,17 +3,23 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
+use Nickcheek\Brightree\Traits\ApiCall;
+use Nickcheek\Brightree\Traits\Custom;
 
 class Patient extends Brightree
 {
-    use \Nickcheek\Brightree\Traits\ApiCall;
-    use \Nickcheek\Brightree\Traits\Custom;
+    use ApiCall;
+    use Custom;
+
+	public object $info;
+	protected string $wsdl;
+	protected array $options;
 
     public function __construct(object $info)
     {
-        $this->info = $info;
-        $this->wsdl = $this->info->config->service['patient'] . '?singleWsdl';
-        $this->options = array('login' => $this->info->username, 'password' => $this->info->password, 'uri' => $this->info->config->service['patient'], 'location' => $this->info->config->service['patient'], 'trace' => 1);
+		$this->info = $info;
+		$this->wsdl = $this->info->config->service['patient'] . '?singleWsdl';
+		$this->options = array('login' => $this->info->username, 'password' => $this->info->password, 'uri' => $this->info->config->service['patient'], 'location' => $this->info->config->service['patient'], 'trace' => 1);
     }
 
     /**
@@ -224,7 +230,8 @@ class Patient extends Brightree
     }
 
     /**
-     * @param int|null $patientid, int|null $brightreeid
+     * @param  int|null  $patientid  , int|null $brightreeid
+     * @param  int|null  $brightreeid
      * @return object
      */
     public function PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID(?int $patientid = null, ?int $brightreeid = null): object
@@ -233,7 +240,8 @@ class Patient extends Brightree
     }
 
     /**
-     * @param int|null $patientid, int|null $brightreeid
+     * @param  int|null  $patientid  , int|null $brightreeid
+     * @param  int|null  $brightreeid
      * @return object
      */
     public function PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID(?int $patientid = null, ?int $brightreeid = null): object

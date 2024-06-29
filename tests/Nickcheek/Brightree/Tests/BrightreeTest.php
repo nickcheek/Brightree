@@ -3,6 +3,8 @@
 namespace Nickcheek\Brightree\Tests;
 
 use Nickcheek\Brightree\Brightree;
+use Nickcheek\Brightree\Service\Doctor;
+use Nickcheek\Brightree\Service\Patient;
 use PHPUnit\Framework\TestCase;
 
 class BrightreeTest extends TestCase
@@ -51,5 +53,25 @@ class BrightreeTest extends TestCase
     {
         $this->assertIsArray($this->brightree->search($this->arr)->build());
     }
+
+
+	public function test_new_instance_initializes_properties() {
+		$brightree = new Brightree('username', 'password');
+		$this->assertInstanceOf(Brightree::class, $brightree);
+		$this->assertObjectHasAttribute('config', $brightree);
+		$this->assertObjectHasAttribute('info', $brightree);
+	}
+
+	public function test_calling_patient_returns_patient_instance() {
+		$brightree = new Brightree('username', 'password');
+		$patient = $brightree->Patient();
+		$this->assertInstanceOf(Patient::class, $patient);
+	}
+
+	public function test_calling_doctor_returns_doctor_instance() {
+		$brightree = new Brightree('username', 'password');
+		$doctor = $brightree->Doctor();
+		$this->assertInstanceOf(Doctor::class, $doctor);
+	}
 
 }

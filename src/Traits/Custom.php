@@ -3,7 +3,7 @@
 namespace Nickcheek\Brightree\Traits;
 
 trait Custom {
-    use \Nickcheek\Brightree\Traits\ApiCall;
+    use ApiCall;
 
     public function Custom($service, $object) : object
     {

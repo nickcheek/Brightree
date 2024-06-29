@@ -3,12 +3,17 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Brightree;
+use Nickcheek\Brightree\Traits\ApiCall;
+use Nickcheek\Brightree\Traits\Custom;
 
 class Insurance extends Brightree
 {
-    use \Nickcheek\Brightree\Traits\ApiCall;
-    use \Nickcheek\Brightree\Traits\Custom;
+    use ApiCall;
+    use Custom;
 
+	public object $info;
+	protected string $wsdl;
+	protected array $options;
 	public function __construct(object $info)
 	{
 		$this->info = $info;
@@ -61,7 +66,8 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param int|null $branchBrightreeID, int|null $insuranceBrightreeID
+     * @param  int|null  $branchBrightreeID  , int|null $insuranceBrightreeID
+     * @param  int|null  $insuranceBrightreeID
      * @return object
      */
     public function BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID(?int $branchBrightreeID = null, ?int $insuranceBrightreeID = null): object
@@ -79,7 +85,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
     public function BundleBillingRuleSetFetchAll(): object
@@ -88,7 +93,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
     public function ClaimFormFetchAll(): object
@@ -115,7 +119,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
     public function CoverageLimitFetchAll(): object
@@ -124,7 +127,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
     public function CustomAppealFormFetchAll(): object
@@ -169,7 +171,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
     public function InsuranceCompanyFetchAll(): object
@@ -187,7 +188,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function InsuranceGroupFetchAll(): object
@@ -196,7 +196,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function InsurancePlanTypeFetchAll(): object
@@ -205,7 +204,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function InsurancePrintedFormsClaimFieldsFetch(): object
@@ -214,7 +212,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function InsurancePrintedFormsPARFieldsFetch(): object
@@ -268,7 +265,8 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param int|null $validationRuleSetBrightreeID, int|null $insuranceBrightreeID
+     * @param  int|null  $validationRuleSetBrightreeID  , int|null $insuranceBrightreeID
+     * @param  int|null  $insuranceBrightreeID
      * @return object
      */
     public function InsuranceValidationRuleSetCreate(?int $validationRuleSetBrightreeID = null, ?int $insuranceBrightreeID = null): object
@@ -286,7 +284,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function ItemGroupFetchAll(): object
@@ -304,7 +301,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function PARFormFetchAll(): object
@@ -313,7 +309,6 @@ class Insurance extends Brightree
     }
 
     /**
-     * @param none
      * @return object
      */
 	public function Ping(): object

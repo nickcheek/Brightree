@@ -53,7 +53,7 @@ class arrayHelper
 
     /**
      * Sort Version.  If null we'll add "SortParams" but sometimes
-     * it's supposed to be SortRequest so we have to allow that because
+     * it's supposed to be SortRequest, so we have to allow that because
      * wtf brightree???
      *
      * @param null $sort
@@ -63,15 +63,14 @@ class arrayHelper
     {
         if($sort == null) {
             $this->sort = ['SortParams' => []];
-            return $this;
         } else {
             $this->sort = $sort;
-            return $this;
         }
+	    return $this;
     }
 
     /**
-     * Builds out the array allowing for blank methods so
+     * Builds out the array allowing for blank methods, so
      * you don't have to chain things you don't need to.
      *
      * @return iterable
@@ -81,17 +80,17 @@ class arrayHelper
         $this->pages ??= ['page' => 1];
         $this->pageSize ??= ['pageSize' => 10];
         $this->sort ??= ['SortParams' => []];
-        $this->arr = array_merge($this->search,$this->sort, $this->pages,$this->pageSize);
+        $this->arr = array_merge((array) $this->search,$this->sort, $this->pages,$this->pageSize);
         return $this->arr;
     }
 
     /**
      * Get the pageSize you'd like, defaults to 10
      *
-     * @param int $pageSize
+     * @param  int  $pageSize
      * @return object
      */
-    public function pageSize($pageSize=10): object
+    public function pageSize(int $pageSize=10): object
     {
         $this->pageSize = ['pageSize' => $pageSize];
         return $this;
@@ -100,10 +99,10 @@ class arrayHelper
     /**
      * Get the number of pages you want to return
      *
-     * @param int $pages
+     * @param  int  $pages
      * @return object
      */
-    public function pages($pages=1): object
+    public function pages(int $pages=1): object
     {
         $this->pages = ['page' => $pages];
         return $this;
