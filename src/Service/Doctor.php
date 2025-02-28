@@ -5,195 +5,168 @@ namespace Nickcheek\Brightree\Service;
 use Nickcheek\Brightree\Brightree;
 use Nickcheek\Brightree\Traits\ApiCall;
 use Nickcheek\Brightree\Traits\Custom;
+use Nickcheek\Brightree\Exceptions\BrightreeException;
 
 class Doctor extends Brightree
 {
-    use ApiCall;
-    use Custom;
+	use ApiCall;
+	use Custom;
 
 	public object $info;
 	protected string $wsdl;
 	protected array $options;
 
-    public function __construct($info)
-    {
-        $this->info = $info;
-        $this->wsdl = $this->info->config->service['doctor'] . '?singleWsdl';
-        $this->options = array('login' => $this->info->username, 'password' => $this->info->password, 'uri' => $this->info->config->service['doctor'], 'location' => $this->info->config->service['doctor'], 'trace' => 1);
-    }
+	protected array $methods = [
+		'DoctorCreate' => true,
+		'DoctorNoteCreate' => true,
+		'DoctorNoteUpdate' => true,
+		'DoctorSearch' => true,
+		'DoctorUpdate' => true,
+		'DoctorGroupFetchAll' => [],
+		'FacilityFetchAll' => [],
+		'FacilityGroupFetchAll' => [],
+		'MarketingRepFetchAll' => []
+	];
 
-    /**
-     * Add referral contact for a doctor
-     *
-     * @param int $DocBrightreeID
-     * @param int $ReferralBrightreeID
-     * @return object
-     */
-    public function AddDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
-    {
-        return $this->apiCall('AddDoctorReferralContact', ['DoctorBrightreeID' => $DocBrightreeID, 'ReferralContactBrightreeID' => $ReferralBrightreeID]);
-    }
+	protected array $specialMethods = [
+		'AddDoctorReferralContact' => ['DoctorBrightreeID', 'ReferralContactBrightreeID'],
+		'DoctorFetchByBrightreeID' => ['BrightreeID'],
+		'DoctorFetchByExternalID' => ['ExternalID'],
+		'DoctorNoteFetchByKey' => ['brightreeID'],
+		'DoctorNoteFetchByDoctor' => ['brightreeID'],
+		'DoctorReferralContactsFetchByDoctorKey' => ['DoctorBrightreeID'],
+		'RemoveDoctorReferralContact' => ['DoctorBrightreeID', 'ReferralContactBrightreeID']
+	];
 
-    /**
-     * Create a new Doctor
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function DoctorCreate(iterable $query): object
-    {
-        return $this->apiCall('DoctorCreate', $query);
-    }
+	public function __construct(object $info)
+	{
+		$this->info = $info;
+		parent::__construct($this->info->username ?? '', $this->info->password ?? '');
 
-    /**
-     * Get Doctor by brightree ID
-     *
-     * @param int $BrightreeID
-     * @return object
-     */
-    public function DoctorFetchByBrightreeID(int $BrightreeID): object
-    {
-        return $this->apiCall('DoctorFetchByBrightreeID', ['BrightreeID' => $BrightreeID]);
-    }
+		try {
+			if (!isset($this->info->config->service['doctor'])) {
+				throw BrightreeException::configError('Doctor service URL not configured');
+			}
 
-    /**
-     * Get doctor by external id
-     *
-     * @param int $ExternalID
-     * @return object
-     */
-    public function DoctorFetchByExternalID(int $ExternalID): object
-    {
-        return $this->apiCall('DoctorFetchByExternalID', ['ExternalID' => $ExternalID]);
-    }
+			$this->wsdl = $this->info->config->service['doctor'] . '?singleWsdl';
+			$this->options = [
+				'login' => $this->info->username ?? '',
+				'password' => $this->info->password ?? '',
+				'uri' => $this->info->config->service['doctor'],
+				'location' => $this->info->config->service['doctor'],
+				'trace' => 1
+			];
 
-    /**
-     * Get all doctor groups
-     *
-     * @return object
-     */
-    public function DoctorGroupFetchAll(): object
-    {
-        return $this->apiCall('DoctorGroupFetchAll', []);
-    }
+			if (empty($this->options['login']) || empty($this->options['password'])) {
+				throw BrightreeException::authError('Authentication credentials not provided');
+			}
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\Throwable $e) {
+			throw new BrightreeException('Failed to initialize Doctor service: ' . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Doctor note create
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function DoctorNoteCreate(iterable $query): object
-    {
-        return $this->apiCall('DoctorNoteCreate', $query);
-    }
+	public function __call(string $name, array $arguments): object
+	{
+		try {
+			if (isset($this->methods[$name])) {
+				$params = $this->methods[$name] === true ? ($arguments[0] ?? []) : [];
 
-    /**
-     * Doctor note update
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function DoctorNoteUpdate(iterable $query): object
-    {
-        return $this->apiCall('DoctorNoteUpdate', $query);
-    }
+				if ($this->methods[$name] === true && !is_iterable($params)) {
+					throw new BrightreeException(sprintf("Method %s requires an iterable parameter", $name), 1002);
+				}
 
-    /**
-     * Fetch doc note by doctor note key
-     *
-     * @param int $brightreeID
-     * @return object
-     */
-    public function DoctorNoteFetchByKey(int $brightreeID): object
-    {
-        return $this->apiCall('DoctorNoteFetchByKey', ['brightreeID' => $brightreeID]);
-    }
+				return $this->apiCall($name, $params);
+			}
 
-    /**
-     * Fetch doc note by doctor
-     *
-     * @param int $brightreeID
-     * @return object
-     */
-    public function DoctorNoteFetchByDoctor(int $brightreeID): object
-    {
-        return $this->apiCall('DoctorNoteFetchByDoctor', ['brightreeID' => $brightreeID]);
-    }
+			if (isset($this->specialMethods[$name])) {
+				$params = [];
+				foreach ($this->specialMethods[$name] as $index => $paramName) {
+					if (!isset($arguments[$index])) {
+						throw BrightreeException::paramError($name, $paramName);
+					}
+					$params[$paramName] = $arguments[$index];
+				}
+				return $this->apiCall($name, $params);
+			}
 
-    /**
-     * Get referral contacts by doctor key
-     *
-     * @param int $DocBrightreeID
-     * @return object
-     */
-    public function DoctorReferralContactsFetchByDoctorKey(int $DocBrightreeID): object
-    {
-        return $this->apiCall('DoctorReferralContactsFetchByDoctorKey', ['DoctorBrightreeID' => $DocBrightreeID]);
-    }
+			throw new \BadMethodCallException("Method $name does not exist");
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => $name, 'params' => $params ?? $arguments]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error calling $name: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Search for doctor
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function DoctorSearch(iterable $query): object
-    {
-        return $this->apiCall('DoctorSearch', $query);
-    }
+	public function AddDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
+	{
+		try {
+			return $this->apiCall('AddDoctorReferralContact', [
+				'DoctorBrightreeID' => $DocBrightreeID,
+				'ReferralContactBrightreeID' => $ReferralBrightreeID
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'AddDoctorReferralContact',
+				'DoctorBrightreeID' => $DocBrightreeID,
+				'ReferralContactBrightreeID' => $ReferralBrightreeID
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error adding doctor referral contact: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Update doctor
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function DoctorUpdate(iterable $query): object
-    {
-        return $this->apiCall('DoctorUpdate', $query);
-    }
+	public function DoctorCreate(iterable $query): object
+	{
+		try {
+			if (!is_iterable($query)) {
+				throw new BrightreeException("DoctorCreate requires an iterable parameter", 1002);
+			}
+			return $this->apiCall('DoctorCreate', $query);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'DoctorCreate', 'query' => $query]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error creating doctor: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Fetch all facilities
-     *
-     * @return object
-     */
-    public function FacilityFetchAll(): object
-    {
-        return $this->apiCall('FacilityFetchAll', []);
-    }
+	public function DoctorFetchByBrightreeID(int $BrightreeID): object
+	{
+		try {
+			return $this->apiCall('DoctorFetchByBrightreeID', ['BrightreeID' => $BrightreeID]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'DoctorFetchByBrightreeID', 'BrightreeID' => $BrightreeID]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching doctor by Brightree ID: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Fetch all facility groups
-     *
-     * @return object
-     */
-    public function FacilityGroupFetchAll(): object
-    {
-        return $this->apiCall('FacilityGroupFetchAll', []);
-    }
-
-    /**
-     * Get all market reps
-     *
-     * @return object
-     */
-    public function MarketingRepFetchAll(): object
-    {
-        return $this->apiCall('MarketingRepFetchAll', []);
-    }
-
-
-    /**
-     * Remove a referral from a doctor
-     *
-     * @param int $DocBrightreeID
-     * @param int $ReferralBrightreeID
-     * @return object
-     */
-    public function RemoveDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
-    {
-        return $this->apiCall('RemoveDoctorReferralContact', ['DoctorBrightreeID' => $DocBrightreeID, 'ReferralContactBrightreeID' => $ReferralBrightreeID]);
-    }
+	public function RemoveDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
+	{
+		try {
+			return $this->apiCall('RemoveDoctorReferralContact', [
+				'DoctorBrightreeID' => $DocBrightreeID,
+				'ReferralContactBrightreeID' => $ReferralBrightreeID
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'RemoveDoctorReferralContact',
+				'DoctorBrightreeID' => $DocBrightreeID,
+				'ReferralContactBrightreeID' => $ReferralBrightreeID
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error removing doctor referral contact: " . $e->getMessage(), 0, $e);
+		}
+	}
 }

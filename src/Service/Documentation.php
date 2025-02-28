@@ -5,515 +5,183 @@ namespace Nickcheek\Brightree\Service;
 use Nickcheek\Brightree\Brightree;
 use Nickcheek\Brightree\Traits\ApiCall;
 use Nickcheek\Brightree\Traits\Custom;
+use Nickcheek\Brightree\Exceptions\BrightreeException;
 
 class Documentation extends Brightree
 {
-    use ApiCall;
-    use Custom;
+	use ApiCall;
+	use Custom;
 
 	public object $info;
 	protected string $wsdl;
 	protected array $options;
 
+	protected array $methods = [
+		'CMNCreateFromPatient' => true,
+		'CMNDetailCreate' => true,
+		'CMNDetailDelete' => true,
+		'CMNDetailUpdate' => true,
+		'CMNFetchByBrightreeID' => true,
+		'CMNFetchByExternalID' => true,
+		'CMNFetchByPatientBrightreeID' => true,
+		'CMNFetchBySalesOrderBrightreeID' => true,
+		'CMNFrequencyUpdate' => true,
+		'CMNLog' => true,
+		'CMNPreview' => true,
+		'CMNPrint' => true,
+		'CMNQuestionAnswerConfiguration' => true,
+		'CMNReasonFetchAll' => true,
+		'CMNRenew' => true,
+		'CMNRevise' => true,
+		'CMNSearch' => true,
+		'CMNTaskCreate' => true,
+		'CMNTaskUpdate' => true,
+		'CMNUpdate' => true,
+		'PARAddPurchaseLimit' => true,
+		'PARCreateFromPatient' => true,
+		'PARDelete' => true,
+		'PARFetchByBrightreeID' => true,
+		'PARFetchByExternalID' => true,
+		'PARFetchByPatientBrightreeID' => true,
+		'PARFetchBySalesOrderBrightreeID' => true,
+		'PARFetchBySalesOrderTemplateBrightreeID' => true,
+		'PARLog' => true,
+		'PARRenew' => true,
+		'PARSearch' => true,
+		'PARTaskCreate' => true,
+		'PARTaskUpdate' => true,
+		'PARUpdate' => true,
+		'PARUpdatePurchaseLimit' => true,
+		'SalesOrderItemLinkCMN' => true,
+		'SalesOrderItemLinkNewCMN' => true,
+		'SalesOrderItemLinkToNewPAR' => true,
+		'SalesOrderItemLinkToPAR' => true,
+		'SalesOrderItemsLinkCMN' => true,
+		'SalesOrderItemsLinkNewCMN' => true,
+		'SalesOrderItemsLinkToNewPAR' => true,
+		'SalesOrderItemsLinkToPAR' => true,
+		'SalesOrderItemsUnlinkCMN' => true,
+		'SalesOrderItemsUnlinkPAR' => true,
+		'SalesOrderItemUnlinkCMN' => true,
+		'SalesOrderItemUnlinkPAR' => true,
+		'SalesOrderTemplateItemLinkToPAR' => true,
+		'SalesOrderTemplateItemsLinkToPAR' => true,
+		'SalesOrderTemplateItemsUnlinkPAR' => true,
+		'SalesOrderTemplateItemUnlinkPAR' => true,
+		'SetParticipantComplianceDate' => true,
+		'PARTaskReasonFetchAll' => []
+	];
+
+	protected array $specialMethods = [
+		'CMNFrequencyFetchbyBrightreeID' => ['BrightreeID'],
+		'PARTaskFetchByPARBrightreeID' => ['BrightreeID']
+	];
+
 	public function __construct(object $info)
 	{
-	    $this->info = $info;
-		$this->wsdl = $this->info->config->service['documentation'] .'?singleWsdl';
-		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['documentation'],'location' => $this->info->config->service['documentation'],'trace' => 1);
+		$this->info = $info;
+		parent::__construct($this->info->username ?? '', $this->info->password ?? '');
+
+		try {
+			if (!isset($this->info->config->service['documentation'])) {
+				throw BrightreeException::configError('Documentation service URL not configured');
+			}
+
+			$this->wsdl = $this->info->config->service['documentation'] . '?singleWsdl';
+			$this->options = [
+				'login' => $this->info->username ?? '',
+				'password' => $this->info->password ?? '',
+				'uri' => $this->info->config->service['documentation'],
+				'location' => $this->info->config->service['documentation'],
+				'trace' => 1
+			];
+
+			if (empty($this->options['login']) || empty($this->options['password'])) {
+				throw BrightreeException::authError('Authentication credentials not provided');
+			}
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\Throwable $e) {
+			throw new BrightreeException('Failed to initialize Documentation service: ' . $e->getMessage(), 0, $e);
+		}
 	}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function CMNCreateFromPatient(iterable $query): object
-    {
-        return $this->apiCall('CMNCreateFromPatient',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	
-	public function CMNDetailCreate(iterable $query): object
+	public function __call(string $name, array $arguments): object
 	{
-		return $this->apiCall('CMNDetailCreate',$query);
+		try {
+			if (isset($this->methods[$name])) {
+				$params = $this->methods[$name] === true ? ($arguments[0] ?? []) : [];
+
+				if ($this->methods[$name] === true && !is_iterable($params)) {
+					throw new BrightreeException(sprintf("Method %s requires an iterable parameter", $name), 1002);
+				}
+
+				return $this->apiCall($name, $params);
+			}
+
+			if (isset($this->specialMethods[$name])) {
+				$params = [];
+				foreach ($this->specialMethods[$name] as $index => $paramName) {
+					if (!isset($arguments[$index])) {
+						throw BrightreeException::paramError($name, $paramName);
+					}
+					$params[$paramName] = $arguments[$index];
+				}
+				return $this->apiCall($name, $params);
+			}
+
+			throw new \BadMethodCallException("Method $name does not exist");
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => $name, 'params' => $params ?? $arguments]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error calling $name: " . $e->getMessage(), 0, $e);
+		}
 	}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNDetailDelete(iterable $query): object
+	public function CMNFrequencyFetchbyBrightreeID(int $BrightreeID): object
 	{
-		return $this->apiCall('CMNDetailDelete',$query);
+		try {
+			if ($BrightreeID <= 0) {
+				throw new BrightreeException("Invalid Brightree ID: $BrightreeID", 1003);
+			}
+			return $this->apiCall('CMNFrequencyFetchbyBrightreeID', ['BrightreeID' => $BrightreeID]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'CMNFrequencyFetchbyBrightreeID', 'BrightreeID' => $BrightreeID]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching CMN frequency: " . $e->getMessage(), 0, $e);
+		}
 	}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNDetailUpdate(iterable $query): object
+	public function PARTaskFetchByPARBrightreeID(int $PARBrightreeID): object
 	{
-		return $this->apiCall('CMNDetailUpdate',$query);
+		try {
+			if ($PARBrightreeID <= 0) {
+				throw new BrightreeException("Invalid PAR Brightree ID: $PARBrightreeID", 1003);
+			}
+			return $this->apiCall('PARTaskFetchByPARBrightreeID', ['BrightreeID' => $PARBrightreeID]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'PARTaskFetchByPARBrightreeID', 'BrightreeID' => $PARBrightreeID]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching PAR task: " . $e->getMessage(), 0, $e);
+		}
 	}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNFetchByBrightreeID(iterable $query): object
+	public function PARTaskReasonFetchAll(): object
 	{
-		return $this->apiCall('CMNFetchByBrightreeID',$query);
+		try {
+			return $this->apiCall('PARTaskReasonFetchAll', []);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'PARTaskReasonFetchAll']);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching PAR task reasons: " . $e->getMessage(), 0, $e);
+		}
 	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNFetchByExternalID(iterable $query): object
-	{
-		return $this->apiCall('CMNFetchByExternalID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNFetchByPatientBrightreeID(iterable $query): object
-	{
-		return $this->apiCall('CMNFetchByPatientBrightreeID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNFetchBySalesOrderBrightreeID(iterable $query): object
-	{
-		return $this->apiCall('CMNFetchBySalesOrderBrightreeID',$query);
-	}
-
-    /**     
-     * @param int $BrightreeID
-     * @return object
-     */
-    public function CMNFrequencyFetchbyBrightreeID(int $BrightreeID): object
-    {
-        return $this->apiCall('CMNFrequencyFetchbyBrightreeID', ['BrightreeID' => $BrightreeID]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNFrequencyUpdate(iterable $query): object
-	{
-		return $this->apiCall('CMNFrequencyUpdate',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNLog(iterable $query): object
-	{
-		return $this->apiCall('CMNLog',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNPreview(iterable $query): object
-	{
-		return $this->apiCall('CMNPreview',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNPrint(iterable $query): object
-	{
-		return $this->apiCall('CMNPrint',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNQuestionAnswerConfiguration(iterable $query): object
-	{
-		return $this->apiCall('CMNQuestionAnswerConfiguration',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNReasonFetchAll(iterable $query): object
-	{
-		return $this->apiCall('CMNReasonFetchAll',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNRenew(iterable $query): object
-	{
-		return $this->apiCall('CMNRenew',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNRevise(iterable $query): object
-	{
-		return $this->apiCall('CMNRevise',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNSearch(iterable $query): object
-	{
-		return $this->apiCall('CMNSearch',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNTaskCreate(iterable $query): object
-	{
-		return $this->apiCall('CMNTaskCreate',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNTaskUpdate(iterable $query): object
-	{
-		return $this->apiCall('CMNTaskUpdate',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function CMNUpdate(iterable $query): object
-	{
-		return $this->apiCall('CMNUpdate',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARAddPurchaseLimit(iterable $query): object
-	{
-		return $this->apiCall('PARAddPurchaseLimit',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARCreateFromPatient(iterable $query): object
-	{
-		return $this->apiCall('PARCreateFromPatient',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARDelete(iterable $query): object
-	{
-		return $this->apiCall('PARDelete',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARFetchByBrightreeID(iterable $query): object
-	{
-		return $this->apiCall('PARFetchByBrightreeID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARFetchByExternalID(iterable $query): object
-	{
-		return $this->apiCall('PARFetchByExternalID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARFetchByPatientBrightreeID(iterable $query): object
-	{
-		return $this->apiCall('PARFetchByPatientBrightreeID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARFetchBySalesOrderBrightreeID(iterable $query): object
-	{
-		return $this->apiCall('PARFetchBySalesOrderBrightreeID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARFetchBySalesOrderTemplateBrightreeID(iterable $query): object
-	{
-		return $this->apiCall('PARFetchBySalesOrderTemplateBrightreeID',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARLog(iterable $query): object
-	{
-		return $this->apiCall('PARLog',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARRenew(iterable $query): object
-	{
-		return $this->apiCall('PARRenew',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARSearch(iterable $query): object
-	{
-		return $this->apiCall('PARSearch',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARTaskCreate(iterable $query): object
-	{
-		return $this->apiCall('PARTaskCreate',$query);
-	}
-
-    /**
-     * @param int $PARBrightreeID
-     * @return object
-     */
-    public function PARTaskFetchByPARBrightreeID(int $PARBrightreeID): object
-    {
-        return $this->apiCall('PARTaskFetchByPARBrightreeID', ['BrightreeID' => $PARBrightreeID]);
-    }
-
-    /**
-     * @return object
-     */
-    public function PARTaskReasonFetchAll(): object
-    {
-        return $this->apiCall('PARTaskReasonFetchAll', []);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARTaskUpdate(iterable $query): object
-	{
-		return $this->apiCall('PARTaskUpdate',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARUpdate(iterable $query): object
-	{
-		return $this->apiCall('PARUpdate',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function PARUpdatePurchaseLimit(iterable $query): object
-	{
-		return $this->apiCall('PARUpdatePurchaseLimit',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function SalesOrderItemLinkCMN(iterable $query): object
-	{
-		return $this->apiCall('SalesOrderItemLinkCMN',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-	public function SalesOrderItemLinkNewCMN(iterable $query): object
-	{
-		return $this->apiCall('SalesOrderItemLinkNewCMN',$query);
-	}
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemLinkToNewPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemLinkToNewPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemLinkToPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemLinkToPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemsLinkCMN(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemsLinkCMN',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemsLinkNewCMN(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemsLinkNewCMN',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemsLinkToNewPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemsLinkToNewPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemsLinkToPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemsLinkToPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemsUnlinkCMN(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemsUnlinkCMN',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemsUnlinkPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemsUnlinkPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemUnlinkCMN(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemUnlinkCMN',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderItemUnlinkPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderItemUnlinkPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderTemplateItemLinkToPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderTemplateItemLinkToPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderTemplateItemsLinkToPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderTemplateItemsLinkToPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderTemplateItemsUnlinkPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderTemplateItemsUnlinkPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SalesOrderTemplateItemUnlinkPAR(iterable $query): object
-    {
-    	return $this->apiCall('SalesOrderTemplateItemUnlinkPAR',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SetParticipantComplianceDate(iterable $query): object
-    {
-    	return $this->apiCall('SetParticipantComplianceDate',$query);
-    }
 }

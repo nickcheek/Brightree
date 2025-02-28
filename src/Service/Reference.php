@@ -5,501 +5,177 @@ namespace Nickcheek\Brightree\Service;
 use Nickcheek\Brightree\Brightree;
 use Nickcheek\Brightree\Traits\ApiCall;
 use Nickcheek\Brightree\Traits\Custom;
+use Nickcheek\Brightree\Exceptions\BrightreeException;
 
 class Reference extends Brightree
 {
-    use ApiCall;
-    use Custom;
+	use ApiCall;
+	use Custom;
 
 	public object $info;
 	protected string $wsdl;
 	protected array $options;
 
+	protected array $methods = [
+		'AccountGroupFetchAll' => [],
+		'AddFacilityReferralContact' => true,
+		'BranchInfoFetchAll' => [],
+		'BranchInfoFetchByBrightreeID' => true,
+		'ClaimNoteTypeFetchAll' => [],
+		'ContactTypeCreate' => true,
+		'ContactTypeDelete' => true,
+		'ContactTypeFetchAll' => [],
+		'ContactTypeFetchByBrightreeID' => true,
+		'ContactTypeUpdate' => true,
+		'DeliveryTechnicianFetchAll' => [],
+		'DepreciationTypesFetchAll' => [],
+		'EPSDTConditionCodeFetchAll' => [],
+		'FacilityCreate' => true,
+		'FacilityDelete' => true,
+		'FacilityFetchByBrightreeID' => true,
+		'FacilityFetchByExternalID' => true,
+		'FacilityInfoFetchAll' => [],
+		'FacilityReferralContactsFetchByFacilityKey' => true,
+		'FacilityUpdate' => true,
+		'FetchCurrentSecUser' => [],
+		'FunctionalAssessmentFetchAll' => [],
+		'GLAccountGroupsFetchAll' => [],
+		'ItemGroupFetchAll' => [],
+		'ItemManufacturerFetchAll' => [],
+		'ItemStatusFetchAll' => [],
+		'ItemTypesFetchAll' => [],
+		'LocationInfoFetchAll' => [],
+		'MarketingRepFetchAll' => [],
+		'MarketingRepFetchByBrightreeID' => true,
+		'MarketingRepFetchByExternalID' => true,
+		'MarketingRepUpdateExternalID' => true,
+		'MSPInsTypeFetchAll' => [],
+		'PatientNoteReasonFetchAll' => [],
+		'PlaceOfServiceFetchAll' => [],
+		'PolicyClaimCodeFetchAll' => [],
+		'PolicyTypeCodeFetchAll' => [],
+		'PractitionerInfoFetchAll' => [],
+		'ReferralContactCreate' => true,
+		'ReferralContactFetchByBrightreeID' => true,
+		'ReferralContactFetchByExternalID' => true,
+		'ReferralContactSearch' => true,
+		'ReferralContactUpdate' => true,
+		'ReferralFetchByBrightreeID' => true,
+		'ReferralSearch' => true,
+		'RemoveFacilityReferralContact' => true,
+		'SalesOrderClassificationFetchAll' => [],
+		'SalesOrderManualHoldReasonFetchAll' => [],
+		'SalesOrderVoidReasonFetchAll' => [],
+		'SalesTypesFetchAll' => [],
+		'SecUsersFetchAll' => [],
+		'ShippingCarriersFetchAll' => [],
+		'SiteInfoFetch' => true,
+		'TaxZoneFetchAll' => [],
+		'VendorFetchByBrightreeID' => true,
+		'VendorsFetchAll' => [],
+		'WIPStatesFetchAll' => []
+	];
+
 	public function __construct(object $info)
 	{
 		$this->info = $info;
-		$this->wsdl = $this->info->config->service['reference'] .'?singleWsdl';
-		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['reference'],'location' => $this->info->config->service['reference'],'trace' => 1);
+		parent::__construct($this->info->username ?? '', $this->info->password ?? '');
+
+		try {
+			if (!isset($this->info->config->service['reference'])) {
+				throw BrightreeException::configError('Reference service URL not configured');
+			}
+
+			$this->wsdl = $this->info->config->service['reference'] . '?singleWsdl';
+			$this->options = [
+				'login' => $this->info->username ?? '',
+				'password' => $this->info->password ?? '',
+				'uri' => $this->info->config->service['reference'],
+				'location' => $this->info->config->service['reference'],
+				'trace' => 1
+			];
+
+			if (empty($this->options['login']) || empty($this->options['password'])) {
+				throw BrightreeException::authError('Authentication credentials not provided');
+			}
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\Throwable $e) {
+			throw new BrightreeException('Failed to initialize Reference service: ' . $e->getMessage(), 0, $e);
+		}
 	}
 
-    /**
-     * @return object
-     */
-	public function AccountGroupFetchAll(): object
-    {
-    	return $this->apiCall('AccountGroupFetchAll',[]);
-    }
+	public function __call(string $name, array $arguments): object
+	{
+		try {
+			if (isset($this->methods[$name])) {
+				$params = $this->methods[$name] === true ? ($arguments[0] ?? []) : [];
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function AddFacilityReferralContact(iterable $query): object
-    {
-        return $this->apiCall('AddFacilityReferralContact',$query);
-    }
+				if ($this->methods[$name] === true && !is_iterable($params)) {
+					throw new BrightreeException(sprintf("Method %s requires an iterable parameter", $name), 1002);
+				}
 
-    /**
-     * @return object
-     */
-    public function BranchInfoFetchAll(): object
-    {
-        return $this->apiCall('BranchInfoFetchAll',[]);
-    }
+				return $this->apiCall($name, $params);
+			}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function BranchInfoFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('BranchInfoFetchByBrightreeID',$query);
-    }
+			throw new \BadMethodCallException("Method $name does not exist");
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => $name, 'params' => $params ?? $arguments]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error calling $name: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * @return object
-     */
-    public function ClaimNoteTypeFetchAll(): object
-    {
-        return $this->apiCall('ClaimNoteTypeFetchAll',[]);
-    }
+	public function FacilityFetchByBrightreeID(iterable $query): object
+	{
+		try {
+			if (!is_iterable($query)) {
+				throw new BrightreeException("FacilityFetchByBrightreeID requires an iterable parameter", 1002);
+			}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ContactTypeCreate(iterable $query): object
-    {
-        return $this->apiCall('ContactTypeCreate',$query);
-    }
+			if (!isset($query['BrightreeID'])) {
+				throw new BrightreeException("BrightreeID is required for FacilityFetchByBrightreeID", 1003);
+			}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ContactTypeDelete(iterable $query): object
-    {
-        return $this->apiCall('ContactTypeDelete',$query);
-    }
+			return $this->apiCall('FacilityFetchByBrightreeID', $query);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'FacilityFetchByBrightreeID', 'query' => $query]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching facility by Brightree ID: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * @return object
-     */
-    public function ContactTypeFetchAll(): object
-    {
-        return $this->apiCall('ContactTypeFetchAll',[]);
-    }
+	public function ReferralContactSearch(iterable $query): object
+	{
+		try {
+			if (!is_iterable($query)) {
+				throw new BrightreeException("ReferralContactSearch requires an iterable parameter", 1002);
+			}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ContactTypeFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('ContactTypeFetchByBrightreeID',$query);
-    }
+			return $this->apiCall('ReferralContactSearch', $query);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'ReferralContactSearch', 'query' => $query]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error searching referral contacts: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ContactTypeUpdate(iterable $query): object
-    {
-        return $this->apiCall('ContactTypeUpdate',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function DeliveryTechnicianFetchAll(): object
-    {
-        return $this->apiCall('DeliveryTechnicianFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function DepreciationTypesFetchAll(): object
-    {
-        return $this->apiCall('DepreciationTypesFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function EPSDTConditionCodeFetchAll(): object
-    {
-        return $this->apiCall('EPSDTConditionCodeFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function FacilityCreate(iterable $query): object
-    {
-        return $this->apiCall('FacilityCreate',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function FacilityDelete(iterable $query): object
-    {
-        return $this->apiCall('FacilityDelete',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function FacilityFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('FacilityFetchByBrightreeID',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function FacilityFetchByExternalID(iterable $query): object
-    {
-        return $this->apiCall('FacilityFetchByExternalID',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function FacilityInfoFetchAll(): object
-    {
-        return $this->apiCall('FacilityInfoFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function FacilityReferralContactsFetchByFacilityKey(iterable $query): object
-    {
-        return $this->apiCall('FacilityReferralContactsFetchByFacilityKey',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function FacilityUpdate(iterable $query): object
-    {
-        return $this->apiCall('FacilityUpdate',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function FetchCurrentSecUser(): object
-    {
-        return $this->apiCall('FetchCurrentSecUser',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function FunctionalAssessmentFetchAll(): object
-    {
-        return $this->apiCall('FunctionalAssessmentFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function GLAccountGroupsFetchAll(): object
-    {
-        return $this->apiCall('GLAccountGroupsFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function ItemGroupFetchAll(): object
-    {
-        return $this->apiCall('ItemGroupFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function ItemManufacturerFetchAll(): object
-    {
-        return $this->apiCall('ItemManufacturerFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function ItemStatusFetchAll(): object
-    {
-        return $this->apiCall('ItemStatusFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function ItemTypesFetchAll(): object
-    {
-        return $this->apiCall('ItemTypesFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function LocationInfoFetchAll(): object
-    {
-        return $this->apiCall('LocationInfoFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function MarketingRepFetchAll(): object
-    {
-        return $this->apiCall('MarketingRepFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function MarketingRepFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('MarketingRepFetchByBrightreeID',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function MarketingRepFetchByExternalID(iterable $query): object
-    {
-        return $this->apiCall('MarketingRepFetchByExternalID',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function MarketingRepUpdateExternalID(iterable $query): object
-    {
-        return $this->apiCall('MarketingRepUpdateExternalID',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function MSPInsTypeFetchAll(): object
-    {
-        return $this->apiCall('MSPInsTypeFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function PatientNoteReasonFetchAll(): object
-    {
-        return $this->apiCall('PatientNoteReasonFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function PlaceOfServiceFetchAll(): object
-    {
-        return $this->apiCall('PlaceOfServiceFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function PolicyClaimCodeFetchAll(): object
-    {
-        return $this->apiCall('PolicyClaimCodeFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function PolicyTypeCodeFetchAll(): object
-    {
-        return $this->apiCall('PolicyTypeCodeFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function PractitionerInfoFetchAll(): object
-    {
-        return $this->apiCall('PractitionerInfoFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralContactCreate(iterable $query): object
-    {
-        return $this->apiCall('ReferralContactCreate',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralContactFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('ReferralContactFetchByBrightreeID',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralContactFetchByExternalID(iterable $query): object
-    {
-        return $this->apiCall('ReferralContactFetchByExternalID',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralContactSearch(iterable $query): object
-    {
-        return $this->apiCall('ReferralContactSearch',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralContactUpdate(iterable $query): object
-    {
-        return $this->apiCall('ReferralContactUpdate',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('ReferralFetchByBrightreeID',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ReferralSearch(iterable $query): object
-    {
-        return $this->apiCall('ReferralSearch',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function RemoveFacilityReferralContact(iterable $query): object
-    {
-        return $this->apiCall('RemoveFacilityReferralContact',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function SalesOrderClassificationFetchAll(): object
-    {
-        return $this->apiCall('SalesOrderClassificationFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function SalesOrderManualHoldReasonFetchAll(): object
-    {
-        return $this->apiCall('SalesOrderManualHoldReasonFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function SalesOrderVoidReasonFetchAll(): object
-    {
-        return $this->apiCall('SalesOrderVoidReasonFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function SalesTypesFetchAll(): object
-    {
-        return $this->apiCall('SalesTypesFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function SecUsersFetchAll(): object
-    {
-        return $this->apiCall('SecUsersFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function ShippingCarriersFetchAll(): object
-    {
-        return $this->apiCall('ShippingCarriersFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SiteInfoFetch(iterable $query): object
-    {
-        return $this->apiCall('SiteInfoFetch',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function TaxZoneFetchAll(): object
-    {
-        return $this->apiCall('TaxZoneFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function VendorFetchByBrightreeID(iterable $query): object
-    {
-        return $this->apiCall('VendorFetchByBrightreeID',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function VendorsFetchAll(): object
-    {
-        return $this->apiCall('VendorsFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function WIPStatesFetchAll(): object
-    {
-        return $this->apiCall('WIPStatesFetchAll',[]);
-    }
+	public function SecUsersFetchAll(): object
+	{
+		try {
+			return $this->apiCall('SecUsersFetchAll', []);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'SecUsersFetchAll']);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching security users: " . $e->getMessage(), 0, $e);
+		}
+	}
 }

@@ -5,334 +5,204 @@ namespace Nickcheek\Brightree\Service;
 use Nickcheek\Brightree\Brightree;
 use Nickcheek\Brightree\Traits\ApiCall;
 use Nickcheek\Brightree\Traits\Custom;
+use Nickcheek\Brightree\Exceptions\BrightreeException;
 
 class Insurance extends Brightree
 {
-    use ApiCall;
-    use Custom;
+	use ApiCall;
+	use Custom;
 
 	public object $info;
 	protected string $wsdl;
 	protected array $options;
+
+	protected array $methods = [
+		'InsuranceSearch' => true,
+		'InsuranceUpdate' => true,
+		'BranchOfficeInsuranceUpdate' => true,
+		'BundleBillingRuleSetFetchAll' => [],
+		'ClaimFormFetchAll' => [],
+		'CommercialEligibilityPayerSearch' => true,
+		'CommercialPayerSearch' => true,
+		'CoverageLimitFetchAll' => [],
+		'CustomAppealFormFetchAll' => [],
+		'InsuranceCarrierCodeCreate' => true,
+		'InsuranceCarrierCodeUpdate' => true,
+		'InsuranceCompanyFetchAll' => [],
+		'InsuranceCreate' => true,
+		'InsuranceGroupFetchAll' => [],
+		'InsurancePlanTypeFetchAll' => [],
+		'InsurancePrintedFormsClaimFieldsFetch' => [],
+		'InsurancePrintedFormsPARFieldsFetch' => [],
+		'InsuranceSpanDateHoldInclusionCreate' => true,
+		'InsuranceSpanDateOverrideCreate' => true,
+		'InsuranceSpanDateOverrideUpdate' => true,
+		'ItemGroupFetchAll' => [],
+		'PARFormFetchAll' => [],
+		'Ping' => [],
+		'PriceTableSearch' => true,
+		'SpanDateSplit' => true
+	];
+
+	protected array $specialMethods = [
+		'InsuranceFetchByBrightreeID' => ['BrightreeID'],
+		'InsuranceFetchByExternalID' => ['ExternalID'],
+		'BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID' => ['BranchBrightreeID', 'InsuranceBrightreeID'],
+		'FetchPmtSubTypeByPmtTypeBrightreeID' => ['PaymentTypeBrightreeID'],
+		'InsuranceCarrierCodeDelete' => ['BrightreeID'],
+		'InsuranceSpanDateHoldInclusionDelete' => ['BrightreeID'],
+		'InsuranceSpanDateOverrideDelete' => ['BrightreeID'],
+		'InsuranceValidationRuleSetCreate' => ['BranchBrightreeID', 'InsuranceBrightreeID'],
+		'InsuranceValidationRuleSetDelete' => ['BrightreeID'],
+		'ItemGroupFetchByInsuranceBrightreeID' => ['BrightreeID']
+	];
+
 	public function __construct(object $info)
 	{
 		$this->info = $info;
-		$this->wsdl = $this->info->config->service['insurance'] .'?singleWsdl';
-		$this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['insurance'],'location' => $this->info->config->service['insurance'],'trace' => 1);
+		parent::__construct($this->info->username ?? '', $this->info->password ?? '');
+
+		try {
+			if (!isset($this->info->config->service['insurance'])) {
+				throw BrightreeException::configError('Insurance service URL not configured');
+			}
+
+			$this->wsdl = $this->info->config->service['insurance'] . '?singleWsdl';
+			$this->options = [
+				'login' => $this->info->username ?? '',
+				'password' => $this->info->password ?? '',
+				'uri' => $this->info->config->service['insurance'],
+				'location' => $this->info->config->service['insurance'],
+				'trace' => 1
+			];
+
+			if (empty($this->options['login']) || empty($this->options['password'])) {
+				throw BrightreeException::authError('Authentication credentials not provided');
+			}
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\Throwable $e) {
+			throw new BrightreeException('Failed to initialize Insurance service: ' . $e->getMessage(), 0, $e);
+		}
 	}
 
-    /**
-     * Get insurance by brightree id
-     *
-     * @param int $id
-     * @return object
-     */
+	public function __call(string $name, array $arguments): object
+	{
+		try {
+			if (isset($this->methods[$name])) {
+				$params = $this->methods[$name] === true ? ($arguments[0] ?? []) : [];
+
+				if ($this->methods[$name] === true && !is_iterable($params)) {
+					throw new BrightreeException(sprintf("Method %s requires an iterable parameter", $name), 1002);
+				}
+
+				return $this->apiCall($name, $params);
+			}
+
+			if (isset($this->specialMethods[$name])) {
+				$params = [];
+				foreach ($this->specialMethods[$name] as $index => $paramName) {
+					if (!isset($arguments[$index])) {
+						throw BrightreeException::paramError($name, $paramName);
+					}
+					$params[$paramName] = $arguments[$index];
+				}
+				return $this->apiCall($name, $params);
+			}
+
+			throw new \BadMethodCallException("Method $name does not exist");
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => $name, 'params' => $params ?? $arguments]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error calling $name: " . $e->getMessage(), 0, $e);
+		}
+	}
+
 	public function InsuranceFetchByBrightreeID(int $id): object
-    {
-    	return $this->apiCall('InsuranceFetchByBrightreeID',['BrightreeID'=>$id]);
-    }
+	{
+		try {
+			if ($id <= 0) {
+				throw new BrightreeException("Invalid Brightree ID: $id", 1003);
+			}
+			return $this->apiCall('InsuranceFetchByBrightreeID', ['BrightreeID' => $id]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'InsuranceFetchByBrightreeID', 'BrightreeID' => $id]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching insurance by Brightree ID: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Get insurance by external id
-     *
-     * @param int $id
-     * @return object
-     */
 	public function InsuranceFetchByExternalID(int $id): object
-    {
-    	return $this->apiCall('InsuranceFetchByExternalID',['ExternalID'=>$id]);
-    }
+	{
+		try {
+			if ($id <= 0) {
+				throw new BrightreeException("Invalid External ID: $id", 1003);
+			}
+			return $this->apiCall('InsuranceFetchByExternalID', ['ExternalID' => $id]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'InsuranceFetchByExternalID', 'ExternalID' => $id]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching insurance by External ID: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * Search for an insurance carrier
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceSearch(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceSearch',$query);
-    }
+	public function BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID(?int $branchBrightreeID = null, ?int $insuranceBrightreeID = null): object
+	{
+		try {
+			if ($branchBrightreeID === null) {
+				throw new BrightreeException("BranchBrightreeID is required", 1003);
+			}
+			if ($insuranceBrightreeID === null) {
+				throw new BrightreeException("InsuranceBrightreeID is required", 1003);
+			}
 
-    /**
-     * Update Insurance
-     *
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceUpdate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceUpdate',$query);
-    }
+			return $this->apiCall('BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID', [
+				'BranchBrightreeID' => $branchBrightreeID,
+				'InsuranceBrightreeID' => $insuranceBrightreeID
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID',
+				'BranchBrightreeID' => $branchBrightreeID,
+				'InsuranceBrightreeID' => $insuranceBrightreeID
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching branch office insurance: " . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * @param  int|null  $branchBrightreeID  , int|null $insuranceBrightreeID
-     * @param  int|null  $insuranceBrightreeID
-     * @return object
-     */
-    public function BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID(?int $branchBrightreeID = null, ?int $insuranceBrightreeID = null): object
-    {
-        return $this->apiCall('BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID', array('BranchBrightreeID' => $branchBrightreeID, 'InsuranceBrightreeID' => $insuranceBrightreeID));
-    }
+	public function InsuranceValidationRuleSetCreate(?int $validationRuleSetBrightreeID = null, ?int $insuranceBrightreeID = null): object
+	{
+		try {
+			if ($validationRuleSetBrightreeID === null) {
+				throw new BrightreeException("ValidationRuleSetBrightreeID is required", 1003);
+			}
+			if ($insuranceBrightreeID === null) {
+				throw new BrightreeException("InsuranceBrightreeID is required", 1003);
+			}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function BranchOfficeInsuranceUpdate(iterable $query): object
-    {
-    	return $this->apiCall('BranchOfficeInsuranceUpdate',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function BundleBillingRuleSetFetchAll(): object
-    {
-    	return $this->apiCall('BundleBillingRuleSetFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function ClaimFormFetchAll(): object
-    {
-    	return $this->apiCall('ClaimFormFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function CommercialEligibilityPayerSearch(iterable $query): object
-    {
-    	return $this->apiCall('CommercialEligibilityPayerSearch',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function CommercialPayerSearch(iterable $query): object
-    {
-    	return $this->apiCall('CommercialPayerSearch',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function CoverageLimitFetchAll(): object
-    {
-    	return $this->apiCall('CoverageLimitFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-    public function CustomAppealFormFetchAll(): object
-    {
-    	return $this->apiCall('CustomAppealFormFetchAll',[]);
-    }
-
-    /**
-     * @param int $paymentTypeBrightreeID
-     * @return object
-     */
-	public function FetchPmtSubTypeByPmtTypeBrightreeID(int $paymentTypeBrightreeID): object
-    {
-    	return $this->apiCall('FetchPmtSubTypeByPmtTypeBrightreeID',['PaymentTypeBrightreeID'=>$paymentTypeBrightreeID]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceCarrierCodeCreate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceCarrierCodeCreate',$query);
-    }
-
-    /**
-     * @param int $brightreeID
-     * @return object
-     */
-	public function InsuranceCarrierCodeDelete(int $brightreeID): object
-    {
-    	return $this->apiCall('InsuranceCarrierCodeDelete',['BrightreeID'=>$brightreeID]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceCarrierCodeUpdate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceCarrierCodeUpdate',$query);
-    }
-
-    /**
-     * @return object
-     */
-    public function InsuranceCompanyFetchAll(): object
-    {
-    	return $this->apiCall('InsuranceCompanyFetchAll',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceCreate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceCreate',$query);
-    }
-
-    /**
-     * @return object
-     */
-	public function InsuranceGroupFetchAll(): object
-    {
-    	return $this->apiCall('InsuranceGroupFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-	public function InsurancePlanTypeFetchAll(): object
-    {
-    	return $this->apiCall('InsurancePlanTypeFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-	public function InsurancePrintedFormsClaimFieldsFetch(): object
-    {
-    	return $this->apiCall('InsurancePrintedFormsClaimFieldsFetch',[]);
-    }
-
-    /**
-     * @return object
-     */
-	public function InsurancePrintedFormsPARFieldsFetch(): object
-    {
-    	return $this->apiCall('InsurancePrintedFormsPARFieldsFetch',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceSpanDateHoldInclusionCreate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceSpanDateHoldInclusionCreate',$query);
-    }
-
-    /**
-     * @param int $brightreeID
-     * @return object
-     */
-	public function InsuranceSpanDateHoldInclusionDelete(int $brightreeID): object
-    {
-    	return $this->apiCall('InsuranceSpanDateHoldInclusionDelete',['BrightreeID'=>$brightreeID]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceSpanDateOverrideCreate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceSpanDateOverrideCreate',$query);
-    }
-
-    /**
-     * @param int $brightreeID
-     * @return object
-     */
-	public function InsuranceSpanDateOverrideDelete(int $brightreeID): object
-    {
-    	return $this->apiCall('InsuranceSpanDateOverrideDelete',['BrightreeID'=>$brightreeID]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InsuranceSpanDateOverrideUpdate(iterable $query): object
-    {
-    	return $this->apiCall('InsuranceSpanDateOverrideUpdate',$query);
-    }
-
-    /**
-     * @param  int|null  $validationRuleSetBrightreeID  , int|null $insuranceBrightreeID
-     * @param  int|null  $insuranceBrightreeID
-     * @return object
-     */
-    public function InsuranceValidationRuleSetCreate(?int $validationRuleSetBrightreeID = null, ?int $insuranceBrightreeID = null): object
-    {
-        return $this->apiCall('InsuranceValidationRuleSetCreate', array('BranchBrightreeID' => $validationRuleSetBrightreeID, 'InsuranceBrightreeID' => $insuranceBrightreeID));
-    }
-
-    /**
-     * @param int $insuranceBrightreeID
-     * @return object
-     */
-	public function InsuranceValidationRuleSetDelete(int $insuranceBrightreeID): object
-    {
-    	return $this->apiCall('InsuranceValidationRuleSetDelete',['BrightreeID'=>$insuranceBrightreeID]);
-    }
-
-    /**
-     * @return object
-     */
-	public function ItemGroupFetchAll(): object
-    {
-    	return $this->apiCall('ItemGroupFetchAll',[]);
-    }
-
-    /**
-     * @param int $insuranceBrightreeID
-     * @return object
-     */
-	public function ItemGroupFetchByInsuranceBrightreeID(int $insuranceBrightreeID): object
-    {
-    	return $this->apiCall('ItemGroupFetchByInsuranceBrightreeID',['BrightreeID'=>$insuranceBrightreeID]);
-    }
-
-    /**
-     * @return object
-     */
-	public function PARFormFetchAll(): object
-    {
-    	return $this->apiCall('PARFormFetchAll',[]);
-    }
-
-    /**
-     * @return object
-     */
-	public function Ping(): object
-    {
-    	return $this->apiCall('Ping',[]);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function PriceTableSearch(iterable $query): object
-    {
-    	return $this->apiCall('PriceTableSearch',$query);
-    }
-
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function SpanDateSplit(iterable $query): object
-    {
-    	return $this->apiCall('SpanDateSplit',$query);
-    }
-
-
+			return $this->apiCall('InsuranceValidationRuleSetCreate', [
+				'ValidationRuleSetBrightreeID' => $validationRuleSetBrightreeID,
+				'InsuranceBrightreeID' => $insuranceBrightreeID
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'InsuranceValidationRuleSetCreate',
+				'ValidationRuleSetBrightreeID' => $validationRuleSetBrightreeID,
+				'InsuranceBrightreeID' => $insuranceBrightreeID
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error creating insurance validation rule set: " . $e->getMessage(), 0, $e);
+		}
+	}
 }

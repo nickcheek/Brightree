@@ -5,92 +5,139 @@ namespace Nickcheek\Brightree\Service;
 use Nickcheek\Brightree\Brightree;
 use Nickcheek\Brightree\Traits\ApiCall;
 use Nickcheek\Brightree\Traits\Custom;
+use Nickcheek\Brightree\Exceptions\BrightreeException;
 
 class Invoice extends Brightree
 {
-    use ApiCall;
-    use Custom;
+	use ApiCall;
+	use Custom;
 
 	public object $info;
 	protected string $wsdl;
 	protected array $options;
 
-    public function __construct(object $info)
-    {
-        $this->info = $info;
-        $this->wsdl = $this->info->config->service['invoice'] .'?singleWsdl';
-        $this->options = array('login' => $this->info->username,'password' => $this->info->password,'uri' => $this->info->config->service['invoice'],'location' => $this->info->config->service['invoice'],'trace' => 1);
-    }
+	protected array $methods = [
+		'InvoiceItemUpdate' => true,
+		'InvoiceUpdate' => true,
+		'ResubmitInvoices' => true
+	];
 
-    /**
-     * @param int $BrightreeID
-     * @return object
-     */
-    public function InvoiceCreatePrintActivity(int $BrightreeID): object
-    {
-        return $this->apiCall('InvoiceCreatePrintActivity',array('BrightreeID'=>$BrightreeID));
-    }
+	protected array $specialMethods = [
+		'InvoiceCreatePrintActivity' => ['BrightreeID'],
+		'InvoiceFetchByBrightreeID' => ['BrightreeID'],
+		'InvoiceFetchByInvoiceID' => ['InvoiceID'],
+		'OpenInvoiceAgedBalanceFetchByPatient' => ['PatientBrightreeID'],
+		'OpenInvoiceBalanceFetchByPatient' => ['PatientBrightreeID']
+	];
 
-    /**
-     * @param int $BrightreeID
-     * @return object
-     */
-    public function InvoiceFetchByBrightreeID(int $BrightreeID): object
-    {
-        return $this->apiCall('InvoiceFetchByBrightreeID',array('BrightreeID'=>$BrightreeID));
-    }
+	public function __construct(object $info)
+	{
+		$this->info = $info;
+		parent::__construct($this->info->username ?? '', $this->info->password ?? '');
 
-    /**
-     * @param int $InvoiceID
-     * @return object
-     */
-    public function InvoiceFetchByInvoiceID(int $InvoiceID): object
-    {
-        return $this->apiCall('InvoiceFetchByInvoiceID',array('InvoiceID'=>$InvoiceID));
-    }
+		try {
+			if (!isset($this->info->config->service['invoice'])) {
+				throw BrightreeException::configError('Invoice service URL not configured');
+			}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InvoiceItemUpdate(iterable $query): object
-    {
-        return $this->apiCall('InvoiceItemUpdate',$query);
-    }
+			$this->wsdl = $this->info->config->service['invoice'] . '?singleWsdl';
+			$this->options = [
+				'login' => $this->info->username ?? '',
+				'password' => $this->info->password ?? '',
+				'uri' => $this->info->config->service['invoice'],
+				'location' => $this->info->config->service['invoice'],
+				'trace' => 1
+			];
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function InvoiceUpdate(iterable $query): object 
-    {
-        return $this->apiCall('InvoiceUpdate',$query);
-    }
+			if (empty($this->options['login']) || empty($this->options['password'])) {
+				throw BrightreeException::authError('Authentication credentials not provided');
+			}
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\Throwable $e) {
+			throw new BrightreeException('Failed to initialize Invoice service: ' . $e->getMessage(), 0, $e);
+		}
+	}
 
-    /**
-     * @param int $BrightreeID
-     * @return object
-     */
-    public function OpenInvoiceAgedBalanceFetchByPatient(int $BrightreeID): object
-    {
-        return $this->apiCall('OpenInvoiceAgedBalanceFetchByPatient',array('PatientBrightreeID'=>$BrightreeID));
-    }
+	public function __call(string $name, array $arguments): object
+	{
+		try {
+			if (isset($this->methods[$name])) {
+				$params = $this->methods[$name] === true ? ($arguments[0] ?? []) : [];
 
-    /**
-     * @param int $BrightreeID
-     * @return object
-     */
-    public function OpenInvoiceBalanceFetchByPatient(int $BrightreeID): object
-    {
-        return $this->apiCall('OpenInvoiceBalanceFetchByPatient',array('PatientBrightreeID'=>$BrightreeID));
-    }
+				if ($this->methods[$name] === true && !is_iterable($params)) {
+					throw new BrightreeException(sprintf("Method %s requires an iterable parameter", $name), 1002);
+				}
 
-    /**
-     * @param iterable $query
-     * @return object
-     */
-    public function ResubmitInvoices(iterable $query): object
-    {
-        return $this->apiCall('ResubmitInvoices',$query);
-    }
+				return $this->apiCall($name, $params);
+			}
+
+			if (isset($this->specialMethods[$name])) {
+				$params = [];
+				foreach ($this->specialMethods[$name] as $index => $paramName) {
+					if (!isset($arguments[$index])) {
+						throw BrightreeException::paramError($name, $paramName);
+					}
+					$params[$paramName] = $arguments[$index];
+				}
+				return $this->apiCall($name, $params);
+			}
+
+			throw new \BadMethodCallException("Method $name does not exist");
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => $name, 'params' => $params ?? $arguments]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error calling $name: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function InvoiceFetchByBrightreeID(int $BrightreeID): object
+	{
+		try {
+			if ($BrightreeID <= 0) {
+				throw new BrightreeException("Invalid Brightree ID: $BrightreeID", 1003);
+			}
+			return $this->apiCall('InvoiceFetchByBrightreeID', ['BrightreeID' => $BrightreeID]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'InvoiceFetchByBrightreeID', 'BrightreeID' => $BrightreeID]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching invoice by Brightree ID: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function InvoiceFetchByInvoiceID(int $InvoiceID): object
+	{
+		try {
+			if ($InvoiceID <= 0) {
+				throw new BrightreeException("Invalid Invoice ID: $InvoiceID", 1003);
+			}
+			return $this->apiCall('InvoiceFetchByInvoiceID', ['InvoiceID' => $InvoiceID]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'InvoiceFetchByInvoiceID', 'InvoiceID' => $InvoiceID]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching invoice by Invoice ID: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function OpenInvoiceBalanceFetchByPatient(int $BrightreeID): object
+	{
+		try {
+			if ($BrightreeID <= 0) {
+				throw new BrightreeException("Invalid Patient Brightree ID: $BrightreeID", 1003);
+			}
+			return $this->apiCall('OpenInvoiceBalanceFetchByPatient', ['PatientBrightreeID' => $BrightreeID]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, ['method' => 'OpenInvoiceBalanceFetchByPatient', 'PatientBrightreeID' => $BrightreeID]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching open invoice balance by patient: " . $e->getMessage(), 0, $e);
+		}
+	}
 }

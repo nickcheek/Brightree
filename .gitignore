@@ -1,2 +1,4 @@
 /vendor/
 /build/
+.idea/*.xml
+git_tool

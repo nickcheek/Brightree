@@ -20,12 +20,12 @@ class BrightreeTest extends TestCase
 
     public function test_class_receives_info_variable(): void
     {
-        $this->assertObjectHasAttribute('info',$this->brightree);
+        $this->assertObjectHasProperty('info',$this->brightree);
     }
 
     public function test_child_class_can_reach_info_variable(): void
     {
-        $this->assertObjectHasAttribute('info',$this->brightree->Patient());
+        $this->assertObjectHasProperty('info',$this->brightree->Patient());
     }
 
     public function test_array_builder_builds_sort_method(): void
@@ -58,8 +58,8 @@ class BrightreeTest extends TestCase
 	public function test_new_instance_initializes_properties() {
 		$brightree = new Brightree('username', 'password');
 		$this->assertInstanceOf(Brightree::class, $brightree);
-		$this->assertObjectHasAttribute('config', $brightree);
-		$this->assertObjectHasAttribute('info', $brightree);
+		$this->assertObjectHasProperty('config', $brightree);
+		$this->assertObjectHasProperty('info', $brightree);
 	}
 
 	public function test_calling_patient_returns_patient_instance() {

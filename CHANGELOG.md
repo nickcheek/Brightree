@@ -108,3 +108,11 @@ All notable changes to `brightree` will be documented in this file
 
 - Added the following to SalesOrder service:
 - SalesOrderTemplateItemFrequencyFetchByBrightreeID,SalesOrderTemplateItemFrequencyUpdate, SalesOrderUpdateItemNextBilling, StopReasonFetchAll
+
+## 4.0.0 - 2025-02-28
+
+BREAKING CHANGES: renamed arrayHelper to ArrayHelper to better fit standards.
+
+- Completely refactored all files
+- Added Exception Handler
+- Added PatientNoteCommentCreate, PatientNoteCommentUpdate, and PatientNotesCommentFetch
