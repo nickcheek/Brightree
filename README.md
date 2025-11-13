@@ -27,7 +27,7 @@ $bt = new Brightree($username,$password);
 $note = $bt->Patient()->GetNoteByKey('141508');
 return $note;
 ```
-##ArrayHelper
+## ArrayHelper
 Since Brightree has so many different ways to build arrays depending on the method you're using, I've tried to make it a bit easier by including a helper.  You can use it like so:
 ``` php
 $bt = new Brightree($username,$password);
@@ -40,7 +40,7 @@ $orderSort = ['SortParams'=>[]];
 
 //now we build it using the arrayHelper, we can specify page and pageSize also, but by omitting, it will insert the default values of pageSize of 10 and page of 1.  You can chain page(2) or pageSize(25) or both.
 
-$search = $bt->search($orderSearch)->sort($sort)->build();
+$search = $bt->search($orderSearch)->sort($orderSort)->build();
 
 $order = $bt->SalesOrder()->SalesOrderSearch($search);
 
@@ -48,7 +48,7 @@ return $order;
 ```
 
 
-#API's
+# API's
 
 ## Patient Class
 
@@ -312,7 +312,7 @@ ContactTypeDelete($query);
 ContactTypeFetchAll();
 ContactTypeFetchByBrightreeID($query);
 ContactTypeUpdate($query);
-DelivryTechnicianFetchAll();
+DeliveryTechnicianFetchAll();
 DepreciationTypesFetchAll();
 EPSDTConditionCodeFetchAll();
 FacilityCreate($query);
@@ -551,12 +551,12 @@ UserGroupPermissionsFetchByUserGroupBrightreeID($query);
 UserGroupPermissionsUpdate($query);
 ```
 
-## Invoice Class 
+## Invoice Class
 #### Usage
 ``` php
 $bt = new Brightree($username,$password);
-$security = $bt->Security()->UserFetchByBrightreeID($query);
-return $security;
+$invoice = $bt->Invoice()->InvoiceFetchByBrightreeID($brightreeID);
+return $invoice;
 ```
 
 #### Methods
@@ -568,7 +568,7 @@ InvoiceItemUpdate($query);
 InvoiceUpdate($query);
 OpenInvoiceAgedBalanceFetchByPatient($id);
 OpenInvoiceBalanceFetchByPatient($id);
-Resubmitinvoices($query);
+ResubmitInvoices($query);
 ```
 ## Custom 
 ###### (new as of 11/16/20)

@@ -2,7 +2,7 @@
 
 namespace Nickcheek\Brightree\Helpers;
 
-class arrayHelper
+class ArrayHelper
 {
 	private array $search = [];
 	private array $sort = [];
