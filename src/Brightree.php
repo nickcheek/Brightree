@@ -17,18 +17,18 @@ use Nickcheek\Brightree\Service\{
     SalesOrder,
     Security
 };
-use Nickcheek\Brightree\Helpers\arrayHelper;
+use Nickcheek\Brightree\Helpers\ArrayHelper;
 
-class Brightree extends arrayHelper
+class Brightree extends ArrayHelper
 {
-    protected string $wsdl;
+
     public object $info;
     protected object $config;
     protected array $options;
 
     public function __construct(string $username, string $password)
     {
-        $this->config = include('Config/config.php');
+        $this->config = require('Config/config.php');
         $this->info = (object)['username'=>$username,'password'=>$password,'config'=>$this->config];
     }
 

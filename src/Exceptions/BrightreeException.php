@@ -7,7 +7,7 @@ class BrightreeException extends \Exception
 	protected $errorData;
 	protected $requestData;
 
-	public function __construct(string $message, int $code = 0, \Throwable $previous = null, $errorData = null, $requestData = null)
+	public function __construct(string $message, int $code = 0, ?\Throwable $previous = null, $errorData = null, $requestData = null)
 	{
 		parent::__construct($message, $code, $previous);
 		$this->errorData = $errorData;
