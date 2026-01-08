@@ -11,7 +11,7 @@ return (object) [
         'doctor' => 'https://webservices.brightree.net/v0100-2406/DoctorService/DoctorService.svc',
         'inventory' => 'https://webservices.brightree.net/v0100-2309/InventoryService/InventoryService.svc',
         'pickup' => 'https://webservices.brightree.net/v0100-2007/OrderEntryService/PickupExchangeService.svc',
-        'salesorder' => 'https://webservices.brightree.net/v0100-2409/OrderEntryService/SalesOrderService.svc',
+        'salesorder' => 'https://webservices.brightree.net/v0100-2408/OrderEntryService/SalesOrderService.svc',
         'invoice' => 'https://webservices.brightree.net/v0100-2409/InvoiceService/InvoiceService.svc',
         'security' => 'https://webservices.brightree.net/v0100-2407/SecurityService/UserSecurityService.svc',
         'pricing' => 'https://webservices.brightree.net/v0100-1908/InventoryService/PricingService.svc'
