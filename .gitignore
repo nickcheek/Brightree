@@ -2,3 +2,10 @@
 /build/
 .idea/*.xml
 git_tool
+*.xml
+.*
+
+# But keep .gitignore itself tracked
+!.gitignore
+
+.idea/
