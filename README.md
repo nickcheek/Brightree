@@ -1,4 +1,4 @@
-# Brightree API Wrapper v3.4.0
+# Brightree API Wrapper
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 [![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
@@ -21,11 +21,11 @@ Reference Class in your controller
 use \Nickcheek\Brightree\Brightree;
 ```
 
-Create a new instance of the service and the API Call you're looking for, for instance, if you wanted to get a note by it's key
+Create a new instance of the service and the API call you're looking for.
 ``` php
 $bt = new Brightree($username,$password);
-$note = $bt->Patient()->GetNoteByKey('141508');
-return $note;
+$patient = $bt->Patient()->PatientFetchByBrightreeID(141508);
+return $patient;
 ```
 ## ArrayHelper
 Since Brightree has so many different ways to build arrays depending on the method you're using, I've tried to make it a bit easier by including a helper.  You can use it like so:
@@ -55,27 +55,27 @@ return $order;
 #### Usage
 ``` php
 $bt = new Brightree($username,$password);
-$note = $bt->Patient()->GetNoteByKey(141508);
-return $note;
+$patient = $bt->Patient()->PatientFetchByBrightreeID(141508);
+return $patient;
 ```
 
 #### Methods
 ``` php
+AdditionalPatientContactCreate($additionalPatientContact);
+AdditionalPatientContactFetchByBrightreeID($patientBrightreeID);
+AdditionalPatientContactUpdate($brightreePatientContactKey, $additionalPatientContact);
 PatientCreate($patient);
 PatientSearch($patient);
 PatientUpdate($patient);
 PatientFetchByExternalID($externalId);
 PatientFetchByPatientID($patientId);
 PatientFetchByBrightreeID($brightreeId);
-PatientFetchByPatientID($patientId);
 PatientPhoneNumberSearch($patient);
 PatientNoteCreate($note);
 PatientNoteFetchByKey($key);
 PatientNoteFetchByPatient($brightreeId);
 PatientNoteSearch($search);
 PatientNoteUpdate($update);
-GetNotesByPatient($id);
-GetNoteByKey($NoteKey);
 PatientPayorAdd($payor);
 PatientPayorFetch($payor);
 PatientPayorFetchAll($patientKey);
@@ -89,7 +89,8 @@ PharmacyPatientClinicalInfoFetchByBrightreeID($query);
 PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID($patientID, $brightreeID);
 PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID($patientID, $brightreeID);
 PharmacyPatientMostRecentLabResultsFetchByPatientBrightreeID($patientID);
-
+FetchPatientOptInStatus($brightreeId, $patientPhone);
+UpdatePatientOptInStatus($patientOptInStatus);
 
 ```
 
@@ -396,6 +397,7 @@ SalesOrderOverrideValidationDetailMessage($query);
 SalesOrderOverrideValidationHeaderMessage($query);
 SalesOrderPayorSearch($query);
 SalesOrderQuickAddItem($query);
+SalesOrderQuickAddItemWithItemsDataReturn($query);
 SalesOrderRemoveItem($query);
 SalesOrderRemoveMarketingReferral($query); 
 SalesOrderSearch($query); 
@@ -419,6 +421,7 @@ SalesOrderTemplateSearch($query);
 SalesOrderTemplateUpdate($query);
 SalesOrderTemplateUpdateInsurance($query);
 SalesOrderTemplateUpdateItem($query);
+SalesOrderTemplateUpdateItemPayor($query);
 SalesOrderTemplateUpdateItemsWithDefaultPriceOption($query);
 SalesOrderTemplateUpdateWIPState($query);
 SalesOrderUpdate($query);
@@ -436,6 +439,10 @@ SalesOrderVoidSearch($query);
 SearchWIPStatusWithUpdate($query);
 StopReasonFetchAll();
 StopReasonSalesOrderFetchByBrightreeID($brightreeID);
+PatientNotesCommentFetch($patientNoteKey);
+PatientNoteCommentFetch($patientNoteKey);
+PatientNoteCommentCreate($query);
+PatientNoteCommentUpdate($query);
 StopReasonSalesOrderTemplateFetchByBrightreeID($brightreeID);
 StopReasonSalesOrderTemplateUpdate($query);
 StopReasonSalesOrderUpdate($query);
@@ -534,21 +541,24 @@ PriceTableFetchAll($query);
 #### Usage
 ``` php
 $bt = new Brightree($username,$password);
-$security = $bt->Security()->UserFetchByBrightreeID($query);
+$security = $bt->Security()->UserFetchByBrightreeID($brightreeID);
 return $security;
 ```
 
 #### Methods
 ```php
-UserFetchByBrightreeID($query);
+UserCreate($query);
+UserFetchByBrightreeID($brightreeID);
 UserSearch($query);
 UserUpdate($query);
 UserGroupCreate($query);
 UserGroupUpdate($query);
 UserGroupFetchByBrightreeID($query);
-UserGroupFetchAll($query);
+UserGroupFetchAll();
 UserGroupPermissionsFetchByUserGroupBrightreeID($query);
 UserGroupPermissionsUpdate($query);
+UserGroupBDMPermissionsFetchByUserGroupBrightreeID($userGroupBrightreeID);
+UserGroupBDMPermissionsUpdate($userGroupBrightreeID, $userGroupBDMPermissions);
 ```
 
 ## Invoice Class

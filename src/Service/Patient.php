@@ -7,6 +7,7 @@ use Nickcheek\Brightree\Exceptions\BrightreeException;
 class Patient extends BaseService
 {
 	protected array $methods = [
+		'AdditionalPatientContactCreate' => true,
 		'FacilityMasterInfoFetchAll' => [],
 		'FacilityResidentCreate' => true,
 		'PatientCreate' => true,
@@ -21,11 +22,11 @@ class Patient extends BaseService
 		'PatientPhoneNumberSearch' => true,
 		'PatientUpdateSleepTherapyPatientID' => true,
 		'PharmacyPatientClinicalInfoFetchByBrightreeID' => true,
-		'FetchPatientOptInStatus' => true,
 		'UpdatePatientOptInStatus' => true
 	];
 
 	protected array $specialMethods = [
+		'AdditionalPatientContactFetchByBrightreeID' => ['PatientBrightreeID'],
 		'PatientAddMarketingReferral' => ['BrightreeID', 'BrightreeReferralID'],
 		'PatientFetchByExternalID' => ['ExternalID'],
 		'PatientFetchByPatientID' => ['PatientID'],
@@ -53,6 +54,77 @@ class Patient extends BaseService
 			throw BrightreeException::fromSoapFault($e, ['method' => 'PatientFetchByBrightreeID', 'BrightreeID' => $id]);
 		} catch (\Throwable $e) {
 			throw new BrightreeException("Error fetching patient by Brightree ID: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function AdditionalPatientContactCreate($additionalPatientContact): object
+	{
+		try {
+			if (!is_array($additionalPatientContact) && !is_object($additionalPatientContact)) {
+				throw new BrightreeException('AdditionalPatientContact must be provided as an array or object', 1002);
+			}
+
+			return $this->apiCall('AdditionalPatientContactCreate', [
+				'AdditionalPatientContact' => $additionalPatientContact
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'AdditionalPatientContactCreate',
+				'AdditionalPatientContact' => $additionalPatientContact
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error creating additional patient contact: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function AdditionalPatientContactFetchByBrightreeID($patientBrightreeID): object
+	{
+		try {
+			if ($patientBrightreeID === null || trim((string) $patientBrightreeID) === '') {
+				throw new BrightreeException('PatientBrightreeID is required for AdditionalPatientContactFetchByBrightreeID', 1003);
+			}
+
+			return $this->apiCall('AdditionalPatientContactFetchByBrightreeID', [
+				'PatientBrightreeID' => (string) $patientBrightreeID
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'AdditionalPatientContactFetchByBrightreeID',
+				'PatientBrightreeID' => $patientBrightreeID
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching additional patient contacts: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function AdditionalPatientContactUpdate($brightreePatientContactKey, $additionalPatientContact): object
+	{
+		try {
+			if ($brightreePatientContactKey === null || (int) $brightreePatientContactKey <= 0) {
+				throw new BrightreeException('BrightreePatientContactKey is required for AdditionalPatientContactUpdate', 1003);
+			}
+			if (!is_array($additionalPatientContact) && !is_object($additionalPatientContact)) {
+				throw new BrightreeException('AdditionalPatientContact must be provided as an array or object', 1002);
+			}
+
+			return $this->apiCall('AdditionalPatientContactUpdate', [
+				'BrightreePatientContactKey' => (int) $brightreePatientContactKey,
+				'AdditionalPatientContact' => $additionalPatientContact
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'AdditionalPatientContactUpdate',
+				'BrightreePatientContactKey' => $brightreePatientContactKey,
+				'AdditionalPatientContact' => $additionalPatientContact
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error updating additional patient contact: " . $e->getMessage(), 0, $e);
 		}
 	}
 
@@ -121,6 +193,55 @@ class Patient extends BaseService
 			]);
 		} catch (\Throwable $e) {
 			throw new BrightreeException("Error fetching pharmacy patient lab results: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function FetchPatientOptInStatus(?int $brightreeId = null, ?string $patientPhone = null): object
+	{
+		try {
+			if ($brightreeId === null || $brightreeId <= 0) {
+				throw new BrightreeException("BrightreeID is required for FetchPatientOptInStatus", 1003);
+			}
+			if ($patientPhone === null || trim($patientPhone) === '') {
+				throw new BrightreeException("PatientPhone is required for FetchPatientOptInStatus", 1003);
+			}
+
+			return $this->apiCall('FetchPatientOptInStatus', [
+				'brightreeId' => $brightreeId,
+				'patientPhone' => $patientPhone
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'FetchPatientOptInStatus',
+				'brightreeId' => $brightreeId,
+				'patientPhone' => $patientPhone
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching patient opt-in status: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function UpdatePatientOptInStatus($patientOptInStatus): object
+	{
+		try {
+			if (!is_array($patientOptInStatus) && !is_object($patientOptInStatus)) {
+				throw new BrightreeException('PatientOptInStatus must be provided as an array or object', 1002);
+			}
+
+			return $this->apiCall('UpdatePatientOptInStatus', [
+				'patientOptInStatus' => $patientOptInStatus
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'UpdatePatientOptInStatus',
+				'patientOptInStatus' => $patientOptInStatus
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error updating patient opt-in status: " . $e->getMessage(), 0, $e);
 		}
 	}
 }

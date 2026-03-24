@@ -50,6 +50,50 @@ class PatientTest extends TestCase
 		$this->assertSame($this->mockApiResponse, $result);
 	}
 
+	public function testAdditionalPatientContactCreateWithArrayPayload()
+	{
+		$payload = [
+			'FirstName' => 'John',
+			'LastName' => 'Doe'
+		];
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactCreate', [
+			              'AdditionalPatientContact' => $payload
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->AdditionalPatientContactCreate($payload);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testAdditionalPatientContactCreateWithObjectPayload()
+	{
+		$payload = (object) [
+			'FirstName' => 'John',
+			'LastName' => 'Doe'
+		];
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactCreate', [
+			              'AdditionalPatientContact' => $payload
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->AdditionalPatientContactCreate($payload);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testAdditionalPatientContactCreateWithInvalidPayload()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('AdditionalPatientContact must be provided as an array or object');
+
+		$this->patient->AdditionalPatientContactCreate('invalid');
+	}
+
 	public function testCallWithInvalidStandardMethodParam()
 	{
 		$this->expectException(BrightreeException::class);
@@ -76,6 +120,27 @@ class PatientTest extends TestCase
 		$this->expectException(BrightreeException::class);
 
 		$this->patient->__call('PatientFetchByExternalID', []);
+	}
+
+	public function testAdditionalPatientContactFetchByBrightreeIDWithValidId()
+	{
+		$patientBrightreeId = '12345';
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactFetchByBrightreeID', ['PatientBrightreeID' => $patientBrightreeId])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->AdditionalPatientContactFetchByBrightreeID($patientBrightreeId);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testAdditionalPatientContactFetchByBrightreeIDWithMissingId()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('PatientBrightreeID is required for AdditionalPatientContactFetchByBrightreeID');
+
+		$this->patient->AdditionalPatientContactFetchByBrightreeID('');
 	}
 
 	public function testCallWithNonExistentMethod()
@@ -194,6 +259,150 @@ class PatientTest extends TestCase
 		$this->expectExceptionMessage('BrightreeID is required');
 
 		$this->patient->PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID(12345, null);
+	}
+
+	public function testAdditionalPatientContactUpdateWithArrayPayload()
+	{
+		$contactKey = 67890;
+		$payload = [
+			'FirstName' => 'John',
+			'LastName' => 'Doe'
+		];
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactUpdate', [
+			              'BrightreePatientContactKey' => $contactKey,
+			              'AdditionalPatientContact' => $payload
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->AdditionalPatientContactUpdate($contactKey, $payload);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testAdditionalPatientContactUpdateWithObjectPayload()
+	{
+		$contactKey = 67890;
+		$payload = (object) [
+			'FirstName' => 'John',
+			'LastName' => 'Doe'
+		];
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactUpdate', [
+			              'BrightreePatientContactKey' => $contactKey,
+			              'AdditionalPatientContact' => $payload
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->AdditionalPatientContactUpdate($contactKey, $payload);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testAdditionalPatientContactUpdateWithInvalidContactKey()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('BrightreePatientContactKey is required for AdditionalPatientContactUpdate');
+
+		$this->patient->AdditionalPatientContactUpdate(0, []);
+	}
+
+	public function testAdditionalPatientContactUpdateWithInvalidPayload()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('AdditionalPatientContact must be provided as an array or object');
+
+		$this->patient->AdditionalPatientContactUpdate(12345, 'invalid');
+	}
+
+	public function testFetchPatientOptInStatusWithValidParams()
+	{
+		$brightreeId = 12345;
+		$patientPhone = '5551234567';
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('FetchPatientOptInStatus', [
+			              'brightreeId' => $brightreeId,
+			              'patientPhone' => $patientPhone
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->FetchPatientOptInStatus($brightreeId, $patientPhone);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFetchPatientOptInStatusWithMissingBrightreeId()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('BrightreeID is required for FetchPatientOptInStatus');
+
+		$this->patient->FetchPatientOptInStatus(null, '5551234567');
+	}
+
+	public function testFetchPatientOptInStatusWithMissingPatientPhone()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('PatientPhone is required for FetchPatientOptInStatus');
+
+		$this->patient->FetchPatientOptInStatus(12345, '');
+	}
+
+	public function testUpdatePatientOptInStatusWithArrayPayload()
+	{
+		$payload = [
+			'BrightreeID' => 12345,
+			'PatientPhone' => '5551234567',
+			'PatientOptInStatus' => [
+				[
+					'ProgramType' => 1,
+					'OptStatus' => 2
+				]
+			]
+		];
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('UpdatePatientOptInStatus', [
+			              'patientOptInStatus' => $payload
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->UpdatePatientOptInStatus($payload);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testUpdatePatientOptInStatusWithObjectPayload()
+	{
+		$payload = new stdClass();
+		$payload->BrightreeID = 12345;
+		$payload->PatientPhone = '5551234567';
+		$payload->PatientOptInStatus = [
+			(object) [
+				'ProgramType' => 1,
+				'OptStatus' => 2
+			]
+		];
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('UpdatePatientOptInStatus', [
+			              'patientOptInStatus' => $payload
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->UpdatePatientOptInStatus($payload);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testUpdatePatientOptInStatusWithInvalidPayload()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('PatientOptInStatus must be provided as an array or object');
+
+		$this->patient->UpdatePatientOptInStatus('invalid');
 	}
 
 	public function testApiCallThrowsSoapFault()

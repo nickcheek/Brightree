@@ -33,6 +33,7 @@ class SalesOrder extends BaseService
 		'SalesOrderOverrideValidationHeaderMessage' => true,
 		'SalesOrderPayorSearch' => true,
 		'SalesOrderQuickAddItem' => true,
+		'SalesOrderQuickAddItemWithItemsDataReturn' => true,
 		'SalesOrderRemoveItem' => true,
 		'SalesOrderRemoveMarketingReferral' => true,
 		'SalesOrderSearch' => true,
@@ -56,6 +57,7 @@ class SalesOrder extends BaseService
 		'SalesOrderTemplateUpdate' => true,
 		'SalesOrderTemplateUpdateInsurance' => true,
 		'SalesOrderTemplateUpdateItem' => true,
+		'SalesOrderTemplateUpdateItemPayor' => true,
 		'SalesOrderTemplateUpdateItemsWithDefaultPriceOption' => true,
 		'SalesOrderTemplateUpdateWIPState' => true,
 		'SalesOrderUpdate' => true,
@@ -82,6 +84,7 @@ class SalesOrder extends BaseService
 		'SalesOrderTemplateItemFrequencyFetchByBrightreeID' => ['BrightreeID'],
 		'StopReasonSalesOrderFetchByBrightreeID' => ['BrightreeID'],
 		'StopReasonSalesOrderTemplateFetchByBrightreeID' => ['BrightreeID'],
+		'PatientNotesCommentFetch' => ['PatientNoteKey'],
 		'PatientNoteCommentFetch' => ['PatientNoteKey']
 	];
 

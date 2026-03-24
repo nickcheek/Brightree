@@ -66,6 +66,25 @@ class SalesOrderTest extends TestCase
 		$this->assertEquals($expectedResponse, $result);
 	}
 
+	public function testSalesOrderQuickAddItemWithItemsDataReturn()
+	{
+		$expectedResponse = (object) ['success' => true];
+		$params = [
+			'BrightreeID' => 12345,
+			'SOItemQuickAdd' => [
+				'ItemIdentifier' => 'ABC123'
+			]
+		];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderQuickAddItemWithItemsDataReturn', $params)
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->SalesOrderQuickAddItemWithItemsDataReturn($params);
+		$this->assertEquals($expectedResponse, $result);
+	}
+
 	public function testCallSpecialMethod()
 	{
 		$expectedResponse = (object) ['success' => true];
@@ -78,6 +97,20 @@ class SalesOrderTest extends TestCase
 		                 ->willReturn($expectedResponse);
 
 		$result = $this->salesOrder->$methodName($brightreeId);
+		$this->assertEquals($expectedResponse, $result);
+	}
+
+	public function testPatientNotesCommentFetchUsesDocumentedMethodName()
+	{
+		$expectedResponse = (object) ['success' => true];
+		$patientNoteKey = 12345;
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('PatientNotesCommentFetch', ['PatientNoteKey' => $patientNoteKey])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->PatientNotesCommentFetch($patientNoteKey);
 		$this->assertEquals($expectedResponse, $result);
 	}
 
@@ -183,6 +216,26 @@ class SalesOrderTest extends TestCase
 		$this->expectExceptionMessage('Invalid Brightree ID: -1');
 
 		$this->salesOrder->StopReasonSalesOrderFetchByBrightreeID(-1);
+	}
+
+	public function testSalesOrderTemplateUpdateItemPayor()
+	{
+		$expectedResponse = (object) ['success' => true];
+		$params = [
+			'BrightreeID' => 12345,
+			'BrightreeDetailID' => 67890,
+			'SalesOrderItemInfo' => [
+				'BillForDenial' => true
+			]
+		];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderTemplateUpdateItemPayor', $params)
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->SalesOrderTemplateUpdateItemPayor($params);
+		$this->assertEquals($expectedResponse, $result);
 	}
 
 	public function testApiCallWithSoapFault()

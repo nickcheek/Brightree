@@ -2,6 +2,15 @@
 
 All notable changes to `brightree` will be documented in this file
 
+## Unreleased
+
+- Updated Patient service to use the `v0100-2410` endpoint.
+- Added `FetchPatientOptInStatus`, `UpdatePatientOptInStatus`, `AdditionalPatientContactCreate`, `AdditionalPatientContactFetchByBrightreeID`, and `AdditionalPatientContactUpdate` to the Patient service.
+- Updated Sales Order service to use the `v0100-2409` endpoint.
+- Added `PatientNotesCommentFetch`, `SalesOrderQuickAddItemWithItemsDataReturn`, and `SalesOrderTemplateUpdateItemPayor` to the Sales Order service.
+- Added `UserGroupBDMPermissionsFetchByUserGroupBrightreeID` and `UserGroupBDMPermissionsUpdate` to the Security service.
+- Updated README documentation and added test coverage for the new Patient, Sales Order, and Security service operations.
+
 ## 1.0.0 - 2019-02-01
 
 - initial release

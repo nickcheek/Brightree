@@ -10,6 +10,8 @@ class Security extends BaseService
 		'UserCreate' => true,
 		'UserSearch' => true,
 		'UserUpdate' => true,
+		'UserGroupBDMPermissionsFetchByUserGroupBrightreeID' => true,
+		'UserGroupBDMPermissionsUpdate' => true,
 		'UserGroupCreate' => true,
 		'UserGroupUpdate' => true,
 		'UserGroupFetchByBrightreeID' => true,
@@ -69,6 +71,55 @@ class Security extends BaseService
 			throw BrightreeException::fromSoapFault($e, ['method' => 'UserGroupPermissionsUpdate', 'query' => $query]);
 		} catch (\Throwable $e) {
 			throw new BrightreeException("Error updating user group permissions: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function UserGroupBDMPermissionsFetchByUserGroupBrightreeID(int $userGroupBrightreeID): object
+	{
+		try {
+			if ($userGroupBrightreeID <= 0) {
+				throw new BrightreeException("Invalid UserGroupBrightreeID: $userGroupBrightreeID", 1003);
+			}
+
+			return $this->apiCall('UserGroupBDMPermissionsFetchByUserGroupBrightreeID', [
+				'UserGroupBrightreeID' => $userGroupBrightreeID
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'UserGroupBDMPermissionsFetchByUserGroupBrightreeID',
+				'UserGroupBrightreeID' => $userGroupBrightreeID
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error fetching user group BDM permissions: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function UserGroupBDMPermissionsUpdate(int $userGroupBrightreeID, $userGroupBDMPermissions): object
+	{
+		try {
+			if ($userGroupBrightreeID <= 0) {
+				throw new BrightreeException("Invalid UserGroupBrightreeID: $userGroupBrightreeID", 1003);
+			}
+			if (!is_array($userGroupBDMPermissions) && !is_object($userGroupBDMPermissions)) {
+				throw new BrightreeException('UserGroupBDMPermissions must be provided as an array or object', 1002);
+			}
+
+			return $this->apiCall('UserGroupBDMPermissionsUpdate', [
+				'UserGroupBrightreeID' => $userGroupBrightreeID,
+				'UserGroupBDMPermissions' => $userGroupBDMPermissions
+			]);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\SoapFault $e) {
+			throw BrightreeException::fromSoapFault($e, [
+				'method' => 'UserGroupBDMPermissionsUpdate',
+				'UserGroupBrightreeID' => $userGroupBrightreeID,
+				'UserGroupBDMPermissions' => $userGroupBDMPermissions
+			]);
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error updating user group BDM permissions: " . $e->getMessage(), 0, $e);
 		}
 	}
 }
