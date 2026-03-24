@@ -3,6 +3,7 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Exceptions\BrightreeException;
+use Nickcheek\Brightree\Search\DoctorSearchBuilder;
 
 class Doctor extends BaseService
 {
@@ -28,6 +29,11 @@ class Doctor extends BaseService
 		'DoctorReferralContactsFetchByDoctorKey' => ['DoctorBrightreeID'],
 		'RemoveDoctorReferralContact' => ['DoctorBrightreeID', 'ReferralContactBrightreeID']
 	];
+
+	public function doctorQuery(): DoctorSearchBuilder
+	{
+		return new DoctorSearchBuilder($this);
+	}
 
 	public function AddDoctorReferralContact(int $DocBrightreeID, int $ReferralBrightreeID): object
 	{

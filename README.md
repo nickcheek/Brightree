@@ -47,6 +47,18 @@ $order = $bt->SalesOrder()->SalesOrderSearch($search);
 return $order;
 ```
 
+## Update
+
+Fluent query builders were added for the search-heavy services.
+
+See [QUERY_BUILDERS.md](QUERY_BUILDERS.md) for examples covering:
+
+- `Patient`
+- `SalesOrder`
+- `Doctor`
+- `Insurance`
+- `Document`
+
 
 # API's
 
@@ -401,7 +413,7 @@ SalesOrderQuickAddItemWithItemsDataReturn($query);
 SalesOrderRemoveItem($query);
 SalesOrderRemoveMarketingReferral($query); 
 SalesOrderSearch($query); 
-SalesOrderSendPOD($query); 
+SalesOrderSendPOD($query);
 SalesOrderTemplateCreate($query);
 SalesOrderTemplateCreateSalesOrder($query);
 SalesOrderTemplateDelete($query); 

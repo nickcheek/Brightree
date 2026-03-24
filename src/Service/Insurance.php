@@ -3,6 +3,10 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Exceptions\BrightreeException;
+use Nickcheek\Brightree\Search\CommercialEligibilityPayerSearchBuilder;
+use Nickcheek\Brightree\Search\CommercialPayerSearchBuilder;
+use Nickcheek\Brightree\Search\InsuranceSearchBuilder;
+use Nickcheek\Brightree\Search\PriceTableSearchBuilder;
 
 class Insurance extends BaseService
 {
@@ -49,6 +53,26 @@ class Insurance extends BaseService
 		'InsuranceValidationRuleSetDelete' => ['BrightreeID'],
 		'ItemGroupFetchByInsuranceBrightreeID' => ['BrightreeID']
 	];
+
+	public function insuranceQuery(): InsuranceSearchBuilder
+	{
+		return new InsuranceSearchBuilder($this);
+	}
+
+	public function commercialEligibilityPayerQuery(): CommercialEligibilityPayerSearchBuilder
+	{
+		return new CommercialEligibilityPayerSearchBuilder($this);
+	}
+
+	public function commercialPayerQuery(): CommercialPayerSearchBuilder
+	{
+		return new CommercialPayerSearchBuilder($this);
+	}
+
+	public function priceTableQuery(): PriceTableSearchBuilder
+	{
+		return new PriceTableSearchBuilder($this);
+	}
 
 	public function InsuranceFetchByBrightreeID(int $id): object
 	{

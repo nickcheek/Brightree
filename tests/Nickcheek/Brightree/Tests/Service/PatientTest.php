@@ -50,6 +50,289 @@ class PatientTest extends TestCase
 		$this->assertSame($this->mockApiResponse, $result);
 	}
 
+	public function testFindUsesBrightreeIdForNumericIdentifier()
+	{
+		$brightreeId = 12345;
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientFetchByBrightreeID', ['BrightreeID' => $brightreeId])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->find($brightreeId);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFindUsesPatientIdForStringIdentifier()
+	{
+		$patientId = 'PAT-12345';
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientFetchByPatientID', ['PatientID' => $patientId])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->find($patientId);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFindRejectsEmptyIdentifier()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('Patient identifier is required');
+
+		$this->patient->find('   ');
+	}
+
+	public function testFindByExternalIdUsesPatientFetchByExternalId()
+	{
+		$externalId = 'EXT-12345';
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientFetchByExternalID', ['ExternalID' => $externalId])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->findByExternalId($externalId);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testPatientSearchBuilderBuildsPayloadFromFluentMethods()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientSearch', [
+			              'searchRequest' => [
+				              'LastName' => 'Doe',
+				              'FirstName' => 'Jane',
+				              'Branch' => [
+					              'ID' => 12,
+					              'Value' => 'Main'
+				              ]
+			              ],
+			              'sortRequest' => [
+				              [
+					              'SortField' => 'LastName',
+					              'SortOrder' => 'Ascending'
+				              ]
+			              ],
+			              'pageSize' => 25,
+			              'page' => 2
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->patientQuery()
+		                        ->lastName('Doe')
+		                        ->firstName('Jane')
+		                        ->branch(12, 'Main')
+		                        ->sortBy('LastName')
+		                        ->pageSize(25)
+		                        ->page(2)
+		                        ->get();
+
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testPatientSearchBuilderSupportsWhereManyAndInvoke()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientSearch', [
+			              'searchRequest' => [
+				              'FirstName' => 'John',
+				              'LastName' => 'Smith'
+			              ],
+			              'sortRequest' => [],
+			              'pageSize' => 10,
+			              'page' => 1
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$builder = $this->patient->patientQuery()->whereMany([
+			'firstname' => 'John',
+			'lastname' => 'Smith'
+		]);
+
+		$result = $builder();
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testPatientSearchBuilderSupportsCustomField()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientSearch', [
+			              'searchRequest' => [
+				              'CustomFieldSearchParams' => [
+					              [
+						              'FieldStorageNumber' => 200,
+						              'Value' => 'ABC123'
+					              ]
+				              ]
+			              ],
+			              'sortRequest' => [],
+			              'pageSize' => 10,
+			              'page' => 1
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->patientQuery()
+		                        ->customField(200, 'ABC123')
+		                        ->get();
+
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testPatientPhoneSearchBuilderBuildsPayload()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientPhoneNumberSearch', [
+			              'searchRequest' => [
+				              'FullName' => 'Jane Doe',
+				              'PhoneNumber' => '5551234567'
+			              ],
+			              'sortRequest' => [
+				              [
+					              'SortField' => 'FullName',
+					              'SortOrder' => 'Descending'
+				              ]
+			              ],
+			              'pageSize' => 5,
+			              'page' => 3
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->patientPhoneQuery()
+		                        ->fullName('Jane Doe')
+		                        ->phoneNumber('(555) 123-4567')
+		                        ->sortBy('FullName', 'Descending')
+		                        ->pageSize(5)
+		                        ->page(3)
+		                        ->get();
+
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testPatientNoteSearchBuilderBuildsPayload()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientNoteSearch', [
+			              'searchRequest' => [
+				              'Patient' => 12345,
+				              'Status' => 2,
+				              'CreateDateTimeStart' => '2026-01-01T00:00:00',
+				              'CreateDateTimeEnd' => '2026-01-31T23:59:59'
+			              ],
+			              'sortRequest' => [
+				              [
+					              'SortField' => 'CreateDate',
+					              'SortOrder' => 'Descending'
+				              ]
+			              ],
+			              'pageSize' => 10,
+			              'page' => 1
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->patientNoteQuery()
+		                        ->patient(12345)
+		                        ->status(2)
+		                        ->createdBetween('2026-01-01T00:00:00', '2026-01-31T23:59:59')
+		                        ->sortBy('CreateDate', 'Descending')
+		                        ->get();
+
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFindByNameBuildsSimpleSearchPayload()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientSearch', [
+			              'searchRequest' => [
+				              'LastName' => 'Doe',
+				              'FirstName' => 'Jane'
+			              ],
+			              'sortRequest' => [],
+			              'pageSize' => 25,
+			              'page' => 2
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->findByName('Doe', 'Jane', 25, 2);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFindByNameRejectsMissingLastName()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('LastName is required');
+
+		$this->patient->findByName('   ');
+	}
+
+	public function testFindByPhoneBuildsSimpleSearchPayload()
+	{
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('PatientPhoneNumberSearch', [
+			              'searchRequest' => [
+				              'PhoneNumber' => '5551234567'
+			              ],
+			              'sortRequest' => [],
+			              'pageSize' => 10,
+			              'page' => 1
+		              ])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->findByPhone('(555) 123-4567');
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFindByPhoneRejectsMissingPhoneNumber()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('PhoneNumber is required');
+
+		$this->patient->findByPhone('---');
+	}
+
+	public function testPatientSearchBuilderRejectsInvalidPageSize()
+	{
+		$this->expectException(BrightreeException::class);
+		$this->expectExceptionMessage('PageSize must be greater than 0');
+
+		$this->patient->patientQuery()->pageSize(0);
+	}
+
+	public function testFindAdditionalContactsUsesBrightreeIdForNumericIdentifier()
+	{
+		$brightreeId = '12345';
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactFetchByBrightreeID', ['PatientBrightreeID' => $brightreeId])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->findAdditionalContacts($brightreeId);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
+	public function testFindAdditionalContactsUsesPatientIdForStringIdentifier()
+	{
+		$patientId = 'PAT-12345';
+
+		$this->patient->expects($this->once())
+		              ->method('apiCall')
+		              ->with('AdditionalPatientContactFetchByPatientID', ['PatientID' => $patientId])
+		              ->willReturn($this->mockApiResponse);
+
+		$result = $this->patient->findAdditionalContacts($patientId);
+		$this->assertSame($this->mockApiResponse, $result);
+	}
+
 	public function testAdditionalPatientContactCreateWithArrayPayload()
 	{
 		$payload = [

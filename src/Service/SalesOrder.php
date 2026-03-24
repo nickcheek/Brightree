@@ -3,6 +3,12 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Exceptions\BrightreeException;
+use Nickcheek\Brightree\Search\SalesOrderPayorSearchBuilder;
+use Nickcheek\Brightree\Search\SalesOrderSearchBuilder;
+use Nickcheek\Brightree\Search\SalesOrderTemplateScheduleLogSearchBuilder;
+use Nickcheek\Brightree\Search\SalesOrderTemplateScheduleSearchBuilder;
+use Nickcheek\Brightree\Search\SalesOrderTemplateSearchBuilder;
+use Nickcheek\Brightree\Search\SalesOrderVoidSearchBuilder;
 
 class SalesOrder extends BaseService
 {
@@ -84,6 +90,36 @@ class SalesOrder extends BaseService
 		'StopReasonSalesOrderFetchByBrightreeID' => ['BrightreeID'],
 		'StopReasonSalesOrderTemplateFetchByBrightreeID' => ['BrightreeID']
 	];
+
+	public function salesOrderQuery(): SalesOrderSearchBuilder
+	{
+		return new SalesOrderSearchBuilder($this);
+	}
+
+	public function salesOrderPayorQuery(): SalesOrderPayorSearchBuilder
+	{
+		return new SalesOrderPayorSearchBuilder($this);
+	}
+
+	public function salesOrderVoidQuery(): SalesOrderVoidSearchBuilder
+	{
+		return new SalesOrderVoidSearchBuilder($this);
+	}
+
+	public function salesOrderTemplateQuery(): SalesOrderTemplateSearchBuilder
+	{
+		return new SalesOrderTemplateSearchBuilder($this);
+	}
+
+	public function salesOrderTemplateScheduleQuery(): SalesOrderTemplateScheduleSearchBuilder
+	{
+		return new SalesOrderTemplateScheduleSearchBuilder($this);
+	}
+
+	public function salesOrderTemplateScheduleLogQuery(): SalesOrderTemplateScheduleLogSearchBuilder
+	{
+		return new SalesOrderTemplateScheduleLogSearchBuilder($this);
+	}
 
 	public function SalesOrderFetchByBrightreeID(iterable $query): object
 	{

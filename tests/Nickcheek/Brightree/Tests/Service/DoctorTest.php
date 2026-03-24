@@ -176,6 +176,47 @@ class DoctorTest extends TestCase
 		$doctor->DoctorSearch('not-iterable');
 	}
 
+	public function testDoctorQueryBuilderBuildsPayload()
+	{
+		$doctor = $this->getMockBuilder(Doctor::class)
+		               ->setConstructorArgs([$this->mockInfo])
+		               ->onlyMethods(['apiCall'])
+		               ->getMock();
+
+		$doctor->expects($this->once())
+		       ->method('apiCall')
+		       ->with('DoctorSearch', [
+			       'searchRequest' => [
+				       'LastName' => 'Smith',
+				       'DoctorGroup' => [
+					       'ID' => 10,
+					       'Value' => 'Group A'
+				       ],
+				       'PhoneNumber' => '5551234567'
+			       ],
+			       'sortRequest' => [
+				       [
+					       'SortField' => 'LastName',
+					       'SortOrder' => 'Ascending'
+				       ]
+			       ],
+			       'pageSize' => 15,
+			       'page' => 2
+		       ])
+		       ->willReturn($this->mockResponse);
+
+		$result = $doctor->doctorQuery()
+		                 ->lastName('Smith')
+		                 ->doctorGroup(10, 'Group A')
+		                 ->phoneNumber('(555) 123-4567')
+		                 ->sortBy('LastName')
+		                 ->pageSize(15)
+		                 ->page(2)
+		                 ->get();
+
+		$this->assertSame($this->mockResponse, $result);
+	}
+
 	public function testMagicCallWithSpecialMethod()
 	{
 		$doctor = $this->getMockBuilder(Doctor::class)

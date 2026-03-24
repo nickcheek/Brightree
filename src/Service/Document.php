@@ -3,6 +3,8 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Exceptions\BrightreeException;
+use Nickcheek\Brightree\Search\DocumentBatchSearchBuilder;
+use Nickcheek\Brightree\Search\DocumentSearchBuilder;
 
 class Document extends BaseService
 {
@@ -21,6 +23,16 @@ class Document extends BaseService
 	protected array $specialMethods = [
 		'FetchDocumentContent' => ['documentKey']
 	];
+
+	public function documentQuery(): DocumentSearchBuilder
+	{
+		return new DocumentSearchBuilder($this);
+	}
+
+	public function documentBatchQuery(): DocumentBatchSearchBuilder
+	{
+		return new DocumentBatchSearchBuilder($this);
+	}
 
 	public function FetchDocumentContent(int $key = 12345): object
 	{

@@ -3,6 +3,9 @@
 namespace Nickcheek\Brightree\Service;
 
 use Nickcheek\Brightree\Exceptions\BrightreeException;
+use Nickcheek\Brightree\Search\PatientNoteSearchBuilder;
+use Nickcheek\Brightree\Search\PatientPhoneSearchBuilder;
+use Nickcheek\Brightree\Search\PatientSearchBuilder;
 
 class Patient extends BaseService
 {
@@ -61,6 +64,88 @@ class Patient extends BaseService
 		'PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID' => ['BrightreeID', 'PatientBrightreeID'],
 		'PharmacyPatientMostRecentLabResultsFetchByPatientBrightreeID' => ['brightreeID']
 	];
+
+	public function patientQuery(): PatientSearchBuilder
+	{
+		return new PatientSearchBuilder($this);
+	}
+
+	public function patientPhoneQuery(): PatientPhoneSearchBuilder
+	{
+		return new PatientPhoneSearchBuilder($this);
+	}
+
+	public function patientNoteQuery(): PatientNoteSearchBuilder
+	{
+		return new PatientNoteSearchBuilder($this);
+	}
+
+	public function find($identifier): object
+	{
+		if (is_int($identifier) || ctype_digit((string) $identifier)) {
+			return $this->PatientFetchByBrightreeID((int) $identifier);
+		}
+
+		$identifier = trim((string) $identifier);
+		if ($identifier === '') {
+			throw new BrightreeException('Patient identifier is required', 1003);
+		}
+
+		return $this->PatientFetchByPatientID($identifier);
+	}
+
+	public function findByExternalId(string $externalId): object
+	{
+		try {
+			$externalId = trim($externalId);
+			if ($externalId === '') {
+				throw new BrightreeException('ExternalID is required', 1003);
+			}
+
+			return $this->PatientFetchByExternalID($externalId);
+		} catch (BrightreeException $e) {
+			throw $e;
+		} catch (\Throwable $e) {
+			throw new BrightreeException("Error finding patient by external ID: " . $e->getMessage(), 0, $e);
+		}
+	}
+
+	public function findByName(string $lastName, ?string $firstName = null, int $pageSize = 10, int $page = 1): object
+	{
+		$builder = $this->patientQuery()
+			->lastName($lastName)
+			->pageSize($pageSize)
+			->page($page);
+
+		if ($firstName !== null && trim($firstName) !== '') {
+			$builder->firstName($firstName);
+		}
+
+		return $builder->get();
+	}
+
+	public function findByPhone(string $phoneNumber, int $pageSize = 10, int $page = 1): object
+	{
+		return $this->patientPhoneQuery()
+			->phoneNumber($phoneNumber)
+			->pageSize($pageSize)
+			->page($page)
+			->get();
+	}
+
+	public function findAdditionalContacts($identifier): object
+	{
+		if (is_int($identifier) || ctype_digit((string) $identifier)) {
+			return $this->AdditionalPatientContactFetchByBrightreeID((string) $identifier);
+		}
+
+		$identifier = trim((string) $identifier);
+		if ($identifier === '') {
+			throw new BrightreeException('Patient identifier is required', 1003);
+		}
+
+		return $this->AdditionalPatientContactFetchByPatientID($identifier);
+	}
 
 	public function PatientFetchByBrightreeID(int $id): object
 	{

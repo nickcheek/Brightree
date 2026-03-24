@@ -129,6 +129,181 @@ class SalesOrderTest extends TestCase
 		$this->salesOrder->SalesOrderCreate('not-iterable');
 	}
 
+	public function testSalesOrderQueryBuilderBuildsPayload()
+	{
+		$expectedResponse = (object) ['success' => true];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderSearch', [
+			                 'SearchParams' => [
+				                 'BrightreeID' => 12345,
+				                 'Branch' => [
+					                 'ID' => 12,
+					                 'Value' => 'Main'
+				                 ],
+				                 'Reference' => 'REF-1'
+			                 ],
+			                 'SortParams' => [
+				                 [
+					                 'SortField' => 'BrightreeID',
+					                 'SortOrder' => 'Descending'
+				                 ]
+			                 ],
+			                 'pageSize' => 25,
+			                 'page' => 2
+		                 ])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->salesOrderQuery()
+		                           ->brightreeId(12345)
+		                           ->branch(12, 'Main')
+		                           ->reference('REF-1')
+		                           ->sortBy('BrightreeID', 'Descending')
+		                           ->pageSize(25)
+		                           ->page(2)
+		                           ->get();
+
+		$this->assertEquals($expectedResponse, $result);
+	}
+
+	public function testSalesOrderPayorQueryBuilderBuildsPayload()
+	{
+		$expectedResponse = (object) ['success' => true];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderPayorSearch', [
+			                 'searchParams' => [
+				                 'SOKey' => 12345,
+				                 'PolicyNumber' => 'POL123',
+				                 'Verified' => true
+			                 ],
+			                 'sortParams' => [],
+			                 'pageSize' => 10,
+			                 'page' => 1
+		                 ])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->salesOrderPayorQuery()
+		                           ->soKey(12345)
+		                           ->policyNumber('POL123')
+		                           ->verified()
+		                           ->get();
+
+		$this->assertEquals($expectedResponse, $result);
+	}
+
+	public function testSalesOrderVoidQueryBuilderBuildsPayload()
+	{
+		$expectedResponse = (object) ['success' => true];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderVoidSearch', [
+			                 'searchParams' => [
+				                 'SalesOrderBrightreeID' => 999,
+				                 'VoidReason' => [
+					                 'ID' => 7,
+					                 'Value' => 'Duplicate'
+				                 ]
+			                 ],
+			                 'sortParams' => [],
+			                 'pageSize' => 10,
+			                 'page' => 1
+		                 ])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->salesOrderVoidQuery()
+		                           ->salesOrderBrightreeId(999)
+		                           ->voidReason(7, 'Duplicate')
+		                           ->get();
+
+		$this->assertEquals($expectedResponse, $result);
+	}
+
+	public function testSalesOrderTemplateQueryBuilderBuildsPayload()
+	{
+		$expectedResponse = (object) ['success' => true];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderTemplateSearch', [
+			                 'SearchParams' => [
+				                 'ExternalID' => 'EXT-1',
+				                 'LastRunHasError' => true,
+				                 'Patient' => [
+					                 'ID' => 111,
+					                 'Value' => 'John Smith'
+				                 ]
+			                 ],
+			                 'SortParams' => [],
+			                 'pageSize' => 10,
+			                 'page' => 1
+		                 ])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->salesOrderTemplateQuery()
+		                           ->externalId('EXT-1')
+		                           ->lastRunHasError()
+		                           ->patient(111, 'John Smith')
+		                           ->get();
+
+		$this->assertEquals($expectedResponse, $result);
+	}
+
+	public function testSalesOrderTemplateScheduleQueryBuilderBuildsPayload()
+	{
+		$expectedResponse = (object) ['success' => true];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderTemplateScheduleSearch', [
+			                 'searchParams' => [
+				                 'SOTemplateKey' => 123,
+				                 'Description' => 'Monthly',
+				                 'IsDisabled' => false
+			                 ],
+			                 'sortParams' => [],
+			                 'pageSize' => 10,
+			                 'page' => 1
+		                 ])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->salesOrderTemplateScheduleQuery()
+		                           ->soTemplateKey(123)
+		                           ->description('Monthly')
+		                           ->isDisabled(false)
+		                           ->get();
+
+		$this->assertEquals($expectedResponse, $result);
+	}
+
+	public function testSalesOrderTemplateScheduleLogQueryBuilderBuildsPayload()
+	{
+		$expectedResponse = (object) ['success' => true];
+
+		$this->salesOrder->expects($this->once())
+		                 ->method('apiCall')
+		                 ->with('SalesOrderTemplateScheduleLogSearch', [
+			                 'searchParams' => [
+				                 'SOTemplateScheduleKey' => 999,
+				                 'ErrorMessage' => 'Timeout'
+			                 ],
+			                 'sortParams' => [],
+			                 'pageSize' => 10,
+			                 'page' => 1
+		                 ])
+		                 ->willReturn($expectedResponse);
+
+		$result = $this->salesOrder->salesOrderTemplateScheduleLogQuery()
+		                           ->soTemplateScheduleKey(999)
+		                           ->errorMessage('Timeout')
+		                           ->get();
+
+		$this->assertEquals($expectedResponse, $result);
+	}
+
 	public function testSalesOrderFetchByBrightreeID()
 	{
 		$expectedResponse = (object) ['success' => true];
