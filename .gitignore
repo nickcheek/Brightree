@@ -1,14 +1,7 @@
 /vendor/
 /build/
-.idea/*.xml
-git_tool
-*.xml
-.*
-
-# But keep .gitignore itself tracked
-!.gitignore
-
-.idea/
-
-.idea/
+/.idea/
 .phpunit.result.cache
+
+# Keep this tracked
+!.gitignore
