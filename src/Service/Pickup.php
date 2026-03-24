@@ -25,7 +25,9 @@ class Pickup extends BaseService
 		'PickupExchangeSendPOD' => true,
 		'PickupExchangeUpdate' => true,
 		'PickupExchangeUpdateItem' => true,
-		'PickupExchangeUpdatePODStatus' => true
+		'PickupExchangeUpdatePODStatus' => true,
+		'PickupExchangeUpdateWIPInfoFromTemplate' => true,
+		'PickupExchangeWIPStatesFetchAll' => []
 	];
 
 	public function PickupExchangeFetchByBrightreeID(iterable $query): object

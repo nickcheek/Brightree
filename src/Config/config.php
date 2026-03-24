@@ -7,7 +7,7 @@ return (object) [
         'documentation' => 'https://webservices.brightree.net/v0100-2004/DocumentationService/DocumentationService.svc',
         'custom' => 'https://webservices.brightree.net/v0100-1610/CustomFieldService/CustomFieldService.svc',
         'insurance' => 'https://webservices.brightree.net/v0100-2310/OrderEntryService/InsuranceService.svc',
-        'reference' => 'https://webservices.brightree.net/v0100-2049/ReferenceDataService/ReferenceDataService.svc',
+        'reference' => 'https://webservices.brightree.net/v0100-2409/ReferenceDataService/ReferenceDataService.svc',
         'doctor' => 'https://webservices.brightree.net/v0100-2406/DoctorService/DoctorService.svc',
         'inventory' => 'https://webservices.brightree.net/v0100-2309/InventoryService/InventoryService.svc',
         'pickup' => 'https://webservices.brightree.net/v0100-2007/OrderEntryService/PickupExchangeService.svc',

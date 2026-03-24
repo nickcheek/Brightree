@@ -34,6 +34,7 @@ class SalesOrder extends BaseService
 		'SalesOrderPayorSearch' => true,
 		'SalesOrderQuickAddItem' => true,
 		'SalesOrderQuickAddItemWithItemsDataReturn' => true,
+		'SalesOrderQuickAddItemWithLinkedPAR' => true,
 		'SalesOrderRemoveItem' => true,
 		'SalesOrderRemoveMarketingReferral' => true,
 		'SalesOrderSearch' => true,
@@ -76,16 +77,12 @@ class SalesOrder extends BaseService
 		'StopReasonFetchAll' => [],
 		'StopReasonSalesOrderTemplateUpdate' => true,
 		'StopReasonSalesOrderUpdate' => true,
-		'PatientNoteCommentCreate' => true,
-		'PatientNoteCommentUpdate' => true,
 	];
 
 	protected array $specialMethods = [
 		'SalesOrderTemplateItemFrequencyFetchByBrightreeID' => ['BrightreeID'],
 		'StopReasonSalesOrderFetchByBrightreeID' => ['BrightreeID'],
-		'StopReasonSalesOrderTemplateFetchByBrightreeID' => ['BrightreeID'],
-		'PatientNotesCommentFetch' => ['PatientNoteKey'],
-		'PatientNoteCommentFetch' => ['PatientNoteKey']
+		'StopReasonSalesOrderTemplateFetchByBrightreeID' => ['BrightreeID']
 	];
 
 	public function SalesOrderFetchByBrightreeID(iterable $query): object

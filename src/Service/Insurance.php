@@ -30,7 +30,10 @@ class Insurance extends BaseService
 		'ItemGroupFetchAll' => [],
 		'PARFormFetchAll' => [],
 		'Ping' => [],
+		'PriceTableFetchByBrightreeID' => true,
 		'PriceTableSearch' => true,
+		'PriceTableUpdate' => true,
+		'SupplyAllowanceRuleSetFetchAll' => [],
 		'SpanDateSplit' => true
 	];
 

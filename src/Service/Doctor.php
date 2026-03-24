@@ -7,6 +7,7 @@ use Nickcheek\Brightree\Exceptions\BrightreeException;
 class Doctor extends BaseService
 {
 	protected array $methods = [
+		'CMNFaxScheduleFetchAll' => [],
 		'DoctorCreate' => true,
 		'DoctorNoteCreate' => true,
 		'DoctorNoteUpdate' => true,

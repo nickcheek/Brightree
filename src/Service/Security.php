@@ -7,6 +7,7 @@ use Nickcheek\Brightree\Exceptions\BrightreeException;
 class Security extends BaseService
 {
 	protected array $methods = [
+		'Ping' => [],
 		'UserCreate' => true,
 		'UserSearch' => true,
 		'UserUpdate' => true,

@@ -14,6 +14,7 @@ class Document extends BaseService
 		'DocumentReviewUpdate' => true,
 		'DocumentSearch' => true,
 		'GenerateDocumentID' => true,
+		'StoreDocumentAndReturnInfo' => true,
 		'StoreDocument' => true
 	];
 
