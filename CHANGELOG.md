@@ -2,7 +2,7 @@
 
 All notable changes to `brightree` will be documented in this file
 
-## Unreleased
+## 4.1.0 - 2026-03-24
 
 - Updated Patient service to use the `v0100-2410` endpoint.
 - Added `FetchPatientOptInStatus`, `UpdatePatientOptInStatus`, `AdditionalPatientContactCreate`, `AdditionalPatientContactFetchByBrightreeID`, and `AdditionalPatientContactUpdate` to the Patient service.
