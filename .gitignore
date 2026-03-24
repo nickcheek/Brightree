@@ -9,3 +9,6 @@ git_tool
 !.gitignore
 
 .idea/
+
+.idea/
+.phpunit.result.cache
