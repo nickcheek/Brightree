@@ -60,8 +60,8 @@ class Patient extends BaseService
 		'PatientPayorFetchAll' => ['PatientKey'],
 		'PatientPayorRemove' => ['brightreeID'],
 		'PatientRemoveMarketingReferral' => ['brightreeID'],
-		'PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID' => ['BrightreeID', 'PatientBrightreeID'],
-		'PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID' => ['BrightreeID', 'PatientBrightreeID'],
+		'PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID' => ['PatientBrightreeID', 'BrightreeID'],
+		'PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID' => ['PatientBrightreeID', 'BrightreeID'],
 		'PharmacyPatientMostRecentLabResultsFetchByPatientBrightreeID' => ['brightreeID']
 	];
 

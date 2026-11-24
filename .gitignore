@@ -2,6 +2,7 @@
 /build/
 /.idea/
 .phpunit.result.cache
+/composer.lock
 
 # Keep this tracked
 !.gitignore

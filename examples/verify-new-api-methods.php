@@ -169,15 +169,15 @@ if ($contactKey !== null) {
 	skipTest('AdditionalPatientContactUpdate', 'requires --contact-key');
 }
 
-heading('SalesOrder Service');
-
 if ($patientNoteKey !== null) {
-	runCall('PatientNotesCommentFetch', function () use ($bt, $patientNoteKey) {
-		return $bt->SalesOrder()->PatientNotesCommentFetch($patientNoteKey);
+	runCall('PatientNoteCommentsFetch', function () use ($bt, $patientNoteKey) {
+		return $bt->Patient()->PatientNoteCommentsFetch(['PatientNoteKey' => $patientNoteKey]);
 	});
 } else {
-	skipTest('PatientNotesCommentFetch', 'requires --patient-note-key');
+	skipTest('PatientNoteCommentsFetch', 'requires --patient-note-key');
 }
+
+heading('SalesOrder Service');
 
 if ($patientId !== null) {
 	$quickAddPayload = [

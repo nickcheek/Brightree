@@ -49,7 +49,7 @@ class Insurance extends BaseService
 		'InsuranceCarrierCodeDelete' => ['BrightreeID'],
 		'InsuranceSpanDateHoldInclusionDelete' => ['BrightreeID'],
 		'InsuranceSpanDateOverrideDelete' => ['BrightreeID'],
-		'InsuranceValidationRuleSetCreate' => ['BranchBrightreeID', 'InsuranceBrightreeID'],
+		'InsuranceValidationRuleSetCreate' => ['ValidationRuleSetBrightreeID', 'InsuranceBrightreeID'],
 		'InsuranceValidationRuleSetDelete' => ['BrightreeID'],
 		'ItemGroupFetchByInsuranceBrightreeID' => ['BrightreeID']
 	];
@@ -90,11 +90,12 @@ class Insurance extends BaseService
 		}
 	}
 
-	public function InsuranceFetchByExternalID(int $id): object
+	public function InsuranceFetchByExternalID(string $id): object
 	{
 		try {
-			if ($id <= 0) {
-				throw new BrightreeException("Invalid External ID: $id", 1003);
+			$id = trim($id);
+			if ($id === '') {
+				throw new BrightreeException('ExternalID is required', 1003);
 			}
 			return $this->apiCall('InsuranceFetchByExternalID', ['ExternalID' => $id]);
 		} catch (BrightreeException $e) {

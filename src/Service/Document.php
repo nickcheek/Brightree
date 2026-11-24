@@ -34,7 +34,7 @@ class Document extends BaseService
 		return new DocumentBatchSearchBuilder($this);
 	}
 
-	public function FetchDocumentContent(int $key = 12345): object
+	public function FetchDocumentContent(int $key): object
 	{
 		try {
 			if ($key <= 0) {

@@ -3,595 +3,146 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 [![Total Downloads](https://img.shields.io/packagist/dt/nickcheek/brightree.svg?style=flat-square)](https://packagist.org/packages/nickcheek/brightree)
 
-PHP wrapper for the Brightree API.  
+PHP wrapper for the Brightree SOAP API. It covers 13 services and 401 API methods, with fluent query builders for the search-heavy ones.
+
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Services](#services)
+- [How methods are called](#how-methods-are-called)
+- [Query builders](#query-builders)
+- [Error handling](#error-handling)
+- [Custom calls](#custom-calls)
+- [Examples](#examples)
 
 ## Installation
 
-You can install the package via composer:
+Requires PHP 7.4 or newer with the `soap` extension.
 
 ```bash
 composer require nickcheek/brightree
 ```
 
+## Quick start
 
-## Usage
+```php
+use Nickcheek\Brightree\Brightree;
 
-Reference Class in your controller
-``` php
-use \Nickcheek\Brightree\Brightree;
-```
+$bt = new Brightree($username, $password);
 
-Create a new instance of the service and the API call you're looking for.
-``` php
-$bt = new Brightree($username,$password);
 $patient = $bt->Patient()->PatientFetchByBrightreeID(141508);
-return $patient;
 ```
 
-## Update
+Pick a service from the table below, then call any of its methods. Every call returns the response object from Brightree.
 
-Fluent query builders were added for the search-heavy services.
+## Services
 
-See [QUERY_BUILDERS.md](QUERY_BUILDERS.md) for examples covering:
+Each service has its own page listing every method, its arguments and the request fields it sends.
 
-- `Patient`
-- `SalesOrder`
-- `Doctor`
-- `Insurance`
-- `Document`
+| Service | Accessor | Methods | Covers |
+|---|---|---|---|
+| [Patient](docs/services/patient.md) | `$bt->Patient()` | 52 | Patients, contacts, notes, payors, pharmacy data and opt-in status. |
+| [SalesOrder](docs/services/sales-order.md) | `$bt->SalesOrder()` | 73 | Sales orders, sales order templates, schedules, WIP state, shipping and stop reasons. |
+| [Doctor](docs/services/doctor.md) | `$bt->Doctor()` | 17 | Doctors, doctor notes, referral contacts, facilities and marketing reps. |
+| [Insurance](docs/services/insurance.md) | `$bt->Insurance()` | 38 | Insurance records, carrier codes, span dates, payer search and price tables. |
+| [Document](docs/services/document.md) | `$bt->Document()` | 10 | Document management: types, batches, search, storage and content. |
+| [Documentation](docs/services/documentation.md) | `$bt->Documentation()` | 55 | CMNs, PARs and linking them to sales order items. |
+| [Inventory](docs/services/inventory.md) | `$bt->Inventory()` | 31 | Items, locations, quantities, lots, serial numbers and item maintenance. |
+| [Pickup](docs/services/pickup.md) | `$bt->Pickup()` | 21 | Pickup and exchange orders. |
+| [Reference](docs/services/reference.md) | `$bt->Reference()` | 69 | Lookup data: branches, facilities, referral contacts, users, vendors and reason lists. |
+| [Pricing](docs/services/pricing.md) | `$bt->Pricing()` | 11 | Prices, price details and price tables. |
+| [Invoice](docs/services/invoice.md) | `$bt->Invoice()` | 8 | Invoices and open balances. |
+| [CustomField](docs/services/custom-field.md) | `$bt->CustomField()` | 3 | Custom field definitions and values. |
+| [Security](docs/services/security.md) | `$bt->Security()` | 13 | Users, user groups and permissions. |
 
+## How methods are called
 
-# API's
+Methods are named after the Brightree SOAP operation they call. They come in three shapes, and each service page shows which shape a method uses.
 
-## Patient Class
+**No arguments.** Mostly the `FetchAll` lookups.
 
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$patient = $bt->Patient()->PatientFetchByBrightreeID(141508);
-return $patient;
+```php
+$branches = $bt->Reference()->BranchInfoFetchAll();
 ```
 
-#### Methods
-``` php
-AdditionalPatientContactCreate($additionalPatientContact);
-AdditionalPatientContactFetchByBrightreeID($patientBrightreeID);
-AdditionalPatientContactUpdate($brightreePatientContactKey, $additionalPatientContact);
-PatientCreate($patient);
-PatientSearch($patient);
-PatientUpdate($patient);
-PatientFetchByExternalID($externalId);
-PatientFetchByPatientID($patientId);
-PatientFetchByBrightreeID($brightreeId);
-PatientPhoneNumberSearch($patient);
-PatientNoteCreate($note);
-PatientNoteFetchByKey($key);
-PatientNoteFetchByPatient($brightreeId);
-PatientNoteSearch($search);
-PatientNoteUpdate($update);
-PatientPayorAdd($payor);
-PatientPayorFetch($payor);
-PatientPayorFetchAll($patientKey);
-PatientPayorRemove($brightreeid);
-PatientPayorUpdate($payor);
-PatientAddMarketingReferral($brightreeid,$referralid);
-PatientRemoveMarketingReferral($id);
-FacilityMasterInfoFetchAll();
-FacilityResidentCreate($resident);
-PharmacyPatientClinicalInfoFetchByBrightreeID($query);
-PharmacyPatientLabResultsFetchByBrightreeIDAndPatientBrightreeID($patientID, $brightreeID);
-PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID($patientID, $brightreeID);
-PharmacyPatientMostRecentLabResultsFetchByPatientBrightreeID($patientID);
-FetchPatientOptInStatus($brightreeId, $patientPhone);
-UpdatePatientOptInStatus($patientOptInStatus);
+**Positional arguments.** The wrapper builds the request for you.
 
-```
-
-## Document Management Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$document = $bt->Document()->DocumentTypesFetchAll();
-return $document;
-```
-
-#### Methods
-``` php
-DocumentTypesFetchAll();
-DocumentBatchCreate($batch);
-DocumentBatchSearch($search);
-DocumentSearch($search);
-DocumentPropertyUpdate($query);
-FetchDocumentContent($key);
-GenerateDocumentID($query);
-StoreDocument($document);
-
-```
-
-## Custom Field Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-//If you need to return the inactive records, pass the number 1 as the second variable
-$cf = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient',1);
-return $cf;
-```
-
-#### Methods
-``` php
-CustomFieldFetchAllByCategory($category,$includeInactive);
-CustomFieldValueFetchAllByBrightreeID($brightreeID,$category);
-CustomFieldValueSaveMultiple($query);
-
-```
-## Doctor Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
+```php
 $doctor = $bt->Doctor()->DoctorFetchByBrightreeID(123);
-return $doctor;
+$fields = $bt->CustomField()->CustomFieldFetchAllByCategory('Patient', 1);
 ```
 
-#### Methods
-``` php
-AddDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
-DoctorCreate($query);
-DoctorFetchByBrightreeID($brightreeID);
-DoctorFetchByExternalID($externalID);
-DoctorGroupFetchAll();
-DoctorReferralContactsFetchByDoctorKey($doctorBrightreeID);
-DoctorSearch($query);
-DoctorUpdate($query);
-DoctorNoteCreate($query);
-DoctorNoteUpdate($query);
-DoctorNoteFetchByKey($brightreeID);
-DoctorNoteFetchByDoctor($brightreeID);
-FacilityFetchAll();
-FacilityGroupFetchAll();
-MarketingRepFetchAll();
-RemoveDoctorReferralContact($doctorBrightreeID,$referralContactBrightreeID);
+**A request array.** You pass the request as an array that matches the Brightree API definition, and it is sent as is.
 
-```
-
-## Insurance Class
-Use the [INSURANCE](ServicesGuide/INSURANCE.md) Readme to see available definitions.
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$insurance = $bt->Insurance()->InsuranceFetchByBrightreeID(['BrightreeID'=>123]);
-return $insurance;
-```
-
-#### Methods
-``` php
-InsuranceFetchByBrightreeID($BrightreeID);
-InsuranceFetchByExternalID($ExternalID);
-InsuranceSearch($query);
-InsuranceUpdate($query);
-InsuranceCreate($query);
-BranchOfficeInsuranceFetchByBranchBrightreeIDAndInsuranceBrightreeID($branchID,$insuranceID);
-BranchOfficeInsuranceUpdate($InsuranceCarrierCodeUpdate);
-BundleBillingRuleSetFetchAll();
-ClaimFormFetchAll();
-CommercialEligibilityPayerSearch($InsuranceCarrierCodeUpdate);
-CommercialPayerSearch($InsuranceCarrierCodeUpdate);
-CoverageLimitFetchAll();
-CustomAppealFormFetchAll();
-FetchPmtSubTypeByPmtTypeBrightreeID($paymentTypeBrightreeID);
-InsuranceCarrierCodeCreate($query);
-InsuranceCarrierCodeUpdate($query);
-InsuranceCarrierCodeDelete($brightreeID);
-InsuranceCompanyFetchAll();
-InsuranceCreate($query);
-InsuranceGroupFetchAll();
-InsurancePlanTypeFetchAll();
-InsurancePrintedFormsClaimFieldsFetch();
-InsurancePrintedFormsPARFieldsFetch();
-InsuranceSpanDateHoldInclusionCreate($query);
-InsuranceSpanDateHoldInclusionDelete($brightreeID);
-InsuranceSpanDateOverrideCreate($query);
-InsuranceSpanDateOverrideDelete($brightreeID);
-InsuranceSpanDateOverrideUpdate($query);
-InsuranceValidationRuleSetCreate($validationRuleSetBrightreeID,$insuranceBrightreeID);
-InsuranceValidationRuleSetDelete($insuranceBrightreeID);
-ItemGroupFetchAll();
-ItemGroupFetchByInsuranceBrightreeID($insuranceBrightreeID);
-PARFormFetchAll();
-Ping();
-PriceTableSearch($query);
-SpanDateSplit($query);
-
-```
-
-## Inventory Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$inventory = $bt->Inventory()->ClaimNoteTypeFetchAll();
-return $inventory;
-```
-
-#### Methods
-``` php
-ClaimNoteTypeFetchAll();
-CoverageTypeFetchAll();
-FetchItemLocations($query);
-FetchItemQuantitiesAtLocation($query);
-InventoryItemAddLots($query);
-InventoryItemAddSerialNumbers($query);
-InventoryItemAdjustment($query);
-InventoryItemTransfer($query);
-ItemAddToLocation($query);
-ItemAddToLocations($query);
-ItemCreate($query);
-ItemFetchByBrightreeID($query);
-ItemFetchByExternalID($query);
-ItemFetchByItemID($query);
-ItemFetchReplacementItemsByBrightreeID($query);
-ItemFetchReplacementItemsByItemID($query);
-ItemLocationsUpdate($query);
-ItemLocationUpdate($query);
-ItemSearch($query);
-ItemUpdate($query);
-KitTypeFetchAll();
-NDCFetchAll();
-StockingUOMFetchAll();
-```
-## Pickup/Exchange Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$params = array(
-    'searchParams'=> array(
-        'Branch'=> array(
-            'ID' => '102'
-        )
-    ),
-    'sortParams' => '',
-    'pageSize' => '100',
-    'page' => 1
-);
-$puex = $bt->Pickup()->PickupExchangeSearch($params);
-return $puex;
-```
-
-#### Methods
-``` php
-
-PickupExchangeAddAllRentalItems($query);
-PickupExchangeAddDeliveryException($query);
-PickupExchangeAddPickupItem($query);
-PickupExchangeCancelPOD($query);
-PickupExchangeConfirm($query);
-PickupExchangeCreate($query);
-PickupExchangeDelete($query);
-PickupExchangeFetchByBrightreeID($query);
-PickupExchangeFetchByExternalID($query);
-PickupExchangeItemAddDeliveryException($query);
-PickupExchangeItemSpecifyExchangeItem($query);
-PickupExchangeMessagesFetchByBrightreeID($query);
-PickupExchangePayorSearch($query);
-PickupExchangeRemoveItem($query);
-PickupExchangeSearch($query);
-PickupExchangeSendPOD($query);
-PickupExchangeUpdate($query);
-PickupExchangeUpdateItem($query);
-PickupExchangeUpdatePODStatus($query);
-
-```
-## Reference Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$reference = $bt->Reference()->AccountGroupFetchAll();
-return $reference;
-```
-
-#### Methods
-``` php
-
-AccountGroupFetchAll();
-AddFacilityReferralContact($query);
-BranchInfoFetchAll();
-BranchInfoFetchByBrightreeID($query);
-ClaimNoteTypeFetchAll();
-ContactTypeCreate($query);
-ContactTypeDelete($query);
-ContactTypeFetchAll();
-ContactTypeFetchByBrightreeID($query);
-ContactTypeUpdate($query);
-DeliveryTechnicianFetchAll();
-DepreciationTypesFetchAll();
-EPSDTConditionCodeFetchAll();
-FacilityCreate($query);
-FacilityDelete($query);
-FacilityFetchByBrightreeID($query);
-FacilityFetchByExternalID($query);
-FacilityInfoFetchAll();
-FacilityReferralContactsFetchByFacilityKey($query);
-FacilityUpdate($query);
-FetchCurrentSecUser();
-FunctionalAssessmentFetchAll();
-GLAccountGroupsFetchAll();
-ItemGroupFetchAll();
-ItemManufacturerFetchAll();
-ItemStatusFetchAll();
-ItemTypesFetchAll();
-LocationInfoFetchAll();
-MarketingRepFetchAll();
-MarketingRepFetchByBrightreeID($query);
-MarketingRepFetchByExternalID($query);
-MarketingRepUpdateExternalID($query);
-MSPInsTypeFetchAll();
-PatientNoteReasonFetchAll();
-PlaceOfServiceFetchAll();
-PolicyClaimCodeFetchAll();
-PolicyTypeCodeFetchAll();
-PractitionerInfoFetchAll();
-ReferralContactCreate($query);
-ReferralContactFetchByBrightreeID($query);
-ReferralContactFetchByExternalID($query);
-ReferralContactSearch($query);
-ReferralContactUpdate($query);
-ReferralFetchByBrightreeID($query);
-ReferralSearch($query);
-RemoveFacilityReferralContact($query);
-SalesOrderClassificationFetchAll();
-SalesOrderManualHoldReasonFetchAll();
-SalesOrderVoidReasonFetchAll();
-SalesTypesFetchAll();
-SecUsersFetchAll();
-ShippingCarriersFetchAll();
-SiteInfoFetch($query);
-TaxZoneFetchAll();
-VendorFetchByBrightreeID($query);
-VendorsFetchAll();
-WIPStatesFetchAll();
-
-```
-## SalesOrder Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$salesorder = $bt->SalesOrder()->BrightSHIPSalesOrderAck(['soKey'=> 12345]);
-return $salesorder;
-```
-
-#### Methods
-``` php
-BrightSHIPSalesOrderAck($query);
-BrightShipSalesOrderFetch($query);
-OrderImport($query);
-SalesOrderAddDeliveryException($query); 
-SalesOrderAddMarketingReferral($query);
-SalesOrderConfirm($query);
-SalesOrderCreate($query);
-SalesOrderFetchByBrightreeID($query);
-SalesOrderFetchByExternalID($query);
-SalesOrderFetchByPurchaseOrderID($query);
-SalesOrderFetchPendingByShippingCarrierKey($query);
-SalesOrderFetchReadyforShipping($query);
-SalesOrderFulfillmentVendorsFetchAll();
-SalesOrderItemAddDeliveryException($query);
-SalesOrderItemPriceOptionFetchByBrightreeID($query);
-SalesOrderItemReplaceGeneric($query); 
-SalesOrderItemUpdateLotNumbers($query); 
-SalesOrderItemUpdatePriceOption($query); 
-SalesOrderItemUpdateSerialNumbers($query);
-SalesOrderMessagesFetchByBrightreeID($query);
-SalesOrderOverrideValidationDetailMessage($query);
-SalesOrderOverrideValidationHeaderMessage($query);
-SalesOrderPayorSearch($query);
-SalesOrderQuickAddItem($query);
-SalesOrderQuickAddItemWithItemsDataReturn($query);
-SalesOrderRemoveItem($query);
-SalesOrderRemoveMarketingReferral($query); 
-SalesOrderSearch($query); 
-SalesOrderSendPOD($query);
-SalesOrderTemplateCreate($query);
-SalesOrderTemplateCreateSalesOrder($query);
-SalesOrderTemplateDelete($query); 
-SalesOrderTemplateFetchByBrightreeID($query);
-SalesOrderTemplateFetchByExternalID($query);
-SalesOrderTemplateItemFrequencyFetchByBrightreeID($brightreeID);
-SalesOrderTemplateItemFrequencyUpdate($query);
-SalesOrderTemplateItemPriceOptionFetchByBrightreeID($query);
-SalesOrderTemplateItemUpdatePriceOption($query);
-SalesOrderTemplateQuickAddItem($query);
-SalesOrderTemplateRemoveItem($query); 
-SalesOrderTemplateScheduleFetchBySOTemplateKey($query);
-SalesOrderTemplateScheduleLogSearch($query);
-SalesOrderTemplateScheduleSearch($query);
-SalesOrderTemplateScheduleUpdate($query);
-SalesOrderTemplateSearch($query);
-SalesOrderTemplateUpdate($query);
-SalesOrderTemplateUpdateInsurance($query);
-SalesOrderTemplateUpdateItem($query);
-SalesOrderTemplateUpdateItemPayor($query);
-SalesOrderTemplateUpdateItemsWithDefaultPriceOption($query);
-SalesOrderTemplateUpdateWIPState($query);
-SalesOrderUpdate($query);
-SalesOrderUpdateInsurance($query);
-SalesOrderUpdateItem($query);
-SalesOrderUpdateItemGeneric($query);
-SalesOrderUpdateItemNextBilling($query);
-SalesOrderUpdateItemPayor($query);
-SalesOrderUpdateItemsWithDefaultPriceOption($query);
-SalesOrderUpdatePODStatus($query);
-SalesOrderUpdateTracking($query);
-SalesOrderUpdateWIPState($query);
-SalesOrderVoid($query);
-SalesOrderVoidSearch($query);
-SearchWIPStatusWithUpdate($query);
-StopReasonFetchAll();
-StopReasonSalesOrderFetchByBrightreeID($brightreeID);
-PatientNotesCommentFetch($patientNoteKey);
-PatientNoteCommentFetch($patientNoteKey);
-PatientNoteCommentCreate($query);
-PatientNoteCommentUpdate($query);
-StopReasonSalesOrderTemplateFetchByBrightreeID($brightreeID);
-StopReasonSalesOrderTemplateUpdate($query);
-StopReasonSalesOrderUpdate($query);
-
-```
-## Documentation Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$documentation = $bt->Documentation()->CMNFetchByBrightreeID(['BrightreeID'=>12345]);
-return $documentation;
-```
-
-#### Methods
-``` php
-CMNCreateFromPatient($query);
-CMNDetailCreate($query);
-CMNDetailDelete($query);
-CMNDetailUpdate($query);
-CMNFetchByBrightreeID($query);
-CMNFetchByExternalID($query);
-CMNFetchByPatientBrightreeID($query);
-CMNFetchBySalesOrderBrightreeID($query);
-CMNLog($query);
-CMNPreview($query);
-CMNPrint($query);
-CMNQuestionAnswerConfiguration($query);
-CMNReasonFetchAll($query);
-CMNRenew($query);
-CMNRevise($query);
-CMNSearch($query);
-CMNTaskCreate($query);
-CMNTaskUpdate($query);
-CMNUpdate($query);
-PARAddPurchaseLimit($query);
-PARCreateFromPatient($query);
-PARDelete($query);
-PARFetchByBrightreeID($query);
-PARFetchByExternalID($query);
-PARFetchByPatientBrightreeID($query);
-PARFetchBySalesOrderBrightreeID($query);
-PARFetchBySalesOrderTemplateBrightreeID($query);
-PARLog($query);
-PARRenew($query);
-PARSearch($query);
-PARTaskCreate($query);
-PARTaskFetchByPARBrightreeID($brightreeID);
-PARTaskReasonFetchAll();
-PARTaskUpdate($query);
-PARUpdate($query);
-PARUpdatePurchaseLimit($query);
-SalesOrderItemLinkCMN($query);
-SalesOrderItemLinkNewCMN($query);
-SalesOrderItemLinkToNewPAR($query);
-SalesOrderItemLinkToPAR($query);
-SalesOrderItemsLinkCMN($query);
-SalesOrderItemsLinkNewCMN($query);
-SalesOrderItemsLinkToNewPAR($query);
-SalesOrderItemsLinkToPAR($query);
-SalesOrderItemsUnlinkCMN($query);
-SalesOrderItemsUnlinkPAR($query);
-SalesOrderItemUnlinkCMN($query);
-SalesOrderItemUnlinkPAR($query);
-SalesOrderTemplateItemLinkToPAR($query);
-SalesOrderTemplateItemsLinkToPAR($query);
-SalesOrderTemplateItemsUnlinkPAR($query);
-SalesOrderTemplateItemUnlinkPAR($query);
-SetParticipantComplianceDate($query);
-
-```
-## Pricing Class
-
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$pricing = $bt->Pricing()->NonTaxReasonFetchAll($query);
-return $pricing;
-```
-#### Methods
 ```php
-CMNFormFetchAll($query);
-NonTaxReasonFetchAll($query);
-PriceCreateItem($query);
-PriceCreateStandard($query);
-PriceDetailCreate($query);
-PriceDetailFetchByBrightreeDetailID($query);
-PriceDetailUpdate($query);
-PriceFetch($query);
-PriceOptionLetterTypeFetchAll($query);
-PriceTableFetchAll($query);
+$order = $bt->SalesOrder()->SalesOrderFetchByBrightreeID(['BrightreeID' => 12345]);
 ```
 
-## Security Class
+## Query builders
 
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$security = $bt->Security()->UserFetchByBrightreeID($brightreeID);
-return $security;
-```
+The search methods on `Patient`, `SalesOrder`, `Doctor`, `Insurance` and `Document` have fluent builders, so you do not need to remember the request shape.
 
-#### Methods
 ```php
-UserCreate($query);
-UserFetchByBrightreeID($brightreeID);
-UserSearch($query);
-UserUpdate($query);
-UserGroupCreate($query);
-UserGroupUpdate($query);
-UserGroupFetchByBrightreeID($query);
-UserGroupFetchAll();
-UserGroupPermissionsFetchByUserGroupBrightreeID($query);
-UserGroupPermissionsUpdate($query);
-UserGroupBDMPermissionsFetchByUserGroupBrightreeID($userGroupBrightreeID);
-UserGroupBDMPermissionsUpdate($userGroupBrightreeID, $userGroupBDMPermissions);
+$patients = $bt->Patient()->patientQuery()
+    ->lastName('Smith')
+    ->firstName('John')
+    ->sortBy('LastName')
+    ->pageSize(25)
+    ->get();
 ```
 
-## Invoice Class
-#### Usage
-``` php
-$bt = new Brightree($username,$password);
-$invoice = $bt->Invoice()->InvoiceFetchByBrightreeID($brightreeID);
-return $invoice;
-```
+See [QUERY_BUILDERS.md](QUERY_BUILDERS.md) for examples. The filters each builder supports are listed on its service page.
 
-#### Methods
+For searches without a builder, the client has a small helper that assembles the search, sort and paging arrays:
+
 ```php
-InvoiceCreatePrintActivity($brightreeID);
-InvoiceFetchByBrightreeID($brightreeID);
-InvoiceFetchByInvoiceID($invoiceID);
-InvoiceItemUpdate($query);
-InvoiceUpdate($query);
-OpenInvoiceAgedBalanceFetchByPatient($id);
-OpenInvoiceBalanceFetchByPatient($id);
-ResubmitInvoices($query);
-```
-## Custom 
-###### (new as of 11/16/20)
-Any function that may not be defined can now be used in a custom query inside any service.
-``` php
-$bt = new Brightree($username,$password);
-$patient = $bt->Patient()->Custom('PatientFetchByPatientID', array('PatientID' => $id));
-return $patient;
+$query = $bt->search(['SearchParams' => ['Branch' => ['ID' => 102]]])
+    ->sort(['SortParams' => []])
+    ->pageSize(50)
+    ->pages(1)
+    ->build();
+
+$orders = $bt->SalesOrder()->SalesOrderSearch($query);
 ```
 
+## Error handling
 
-### Changelog
+Failures are thrown as `Nickcheek\Brightree\Exceptions\BrightreeException`, including SOAP faults and invalid arguments.
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+```php
+use Nickcheek\Brightree\Exceptions\BrightreeException;
+
+try {
+    $patient = $bt->Patient()->PatientFetchByBrightreeID(141508);
+} catch (BrightreeException $e) {
+    $e->getMessage();
+    $e->getErrorData();   // SOAP fault detail, when there is one
+    $e->getRequestData(); // the method and request that failed
+}
+```
+
+`getRequestData()` holds the request that was sent, which can include patient information. Take care where you log it.
+
+## Custom calls
+
+Any operation on a service endpoint that the wrapper does not define can be called with `Custom()`:
+
+```php
+$patient = $bt->Patient()->Custom('PatientFetchByPatientID', ['PatientID' => $id]);
+```
+
+## Examples
+
+Runnable scripts are in [examples/](examples).
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for what has changed recently.
 
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-### Security
+## Security
 
 If you discover any security related issues, please email nick@nicholascheek.com.
 

@@ -100,20 +100,6 @@ class SalesOrderTest extends TestCase
 		$this->assertEquals($expectedResponse, $result);
 	}
 
-	public function testPatientNotesCommentFetchUsesDocumentedMethodName()
-	{
-		$expectedResponse = (object) ['success' => true];
-		$patientNoteKey = 12345;
-
-		$this->salesOrder->expects($this->once())
-		                 ->method('apiCall')
-		                 ->with('PatientNotesCommentFetch', ['PatientNoteKey' => $patientNoteKey])
-		                 ->willReturn($expectedResponse);
-
-		$result = $this->salesOrder->PatientNotesCommentFetch($patientNoteKey);
-		$this->assertEquals($expectedResponse, $result);
-	}
-
 	public function testCallNonExistentMethod()
 	{
 		$this->expectException(BrightreeException::class);

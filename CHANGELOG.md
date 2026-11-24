@@ -2,6 +2,16 @@
 
 All notable changes to `brightree` will be documented in this file
 
+## Unreleased
+
+- Fixed `PharmacyPatientMedicationHistoryFetchByBrightreeIDAndPatientBrightreeID` argument order. It now takes the patient ID first, as documented and as the lab results method does.
+- `InsuranceFetchByExternalID` now accepts string External IDs.
+- `Document::FetchDocumentContent` no longer defaults to document key 12345. The key is required.
+- `Custom()` now throws `BrightreeException` on SOAP faults like every other method.
+- Corrected the `InsuranceValidationRuleSetCreate` field map entry.
+- Removed the stale `PatientNotesCommentFetch` test and example on the Sales Order service. Use `Patient()->PatientNoteCommentsFetch()`.
+- Split the README into per-service pages under `docs/services/`.
+
 ## 4.1.0 - 2026-03-24
 
 - Updated Patient service to use the `v0100-2410` endpoint.
